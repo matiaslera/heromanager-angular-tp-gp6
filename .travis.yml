@@ -21,3 +21,9 @@ before_install:
 before_script:
 
 script: ng test --sourceMap=false --watch=false
+
+notifications:
+  email:
+    - matiasmal_94@hotmail.com
+    - kirinico92@gmail.com	
+    - javiemgz@gmail.com
