@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from './services/loginService/login.service';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'tp-heromanager-angular-grupo6';
+  constructor(private userLogService: LoginService){}
+  title = 'hero-manager'
+  isLogged(){
+    return this.userLogService.isAuthenticated()
+  }
 }
