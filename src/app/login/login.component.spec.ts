@@ -15,7 +15,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent, routingComponents],
+      declarations: [LoginComponent],
       imports: [FormsModule, ReactiveFormsModule, MaterialModule, RouterTestingModule.withRoutes([]),],
       providers: [{
         provide: APP_BASE_HREF, useValue: '/home'
@@ -48,14 +48,8 @@ describe('LoginComponent', () => {
   })
 
 
-  // it('legea un usuario en el formulario', () => {
-  //  const itemUsername = app.loginForm.controls['username'].setValue('123')
-  //  const itemPassword = app.loginForm.controls['password'].setValue('123')
-  //   expect(app.loginForm.valid).toBeTruthy()
-    
-  //   app.authenticate(itemUsername, itemPassword)
-  //    app.needs
-  // });
 
+  
+  
 
 });
