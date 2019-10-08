@@ -7,8 +7,8 @@ import { RelacionesComponent} from './relaciones/relaciones.component'
 
 export const routes: Routes =[
    {path:'',component:LoginComponent},
-   {path:'home',canActivate:[AuthGuard],component:HomeComponent},
-   {path:'relaciones', component:RelacionesComponent},
+   {path:'home',canActivate:[AuthGuard], component:HomeComponent},
+   {path:'relaciones', canActivate:[AuthGuard], component:RelacionesComponent},
 ]
 
 @NgModule({
