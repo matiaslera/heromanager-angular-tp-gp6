@@ -19,15 +19,6 @@ export class LoginComponent {
     })
   }
 
-  suma(num: number){
-    if(num>10){
-      return true
-    }
-    else{
-      false
-    }
-  }
-
   public hasError = (controlName: string, errorName: string) => {
     return this.loginForm.controls[controlName].hasError(errorName)
   }
