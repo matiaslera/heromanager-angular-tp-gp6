@@ -8,7 +8,7 @@ import { LoginService } from './services/loginService/login.service';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RelacionesComponent} from './relaciones/relaciones.component'
 
 @NgModule({
@@ -23,7 +23,8 @@ import {RelacionesComponent} from './relaciones/relaciones.component'
       AppRoutingModule,
       BrowserAnimationsModule,
       MaterialModule,
-      FormsModule
+      FormsModule,
+      ReactiveFormsModule
    ],
    providers: [
       LoginService,

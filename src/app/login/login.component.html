@@ -1,18 +1,20 @@
 <main>
   <mat-card>
-    <form>
+    <form [formGroup]="loginForm">
       <mat-card-header>
         <mat-card-title>Login</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div class="logForm">
+        <div class="logForm" >
           <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
-            <input matInput placeholder="eg: batman" #user autofocus>
+            <input matInput placeholder="eg: batman" #user autofocus formControlName="username" >
+            <mat-error *ngIf="hasError('username','required')">Ingrese un usuario</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput type="password" placeholder="*******" #password>
+            <input matInput type="password" placeholder="*******" #password formControlName="password">
+            <mat-error *ngIf="hasError('password','required')">Ingrese la Contrasena</mat-error>
           </mat-form-field>
         </div>
       </mat-card-content>
