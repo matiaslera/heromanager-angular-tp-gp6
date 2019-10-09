@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LoginService {
-  private authenticated: boolean
+  private authenticated: boolean 
   private registeredUsers: UserCredential[] = []
 
 
