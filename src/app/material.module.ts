@@ -12,9 +12,12 @@ import {
     MatListModule,
     MatMenuModule,
     MatDividerModule,
+    
 
 } from '@Angular/material'
 import { MatDialogModule } from '@angular/material/dialog'
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
     imports: [
@@ -30,6 +33,8 @@ import { MatDialogModule } from '@angular/material/dialog'
         MatListModule,
         MatMenuModule,
         MatDividerModule,
+        MatPaginatorModule,
+        MatTableModule,
     ],
     exports: [
         MatButtonModule,
@@ -43,7 +48,9 @@ import { MatDialogModule } from '@angular/material/dialog'
         MatIconModule,
         MatListModule,
         MatMenuModule,
-        MatDividerModule
+        MatDividerModule,
+        MatPaginatorModule,
+        MatTableModule,
     ]
 })
 export class MaterialModule { }

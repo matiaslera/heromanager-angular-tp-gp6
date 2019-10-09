@@ -10,9 +10,7 @@
 <mat-sidenav-container class="example-container"  >
    
     <mat-sidenav #sidenav  mode="side" class="example-sidenav" 
-     opened="true" (mouseenter)="increase()"
-     hasBackdrop= "true"
-     (mouseleave)="decrease()"   *ngIf="isLogged()">
+     opened="true"   *ngIf="isLogged()">
  
      <mat-nav-list>
        <mat-list-item routerLink="./relaciones" routerLinkActive="active" >
