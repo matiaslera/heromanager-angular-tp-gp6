@@ -1,4 +1,5 @@
 <mat-toolbar color=primary class="toolbarBtnPoss">
+  <button *ngIf="isLogged()" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
   <img src="../assets/superhero.png" width="50rem">
   <span>Hero Manager</span>
   <span class="mainToolbarSpacer"></span>
@@ -8,7 +9,7 @@
   </span>
 </mat-toolbar>
 <mat-sidenav-container class="sidenavContainer">
-  <mat-sidenav #sidenav mode="side" class="sidenav" opened="true">
+  <mat-sidenav #sidenav mode="side" class="sidenav">
     <mat-nav-list *ngIf="isLogged()">
       <mat-list-item routerLink="./relaciones" routerLinkActive="active">
         <mat-icon mat-list-icon>person</mat-icon>
