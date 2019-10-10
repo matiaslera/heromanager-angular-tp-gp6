@@ -1,7 +1,7 @@
 <mat-toolbar color=primary class="toolbarBtnPoss">
   <button *ngIf="isLogged()" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-  <img src="../assets/superhero.png" width="50rem">
-  <span>Hero Manager</span>
+  <img src="../assets/superhero.png" width="50rem" routerLink="/home">
+  <span routerLink="/home">Hero Manager</span>
   <span class="mainToolbarSpacer"></span>
   <span *ngIf="isLogged()">
     <a mat-button routerLink="/home">Home</a>
