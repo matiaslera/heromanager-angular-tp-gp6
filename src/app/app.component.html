@@ -1,57 +1,28 @@
-<mat-toolbar color=primary>
+<mat-toolbar color=primary class="toolbarBtnPoss">
   <img src="../assets/superhero.png" width="50rem">
   <span>Hero Manager</span>
-  <span class="espaciador"></span>
+  <span class="mainToolbarSpacer"></span>
   <span *ngIf="isLogged()">
-      <a mat-button routerLink=".">Home</a>
-      <a mat-button routerLink=".">Perfil</a>
+    <a mat-button routerLink="/home">Home</a>
+    <a mat-button routerLink="/profile">Perfil</a>
   </span>
 </mat-toolbar>
-<mat-sidenav-container class="example-container"  >
-   
-    <mat-sidenav #sidenav  mode="side" class="example-sidenav" 
-     opened="true"   *ngIf="isLogged()">
- 
-     <mat-nav-list>
-       <mat-list-item routerLink="./relaciones" routerLinkActive="active" >
-       <mat-icon mat-list-icon>person</mat-icon>
-       <div fxFlex="10"> Relaciones</div>
-     </mat-list-item>
- 
-     <mat-list-item routerLink="./home" routerLinkActive="active">
-       <mat-icon mat-list-icon>people_alt</mat-icon>
-       <div fxFlex="10">Mis Equipos</div>      
-   </mat-list-item> 
-    
-   <mat-list-item >
-       <button mat-icon-button (click)="sidenav.toggle()">
-           <mat-icon mat-list-icon>settings</mat-icon>
-       </button>
-         
-         <div fxFlex="10"></div>
-       </mat-list-item>
- 
-     </mat-nav-list>      
- 
-   </mat-sidenav>
-   <!-- CONTENIDO  -->
- 
-   <mat-sidenav-content>
-       <span>
-         <router-outlet></router-outlet>
-       </span>
-     </mat-sidenav-content>
- </mat-sidenav-container>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+<mat-sidenav-container class="sidenavContainer">
+  <mat-sidenav #sidenav mode="side" class="sidenav" opened="true">
+    <mat-nav-list *ngIf="isLogged()">
+      <mat-list-item routerLink="./relaciones" routerLinkActive="active">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <div> Relaciones</div>
+      </mat-list-item>
+      <mat-list-item routerLink="./home" routerLinkActive="active">
+        <mat-icon mat-list-icon>people_alt</mat-icon>
+        <div>Mis Equipos</div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <span>
+      <router-outlet></router-outlet>
+    </span>
+  </mat-sidenav-content>
+</mat-sidenav-container>
