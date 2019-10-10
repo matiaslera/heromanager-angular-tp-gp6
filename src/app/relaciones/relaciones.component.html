@@ -1,9 +1,8 @@
 <mat-card class="item">
 
 <mat-nav-list>
-        <mat-list-item >Item 1</mat-list-item>
-        <mat-list-item >Item 2</mat-list-item>
-        <mat-list-item>Item 3</mat-list-item>
+                <mat-list-item *ngFor="let amigo of amigos">{{amigo.nombre}}</mat-list-item>
+
 </mat-nav-list>
 
 </mat-card>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import { Amigos } from '../domain/Amigos';
+import { AmigosService } from '../services/amigosService/amigos.service';
 
 @Component({
   selector: 'app-relaciones',
@@ -8,11 +10,19 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class RelacionesComponent implements OnInit {
 
-  constructor() {
-    
+  amigos : Amigos[] = []
+  
+  constructor(public amigosService: AmigosService ) { 
   }
   
+  
   ngOnInit() {
+    this.amigosService.getData()
+    .subscribe(
+      amigo =>{
+        this.amigos = amigo
+      }
+    )
   }
 
 }

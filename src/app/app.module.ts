@@ -10,6 +10,8 @@ import { AuthGuard } from './guard/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RelacionesComponent} from './relaciones/relaciones.component'
+import { AmigosService } from './services/amigosService/amigos.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
    declarations: [
@@ -24,11 +26,13 @@ import {RelacionesComponent} from './relaciones/relaciones.component'
       BrowserAnimationsModule,
       MaterialModule,
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      HttpClientModule
    ],
    providers: [
       LoginService,
-      AuthGuard
+      AuthGuard,
+      AmigosService
    ],
    bootstrap: [
       AppComponent
