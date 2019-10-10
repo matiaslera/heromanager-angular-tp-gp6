@@ -1,8 +1,21 @@
 <mat-card class="item">
+        <h4>Amigos</h4>
+        <div class="LoginFriends">
+                <mat-form-field >
+                        <mat-label>Ingrese amigos</mat-label>
+                        <mat-select>
+                                <mat-option *ngFor="let amigo of amigosdiferentes" [value]="amigo.password">
+                                        {{amigo.username}}
+                                        
+                                </mat-option>
+                        </mat-select>
+                </mat-form-field>
+                <button class="buttonAdd" color="primary" mat-flat-button><mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon></button>
 
-<mat-nav-list>
+        </div>
+        <mat-nav-list>
                 <mat-list-item *ngFor="let amigo of amigos">{{amigo.nombre}}</mat-list-item>
 
-</mat-nav-list>
+        </mat-nav-list>
 
 </mat-card>

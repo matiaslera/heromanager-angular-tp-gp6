@@ -26,7 +26,7 @@ export class LoginService {
 
 }
 
-interface UserCredential {
+export interface UserCredential {
   username: string
   password: string
 }

@@ -12,6 +12,7 @@ import {
     MatListModule,
     MatMenuModule,
     MatDividerModule,
+    MatSelectModule,
     
 
 } from '@Angular/material'
@@ -35,6 +36,7 @@ import {MatTableModule} from '@angular/material/table';
         MatDividerModule,
         MatPaginatorModule,
         MatTableModule,
+        MatSelectModule
     ],
     exports: [
         MatButtonModule,
@@ -51,6 +53,7 @@ import {MatTableModule} from '@angular/material/table';
         MatDividerModule,
         MatPaginatorModule,
         MatTableModule,
+        MatSelectModule
     ]
 })
 export class MaterialModule { }
