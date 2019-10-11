@@ -1,36 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
+import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
-export interface Equipo {
-  name: string;
-  lider: string;
-  propietario: string;
-}
-
-const ELEMENT_DATA: Equipo[] = [
-  { name: 'Justicie League', lider: 'H', propietario: 'Superman'},
-  { name: 'Justicie League', lider: 'He',propietario: 'Superman'},
-  { name: 'Los galacticos', lider: 'Li',propietario: 'Batman'},
-  { name: 'Los vengadores', lider: 'Be',propietario: 'Batman'},
-  { name: 'Insurgency', lider: 'B',propietario: 'Batman'},
-  { name: 'Insurgency',   lider: 'C',propietario: 'Spiderman'},
-  { name: 'Insurgency',   lider: 'N',propietario: 'Spiderman'},
-];
 
 @Component({
   selector: 'app-home-component',
   styleUrls: ['home.component.css'],
   templateUrl: 'home.component.html',
 })
-export class HomeComponent {
-  displayedColumns: string[] = [ 'name', 'lider', 'propietario'];
-  dataSource = new MatTableDataSource<Equipo>(ELEMENT_DATA);
-
-  
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
+export class HomeComponent implements OnInit {
+  constructor(private router:Router){}
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
   }
 }

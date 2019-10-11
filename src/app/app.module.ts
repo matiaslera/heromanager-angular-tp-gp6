@@ -12,7 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RelacionesComponent} from './relaciones/relaciones.component'
 import { AmigosService } from './services/amigosService/amigos.service';
 import { HttpClientModule } from '@angular/common/http';
-import { NewEquipoComponent} from './new-equipo/new-equipo.component'
+import { NewEquipoComponent} from './nuevoEquipo/nuevoEquipo.component'
+import { MisEquiposComponent } from './misEquipos/misEquipos.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
    declarations: [
@@ -21,6 +23,8 @@ import { NewEquipoComponent} from './new-equipo/new-equipo.component'
       HomeComponent,
       RelacionesComponent,
       NewEquipoComponent,
+      MisEquiposComponent,
+      ProfileComponent
    ],
    imports: [
       BrowserModule,

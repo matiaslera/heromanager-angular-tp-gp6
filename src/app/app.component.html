@@ -1,29 +1,10 @@
 <mat-toolbar color=primary class="toolbarBtnPoss">
-  <button *ngIf="isLogged()" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-  <img src="../assets/superhero.png" width="50rem" routerLink="/equipos">
-  <span routerLink="/equipos">Hero Manager</span>
+  <img src="../assets/superhero.png" width="50rem" routerLink="home">
+  <span routerLink="home">Hero Manager</span>
   <span class="mainToolbarSpacer"></span>
   <span *ngIf="isLogged()">
-    <a mat-button routerLink="/equipos">Home</a>
-    <a mat-button routerLink="/profile">Perfil</a>
+    <a mat-button routerLink="home">Home</a>
+    <a mat-button routerLink="perfil">Perfil</a>
   </span>
 </mat-toolbar>
-<mat-sidenav-container class="sidenavContainer">
-  <mat-sidenav #sidenav mode="side" class="sidenav">
-    <mat-nav-list *ngIf="isLogged()">
-      <mat-list-item routerLink="./relaciones" routerLinkActive="active">
-        <mat-icon mat-list-icon>person</mat-icon>
-        <div> Relaciones</div>
-      </mat-list-item>
-      <mat-list-item routerLink="./equipos" routerLinkActive="active">
-        <mat-icon mat-list-icon>people_alt</mat-icon>
-        <div>Mis Equipos</div>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <span>
-      <router-outlet></router-outlet>
-    </span>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<router-outlet></router-outlet>
