@@ -1,21 +1,26 @@
 <mat-card class="item">
         <h4>Amigos</h4>
         <div class="LoginFriends">
-                <mat-form-field >
-                        <mat-label>Ingrese amigos</mat-label>
-                        <mat-select>
-                                <mat-option *ngFor="let amigo of amigosdiferentes" [value]="amigo.password">
-                                        {{amigo.username}}
-                                        
-                                </mat-option>
-                        </mat-select>
-                </mat-form-field>
-                <button class="buttonAdd" color="primary" mat-flat-button><mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon></button>
+                <mat-card-content class="masCardFriends">
+                        <mat-form-field appearance="outline" class="matInputFriend">
+                                <mat-label>Friends</mat-label>
+                                <input matInput placeholder="eg: batman" #user autofocus >
+                        </mat-form-field>
+                </mat-card-content>
 
+                        <button class="buttonAdd" color="primary" mat-flat-button>
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+                        </button>
         </div>
-        <mat-nav-list>
-                <mat-list-item *ngFor="let amigo of amigos">{{amigo.nombre}}</mat-list-item>
+        <mat-nav-list class="listFriends">
+                <mat-list-item *ngFor="let amigo of amigos">{{amigo.nombre}}
 
+                        <span class="buttonclear"></span>
+                        <button mat-flat-button>
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">clear</mat-icon>
+                        </button>
+
+                </mat-list-item>
         </mat-nav-list>
 
 </mat-card>

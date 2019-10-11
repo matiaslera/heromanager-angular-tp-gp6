@@ -1,7 +1,30 @@
 .item{
-    width: 20%;
+    width: 30%;
     margin: auto;
     margin-top: 10%;
+}
+
+.masCardFriends{
+    width: 100%;
+}
+.LoginFriends{
+    display: flex;
+    flex-direction: row;
+}
+.matInputFriend{
+    width: 100%;
+}
+.buttonAdd{
+    height: 2rem;
+    margin: 1rem;
+}
+
+.listFriends{
+    width: 100%;
+}
+
+.buttonclear{
+    flex: 1 1 auto;
 }
 
 
