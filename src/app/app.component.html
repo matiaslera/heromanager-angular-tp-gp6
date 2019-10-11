@@ -1,10 +1,10 @@
 <mat-toolbar color=primary class="toolbarBtnPoss">
   <button *ngIf="isLogged()" mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-  <img src="../assets/superhero.png" width="50rem" routerLink="/home">
-  <span routerLink="/home">Hero Manager</span>
+  <img src="../assets/superhero.png" width="50rem" routerLink="/equipos">
+  <span routerLink="/equipos">Hero Manager</span>
   <span class="mainToolbarSpacer"></span>
   <span *ngIf="isLogged()">
-    <a mat-button routerLink="/home">Home</a>
+    <a mat-button routerLink="/equipos">Home</a>
     <a mat-button routerLink="/profile">Perfil</a>
   </span>
 </mat-toolbar>
@@ -15,7 +15,7 @@
         <mat-icon mat-list-icon>person</mat-icon>
         <div> Relaciones</div>
       </mat-list-item>
-      <mat-list-item routerLink="./home" routerLinkActive="active">
+      <mat-list-item routerLink="./equipos" routerLinkActive="active">
         <mat-icon mat-list-icon>people_alt</mat-icon>
         <div>Mis Equipos</div>
       </mat-list-item>

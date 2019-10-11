@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RelacionesComponent} from './relaciones/relaciones.component'
 import { AmigosService } from './services/amigosService/amigos.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NewEquipoComponent} from './new-equipo/new-equipo.component'
 
 @NgModule({
    declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
       LoginComponent,
       HomeComponent,
       RelacionesComponent,
+      NewEquipoComponent,
    ],
    imports: [
       BrowserModule,

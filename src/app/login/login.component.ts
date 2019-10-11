@@ -29,7 +29,7 @@ export class LoginComponent {
       this.error()
     }
     else {
-      this.router.navigate(['home']);
+      this.router.navigate(['equipos']);
     }
   }
 
