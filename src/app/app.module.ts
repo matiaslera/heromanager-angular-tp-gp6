@@ -9,22 +9,24 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {RelacionesComponent} from './relaciones/relaciones.component'
 import { AmigosService } from './services/amigosService/amigos.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NewEquipoComponent} from './nuevoEquipo/nuevoEquipo.component'
 import { MisEquiposComponent } from './misEquipos/misEquipos.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RelationsComponent } from './relations/relations.component';
+import { TypeOfRelationsComponent } from './relations/typeOfRelations/typeOfRelations.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       LoginComponent,
       HomeComponent,
-      RelacionesComponent,
       NewEquipoComponent,
       MisEquiposComponent,
-      ProfileComponent
+      ProfileComponent,
+      RelationsComponent,
+      TypeOfRelationsComponent
    ],
    imports: [
       BrowserModule,

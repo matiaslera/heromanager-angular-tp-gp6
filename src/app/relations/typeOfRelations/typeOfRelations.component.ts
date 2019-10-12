@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import { Amigos } from '../domain/Amigos';
-import { AmigosService } from '../services/amigosService/amigos.service';
-import { LoginService, UserCredential } from '../services/loginService/login.service';
+import { UserCredential } from 'src/app/services/loginService/login.service';
+import { Amigos } from 'src/app/domain/Amigos';
+import { AmigosService } from 'src/app/services/amigosService/amigos.service';
 
 @Component({
-  selector: 'app-relaciones',
-  templateUrl: './relaciones.component.html',
-  styleUrls: ['./relaciones.component.css']
+  selector: 'app-typeOfRelations',
+  templateUrl: './typeOfRelations.component.html',
+  styleUrls: ['./typeOfRelations.component.css']
 })
-export class RelacionesComponent implements OnInit {
-
+export class TypeOfRelationsComponent implements OnInit {
   amigos : Amigos[] = []
   
   constructor(public amigosService: AmigosService) { 
@@ -31,5 +29,6 @@ export class RelacionesComponent implements OnInit {
       }
     )
   }
+
 
 }

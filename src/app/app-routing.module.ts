@@ -3,17 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guard/auth.guard';
-import { RelacionesComponent} from './relaciones/relaciones.component'
 import { NewEquipoComponent } from './nuevoEquipo/nuevoEquipo.component'
 import { MisEquiposComponent } from './misEquipos/misEquipos.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RelationsComponent } from './relations/relations.component';
 
 export const routes: Routes =[
    {path:'login',component:LoginComponent},
    {path:'home',canActivate:[AuthGuard], component:HomeComponent,
       children:[
         {path:'misequipos', component:MisEquiposComponent},
-        {path:'relaciones',  component:RelacionesComponent},
+        {path:'relaciones',  component:RelationsComponent},
         {path:'', redirectTo:'misequipos',pathMatch:'full'},
       ]
     },

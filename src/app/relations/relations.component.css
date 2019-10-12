@@ -1,0 +1,11 @@
+.relationsContains{
+    display: flex;
+}
+.type{
+    flex-direction: row;
+    width: 50%;
+}
+.individuo{
+    width: 100%;
+    
+}
