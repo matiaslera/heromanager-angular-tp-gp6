@@ -9,8 +9,9 @@ export class AmigosService {
 
   constructor(private httpCLient: HttpClient) {}
 
-  getData() {
-    return this.httpCLient.get<Amigos[]>('./assets/Amigos.json')
+  async individuos() {
+    const individuos = await this.httpCLient.get<Amigos[]>('./assets/Amigos.json').toPromise()
+    return individuos.map((individuo) => Amigos.fromJson(individuo))
   }
 
 }
