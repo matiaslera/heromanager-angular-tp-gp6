@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserCredential } from 'src/app/services/loginService/login.service';
-import { Amigos } from 'src/app/domain/Amigos';
 import { AmigosService } from 'src/app/services/amigosService/amigos.service';
+import { Individuo } from 'src/app/domain/Individuo';
 
 @Component({
   selector: 'app-typeOfRelations',
@@ -11,7 +11,7 @@ import { AmigosService } from 'src/app/services/amigosService/amigos.service';
 export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: any
-  @Input() amigos: Amigos[]
+  @Input() amigos: Individuo[]
 
    
   // constructor(public amigosService: AmigosService) { 

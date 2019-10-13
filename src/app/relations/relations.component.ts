@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserCredential } from '../services/loginService/login.service';
 import { AmigosService } from '../services/amigosService/amigos.service';
-import { Amigos } from '../domain/Amigos';
+import { Individuo } from '../domain/Individuo';
 
 @Component({
   selector: 'app-relations',
@@ -9,19 +8,13 @@ import { Amigos } from '../domain/Amigos';
   styleUrls: ['./relations.component.css']
 })
 export class RelationsComponent implements OnInit {
-  amigos : Array<Amigos> = []
+  amigos : Array<Individuo> = []
   
   constructor(public amigosService: AmigosService) { 
   }
   
 
   async ngOnInit() {
-    // this.amigosService.individuos()
-    // .subscribe(
-    //   amigo =>{
-    //     this.amigos = amigo
-    //   }
-    // )
     this.amigos = await this.amigosService.individuos()
   }
 
