@@ -25,19 +25,21 @@
                                         <input matInput placeholder="ej: batman" #user autofocus>
                                 </mat-form-field>
 
-                                <button color="primary" mat-flat-button>
-                                    <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                            (click)="loginFriend(user)">add</mat-icon>
+                                <button color="primary" mat-flat-button (click)="mensajePrueba()">
+                                    <mat-icon aria-hidden="false" aria-label="Example home icon" >add
+                                    </mat-icon>
                             </button>
                         </mat-card-content>
                 </div>
       
                 <mat-nav-list class="listFriends">
-                        <mat-list-item *ngFor="let individuo of individuos">{{individuo.name}}
+                        <mat-list-item *ngFor="let individuo of individuos" [title]="individuo.description'">
+                                {{individuo.name}}
+                                <!-- <a *ngIf="individuo.description">  Description: {{ individuo.description }}
+                                              </a> -->
                                 <span class="buttonclear"></span>
-                                <button mat-flat-button>
-                                        <mat-icon aria-hidden="false" aria-label="Example home icon">clear
-                                        </mat-icon>
+                                <button mat-flat-button (click)="mensajePrueba()">
+                                        <mat-icon aria-hidden="false" aria-label="Example home icon">clear</mat-icon>
                                 </button>
                         </mat-list-item>
                 </mat-nav-list>

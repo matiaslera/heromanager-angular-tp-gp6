@@ -8,11 +8,15 @@ import { IndividuoService } from 'src/app/services/individuos/Individuos.service
 export class NewEquipoComponent implements OnInit {
 
  individuos = individuos;
- 
+
   constructor() { }
 
   ngOnInit() {
    
+  }
+
+  mensajePrueba(){
+    window.alert('El componente esta funcionando');
   }
 
 
