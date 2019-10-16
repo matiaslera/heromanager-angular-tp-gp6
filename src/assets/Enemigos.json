@@ -1,0 +1,29 @@
+[{
+    "id": "I4",
+    "nombre": "javi",
+    "alcance": 100,
+    "peso": 1,
+    "danio": 50,
+    "resistencia": 0,
+    "precio": 800,
+    "sobrenatural": false
+},
+{
+    "id": "I5",
+    "nombre": "mati",
+    "alcance": 10,
+    "peso": 1.5,
+    "danio": 25,
+    "resistencia": 30,
+    "precio": 400,
+    "sobrenatural": false
+},
+{
+    "id": "I6",
+    "nombre": "dodain",
+    "componentes": [
+        "I1",
+        "I2"
+    ]
+}
+]

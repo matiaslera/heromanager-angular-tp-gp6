@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AmigosService } from '../services/amigosService/amigos.service';
 import { Individuo } from '../domain/Individuo';
+import { LoginService } from '../services/loginService/login.service';
 
 @Component({
   selector: 'app-relations',
@@ -10,7 +11,7 @@ import { Individuo } from '../domain/Individuo';
 export class RelationsComponent implements OnInit {
   amigos : Array<Individuo> = []
   
-  constructor(public amigosService: AmigosService) { 
+  constructor(public amigosService: AmigosService, private loginServer: LoginService) { 
   }
   
 
