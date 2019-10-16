@@ -12,7 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 export class LoginComponent {
 
   public loginForm: FormGroup
-  constructor(private userLogService: LoginService, private router: Router, private snackBar: MatSnackBar, private biulter: FormBuilder) {
+  constructor(private userLogService: LoginService, private snackBar: MatSnackBar, private biulter: FormBuilder) {
     this.loginForm = this.biulter.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -27,9 +27,6 @@ export class LoginComponent {
     this.userLogService.authenticate(user.value, password.value)
     if (!this.userLogService.isAuthenticated()) {
       this.error()
-    }
-    else {
-      this.router.navigate(['home/misequipos']);
     }
   }
 

@@ -15,8 +15,8 @@ export class AmigosService {
   }
 
   async amigosDeIndividuo(id: string) {
-    const amigo = await this.httpCLient.get<Individuo>(REST_SERVER_URL + '/tareas/' + id).toPromise()
-    return Individuo.fromJson(amigo)
+    const amigo = await this.httpCLient.get<Individuo []>(REST_SERVER_URL + '/amigos/' + id).toPromise()
+    return amigo.map((individuo) => Individuo.fromJson(individuo))
  
   }
 }

@@ -16,7 +16,7 @@ export class RelationsComponent implements OnInit {
   
 
   async ngOnInit() {
-    this.amigos = await this.amigosService.individuos()
+    this.amigos = await this.amigosService.amigosDeIndividuo(this.loginServer.getidUserLogged())
   }
 
 
