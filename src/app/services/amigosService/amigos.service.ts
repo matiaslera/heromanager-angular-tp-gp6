@@ -7,16 +7,12 @@ import { REST_SERVER_URL } from '../configuration'
 })
 export class AmigosService {
 
-  constructor(private httpCLient: HttpClient) {}
-
-  async individuos() {
-    const individuos = await this.httpCLient.get<Individuo[]>('./assets/Amigos.json').toPromise()
-    return individuos.map((individuo) => Individuo.fromJson(individuo))
-  }
+  constructor(private httpCLient: HttpClient) { }
 
   async amigosDeIndividuo(id: string) {
-    const amigo = await this.httpCLient.get<Individuo []>(REST_SERVER_URL + '/amigos/' + id).toPromise()
-    return amigo.map((individuo) => Individuo.fromJson(individuo))
- 
+    const amigos = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/amigos/' + id).toPromise()
+    return amigos.map((amigo) => Individuo.fromJson(amigo))
   }
+
+ 
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AmigosService } from 'src/app/services/amigosService/amigos.service';
 import { Individuo } from 'src/app/domain/Individuo';
 
 @Component({
@@ -10,7 +9,7 @@ import { Individuo } from 'src/app/domain/Individuo';
 export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: any
-  @Input() amigos: Individuo[]
+  @Input() individuos: Individuo[]
 
   
  ngOnInit() {

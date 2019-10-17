@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core'
-import { Router } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { LoginService } from '../services/loginService/login.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'

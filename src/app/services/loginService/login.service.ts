@@ -32,6 +32,7 @@ export class LoginService {
   }
   getidUserLogged() {
     return this.userLogged
+
   }
 
   isAuthenticated() {
