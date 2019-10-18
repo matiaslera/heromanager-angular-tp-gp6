@@ -1,22 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import { Equipo } from '../domain/misequipos';
+import { EquiposService } from '../../app/services/individuos/misequipos.service';
+import { Router } from '@angular/router'
 
-export interface Equipo {
-  name: string;
-  lider: string;
-  propietario: string;
+function mostrarError(component, error) {
+  console.log('error', error)
+  component.errors.push(error.error)
 }
-
-const ELEMENT_DATA: Equipo[] = [
-  { name: 'Justicie League', lider: 'H', propietario: 'Superman'},
-  { name: 'Justicie League', lider: 'He',propietario: 'Superman'},
-  { name: 'Los galacticos', lider: 'Li',propietario: 'Batman'},
-  { name: 'Los vengadores', lider: 'Be',propietario: 'Batman'},
-  { name: 'Insurgency', lider: 'B',propietario: 'Batman'},
-  { name: 'Insurgency',   lider: 'C',propietario: 'Spiderman'},
-  { name: 'Insurgency',   lider: 'N',propietario: 'Spiderman'},
-];
 
 @Component({
   selector: 'app-misEquipos',
@@ -24,13 +16,52 @@ const ELEMENT_DATA: Equipo[] = [
   styleUrls: ['./misEquipos.component.css']
 })
 export class MisEquiposComponent implements OnInit{
-  displayedColumns: string[] = [ 'name', 'lider', 'propietario'];
-  dataSource = new MatTableDataSource<Equipo>(ELEMENT_DATA);
+
+  equipos: Array<Equipo> = []
+  errors = [];
+  dataSource:MatTableDataSource<Equipo>;
+  perfil ='Batman';
+
+  displayedColumns: string[] = [ 'nombre', 'lider', 'propietario'];
+  constructor(public equiposService: EquiposService, private router: Router) { }
+
+ @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  async ngOnInit() {
+    
+    console.log(this.dataSource);
+    try {
+      // Truco para que refresque la pantalla
+      console.log('error en init')
+      // this.router.routeReuseStrategy.shouldReuseRoute = () => false
+      this.equipos = await this.equiposService.todosLosEquipos()
+      this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
+    } catch (error) {
+      mostrarError(this, error)
+    }
+  }
 
   
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  // async cumplir(tarea: Tarea) {
+  //   try {
+  //     tarea.cumplir()
+  //     await this.tareasService.actualizarTarea(tarea)
+  //   } catch (error) {
+  //     mostrarError(this, error)
+  //   }
+  // }
 
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  // async desasignar(tarea: Tarea) {
+  //   try {
+  //     tarea.desasignar()
+  //     this.tareasService.actualizarTarea(tarea)
+  //   } catch (error) {
+  //     mostrarError(this, error)
+  //   }
+  // }
+
+  // asignar(tarea: Tarea) {
+  //   this.router.navigate(['/asignarTarea', tarea.id])
+  // }
+
 }
