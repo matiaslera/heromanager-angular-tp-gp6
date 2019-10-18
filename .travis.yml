@@ -24,6 +24,6 @@ script: ng test --sourceMap=false --watch=false
 
 notifications:
   email:
-    - matiasmal_94@hotmail.com
+    - matiasmal94@gmail.com
     - kirinico92@gmail.com	
     - javiemgz@gmail.com
