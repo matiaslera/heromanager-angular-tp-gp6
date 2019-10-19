@@ -1,30 +1,40 @@
-
 <mat-card class="mainFriends">
-  <div class="containerFriends">
-          <h4>{{title}}</h4>
-          <div class="LoginFriends">
-                  <mat-card-content class="masCardInputFriends">
-                          <mat-form-field appearance="outline" class="matInputFriend">
-                                  <mat-label>Friends</mat-label>
-                                  <input matInput placeholder="eg: batman" #user autofocus>
-                          </mat-form-field>
-                  </mat-card-content>
-                  <mat-card-footer>
-                          <button color="primary" mat-flat-button>
-                                  <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                          (click)="loginFriend(user)">add</mat-icon>
-                          </button>
-                  </mat-card-footer>
-          </div>
+        <div class="containerFriends">
+                <h4>{{title}}</h4>
+                <div class="LoginFriends">
+                        <form class="formAutocomplit">
+                                <mat-form-field appearance="outline" class="matInputFriend">
 
-          <mat-nav-list class="listFriends">
-                  <mat-list-item *ngFor="let individuo of individuos">{{individuo.nombre}}
-                          <span class="buttonclear"></span>
-                          <button mat-flat-button>
-                                  <mat-icon aria-hidden="false" aria-label="Example home icon">clear
-                                  </mat-icon>
-                          </button>
-                  </mat-list-item>
-          </mat-nav-list>
-  </div>
+                                        <input type="text" placeholder="individuo" aria-label="allIndividuals" matInput
+                                                [formControl]="myControl" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                                <mat-option *ngFor="let individual of allIndividuals"
+                                                [value]="individual.nombre">
+                                                        {{individual.nombre}}
+                                                </mat-option>
+                                        </mat-autocomplete>
+
+                                </mat-form-field>
+
+
+                                <mat-card-footer class="buttonAdd">
+                                        <button color="primary" mat-flat-button>
+                                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                                        (click)="loginFriend(user)">add</mat-icon>
+                                        </button>
+                                </mat-card-footer>
+                        </form>
+
+                </div>
+
+                <mat-nav-list class="listFriends">
+                        <mat-list-item *ngFor="let individuo of individuos">{{individuo.nombre}}
+                                <span class="buttonclear"></span>
+                                <button mat-flat-button>
+                                        <mat-icon aria-hidden="false" aria-label="Example home icon">clear
+                                        </mat-icon>
+                                </button>
+                        </mat-list-item>
+                </mat-nav-list>
+        </div>
 </mat-card>

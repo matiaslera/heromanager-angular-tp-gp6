@@ -13,6 +13,7 @@ import {
     MatMenuModule,
     MatDividerModule,
     MatSelectModule,
+    MatAutocompleteModule,
     
 
 } from '@Angular/material'
@@ -36,9 +37,11 @@ import {MatTableModule} from '@angular/material/table';
         MatDividerModule,
         MatPaginatorModule,
         MatTableModule,
-        MatSelectModule
+        MatSelectModule,
+        MatAutocompleteModule
     ],
     exports: [
+        MatAutocompleteModule,
         MatButtonModule,
         MatInputModule,
         MatCardModule,

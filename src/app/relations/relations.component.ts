@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AmigosService } from '../services/amigosService/amigos.service';
 import { Individuo } from '../domain/Individuo';
 import { LoginService } from '../services/loginService/login.service';
-import { EnemigosService } from '../services/enemigosService/enemigos.service';
+import { RelationService } from '../services/relationsService/relation.service';
 
 @Component({
   selector: 'app-relations',
@@ -10,16 +9,16 @@ import { EnemigosService } from '../services/enemigosService/enemigos.service';
   styleUrls: ['./relations.component.css']
 })
 export class RelationsComponent implements OnInit {
-  amigos : Array<Individuo> = []
-  enemigos : Array<Individuo> = []
+  friends : Array<Individuo> = []
+  enemies : Array<Individuo> = []
 
-  constructor(private amigosService: AmigosService, private loginService: LoginService, private enemigosService: EnemigosService) { 
+  constructor(private relationService: RelationService, private loginService: LoginService) { 
   }
   
 
   async ngOnInit() {
-    this.amigos = await this.amigosService.amigosDeIndividuo(this.loginService.getidUserLogged())
-    this.enemigos = await this.enemigosService.enemigosDeIndividuo(this.loginService.getidUserLogged())
+    this.friends = await this.relationService.getAllIndividuals(this.loginService.getidUserLogged())
+    this.enemies = await this.relationService.enemigosDeIndividuo(this.loginService.getidUserLogged())
   }
 
 
