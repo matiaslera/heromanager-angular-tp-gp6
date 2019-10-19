@@ -40,8 +40,3 @@ margin-left: 10px;
     flex-direction: row;
     margin-left: 1rem;
 }
-::ng-deep .containerFriends{
-            
-    border-radius: 30px !important;
-    border: 1px solid #3f51b5;
-}

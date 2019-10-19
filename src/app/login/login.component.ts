@@ -22,17 +22,26 @@ export class LoginComponent {
     return this.loginForm.controls[controlName].hasError(errorName)
   }
 
-  authenticate(user, password) {
-    this.userLogService.authenticate(user.value, password.value)
+  authenticate() {
+    this.userLogService.authenticate(this.getUsernameValue(), this.getPasswordValue())
     if (!this.userLogService.isAuthenticated()) {
       this.error()
     }
   }
-
+  formHasData(){
+    return this.loginForm.status == 'INVALID'
+  }
   error() {
     this.snackBar.open('Nombre de usuario o contraseña invalido', 'x', {
       duration: 100000,
     });
+  }
+
+  getUsernameValue():string{
+    return this.loginForm.get('username').value
+  }
+  getPasswordValue():string{
+    return this.loginForm.get('pasword').value
   }
 }
 

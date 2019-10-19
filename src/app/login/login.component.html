@@ -8,7 +8,7 @@
         <div class="logForm" >
           <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
-            <input matInput placeholder="eg: batman" #user autofocus formControlName="username" >
+            <input matInput placeholder="eg: batman" #user autofocus formControlName="username">
             <mat-error *ngIf="hasError('username','required')">Ingrese un usuario</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
@@ -20,7 +20,7 @@
       </mat-card-content>
       <mat-card-footer>
         <button class="logButton" mat-flat-button color="primary"
-          (click)="authenticate(user,password)">Ingresar</button>
+          (click)="authenticate()" [disabled]="formHasData()">Ingresar</button>
       </mat-card-footer>
     </form>
   </mat-card>
