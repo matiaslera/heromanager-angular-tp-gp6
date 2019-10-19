@@ -10,17 +10,21 @@ export class RelationService {
 
   constructor(private httpCLient: HttpClient) { }
 
-  async getFriendsIndividual(id: string) {
+  async getFriendsOfIndividual(id: string) {
     const friends = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/amigos/' + id).toPromise()
     return friends.map((friend) => Individuo.fromJson(friend))
   }
 
-  async getAllIndividuals(id: string) {
+  async getNoFriendIndividuals(id: string) {
     const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/amigosnoagregados/' + id).toPromise()
     return Individuals.map((Individual) => Individuo.fromJson(Individual))
   }
+  async getNoEnemysIndividuals(id: string) {
+    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/enemigosnoagregados/' + id).toPromise()
+    return Individuals.map((Individual) => Individuo.fromJson(Individual))
+  }
 
-  async enemigosDeIndividuo(id: string) {
+  async enemysOfIndividual(id: string) {
     const enemigos = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/enemigos/' + id).toPromise()
     return enemigos.map((enemigo) => Individuo.fromJson(enemigo))
   }

@@ -13,12 +13,12 @@ export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: any
   @Input() individuos: Individuo[]
-  allIndividuals : Individuo[]
+  @Input() individuosNoAgregados: Individuo[]
   myControl = new FormControl();
   constructor(private relationService: RelationService, private loginService: LoginService){}
  
   async ngOnInit() {
-    this.allIndividuals = await this.relationService.getAllIndividuals(this.loginService.getidUserLogged())
+  
   }
 
 
