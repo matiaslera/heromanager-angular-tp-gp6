@@ -14,10 +14,11 @@ export const routes: Routes =[
       children:[
         {path:'misequipos', component:MisEquiposComponent},
         {path:'relaciones',  component:RelationsComponent},
+        {path:'misequipos/nuevo', component:NewEquipoComponent},
         {path:'', redirectTo:'misequipos',pathMatch:'full'},
       ]
     },
-   {path:'equipos/nuevo',canActivate:[AuthGuard], component:NewEquipoComponent},
+   
    {path:'perfil',canActivate:[AuthGuard], component:ProfileComponent},
    {path:'**', redirectTo:'home',pathMatch:'full'},
 ]

@@ -1,0 +1,46 @@
+[{
+    "id":1,
+    "nombre": "Liga de La Justicia",
+    "lider": "Superman",
+    "propietario":"Batman",
+    "integrantes": [
+        "Robin",
+        "Duende verde"
+    ]
+},
+{   
+    "id":2,
+    "nombre": "Los galacticos",
+    "lider": "Batman",
+    "propietario":"SpiderMan",
+    "integrantes": [
+        "Guason",
+        "Linterna verde"
+    ]
+    
+},
+{
+    "id":3,
+    "nombre": "Los supercampeones",
+    "lider": "Tevez",
+    "propietario":"Angelici",
+    "integrantes": [
+        "Abonanzieri",
+        "Palermo",
+        "Schelloto",
+        "Riquelme"
+    ]
+},
+{
+    "id":4,
+    "nombre": "Chespirito",
+    "lider": "El chavo",
+    "propietario":"Gomez bolano",
+    "integrantes": [
+        "Quico",
+        "Chilindrina",
+        "Jirafales",
+        "Godines"
+    ]
+}
+]

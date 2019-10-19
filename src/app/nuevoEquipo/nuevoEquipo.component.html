@@ -1,4 +1,48 @@
 <div >
     <p>Nuevo Equipo</p>
 
+    <div class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="Nombre:">
+        </mat-form-field>
+      
+        <mat-form-field>
+          <mat-select placeholder="Lider:">
+            <mat-option value="s">Superman</mat-option>
+            <mat-option value="Batman">Batman</mat-option>
+            <mat-option value="Hulk">Hulk</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <mat-card class="mainFriends">
+        <div class="containerFriends">
+                <h4>Integrante: </h4>
+                <div class="LoginFriends">
+                        <mat-card-content class="masCardInputFriends">
+                                <mat-form-field appearance="outline" class="matInputFriend">
+                                        <mat-label>Nuevo integrante</mat-label>
+                                        <input matInput placeholder="ej: batman" #user autofocus>
+                                </mat-form-field>
+
+                                <button color="primary" mat-flat-button (click)="mensajePrueba()">
+                                    <mat-icon aria-hidden="false" aria-label="Example home icon" >add
+                                    </mat-icon>
+                            </button>
+                        </mat-card-content>
+                </div>
+      
+                <mat-nav-list class="listFriends">
+                        <mat-list-item *ngFor="let individuo of individuos" title="individuo.description'">
+                                {{individuo.name}}
+                                <!-- <a *ngIf="individuo.description">  Description: {{ individuo.description }}
+                                              </a> -->
+                                <span class="buttonclear"></span>
+                                <button mat-flat-button (click)="mensajePrueba()">
+                                        <mat-icon aria-hidden="false" aria-label="Example home icon">clear</mat-icon>
+                                </button>
+                        </mat-list-item>
+                </mat-nav-list>
+        </div>
+      </mat-card>
 </div>
