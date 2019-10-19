@@ -3,8 +3,14 @@
   <span routerLink="home">Hero Manager</span>
   <span class="mainToolbarSpacer"></span>
   <span *ngIf="isLogged()">
-    <a mat-button routerLink="home">Home</a>
-    <a mat-button routerLink="perfil">Perfil</a>
+    <a mat-button routerLink="home">
+      <mat-icon mat-list-icon>home</mat-icon>
+      Home
+    </a>
+    <a mat-button routerLink="perfil">
+      <mat-icon mat-list-icon>person</mat-icon>
+      Perfil
+    </a>
   </span>
 </mat-toolbar>
 <router-outlet></router-outlet>

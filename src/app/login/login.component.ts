@@ -41,7 +41,7 @@ export class LoginComponent {
     return this.loginForm.get('username').value
   }
   getPasswordValue():string{
-    return this.loginForm.get('pasword').value
+    return this.loginForm.get('password').value
   }
 }
 
