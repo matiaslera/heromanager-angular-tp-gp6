@@ -1,27 +1,40 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Individuo } from 'src/app/domain/Individuo';
 import { FormControl } from '@angular/forms';
-import { LoginService } from 'src/app/services/loginService/login.service';
 import { RelationService } from 'src/app/services/relationsService/relation.service';
-
+import { LoginService } from 'src/app/services/loginService/login.service';
+import * as _ from 'lodash'
 @Component({
   selector: 'app-typeOfRelations',
   templateUrl: './typeOfRelations.component.html',
   styleUrls: ['./typeOfRelations.component.css']
 })
-export class TypeOfRelationsComponent {
+export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: any
   @Input() individuos: Individuo[]
-  @Input() individualsNotAdded: Individuo[]
+  individualsNotAdded: Individuo[]
   candidateIndividualToAdd: Individuo = new Individuo
   myControl = new FormControl();
 
+  constructor(private relationService: RelationService, private loginService: LoginService) {}
 
-  loginFriend() {
-    const individualFilter = this.individualsNotAdded.find(individualNotAdded => individualNotAdded.apodo == this.candidateIndividualToAdd.apodo)
-    this.individuos.push(individualFilter)
+
+  async ngOnInit() {
+    this.individualsNotAdded = await this.relationService.getNoFriendIndividuals()
+    const individualUserFilter = this.individualsNotAdded.find(individualUserId => (individualUserId.id == this.loginService.getidUserLogged()))
+    this.delete(individualUserFilter)
   }
 
+  loginFriend() {
+    const individualFilter = this.individualsNotAdded.find(individualNotAdded => (individualNotAdded.apodo == this.candidateIndividualToAdd.apodo))
+    this.individuos.push(individualFilter)
+    this.delete(individualFilter)
+    this.candidateIndividualToAdd = new Individuo
+  }
+
+  delete(individual: Individuo){
+    _.remove(this.individualsNotAdded, individual)
+  }
 
 }

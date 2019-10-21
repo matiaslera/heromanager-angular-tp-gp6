@@ -20,9 +20,7 @@ export class RelationsComponent implements OnInit {
 
   async ngOnInit() {
     this.friends = await this.relationService.getFriendsOfIndividual()
-    this.noFriends = await this.relationService.getNoFriendIndividuals()
     this.enemies = await this.relationService.enemysOfIndividual()
-    this.noEnemies = await this.relationService.getNoEnemysIndividuals()
   }
 
 

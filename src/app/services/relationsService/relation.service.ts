@@ -33,4 +33,5 @@ export class RelationService {
     const enemigos = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/enemigos/' + this.getidUserLogged()).toPromise()
     return enemigos.map((enemigo) => Individuo.fromJson(enemigo))
   }
+
 }
