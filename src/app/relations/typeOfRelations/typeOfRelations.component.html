@@ -6,10 +6,10 @@
                                 <mat-form-field appearance="outline" class="matInputFriend">
 
                                         <input type="text" placeholder="individuo" aria-label="allIndividuals" matInput
-                                                [formControl]="myControl" [matAutocomplete]="auto">
+                                                [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="candidateIndividualToAdd.apodo">
                                         <mat-autocomplete #auto="matAutocomplete">
-                                                <mat-option *ngFor="let individual of individuosNoAgregados"
-                                                [value]="individual.nombre">
+                                                <mat-option *ngFor="let individual of individualsNotAdded"
+                                                [value]="individual.apodo">
                                                         {{individual.apodo}}
                                                 </mat-option>
                                         </mat-autocomplete>
@@ -20,7 +20,7 @@
                                 <mat-card-footer class="buttonAdd">
                                         <button color="primary" mat-flat-button>
                                                 <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                                        (click)="loginFriend(user)">add</mat-icon>
+                                                        (click)="loginFriend()">add</mat-icon>
                                         </button>
                                 </mat-card-footer>
                         </form>

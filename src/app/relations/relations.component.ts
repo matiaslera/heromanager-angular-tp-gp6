@@ -14,15 +14,15 @@ export class RelationsComponent implements OnInit {
   noFriends : Array<Individuo> = []
   noEnemies : Array<Individuo> = []
 
-  constructor(private relationService: RelationService, private loginService: LoginService) { 
+  constructor(private relationService: RelationService) { 
   }
   
 
   async ngOnInit() {
-    this.friends = await this.relationService.getFriendsOfIndividual(this.loginService.getidUserLogged())
-    this.noFriends = await this.relationService.getNoFriendIndividuals(this.loginService.getidUserLogged())
-    this.enemies = await this.relationService.enemysOfIndividual(this.loginService.getidUserLogged())
-    this.noEnemies = await this.relationService.getNoEnemysIndividuals(this.loginService.getidUserLogged())
+    this.friends = await this.relationService.getFriendsOfIndividual()
+    this.noFriends = await this.relationService.getNoFriendIndividuals()
+    this.enemies = await this.relationService.enemysOfIndividual()
+    this.noEnemies = await this.relationService.getNoEnemysIndividuals()
   }
 
 

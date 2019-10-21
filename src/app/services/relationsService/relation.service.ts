@@ -2,30 +2,35 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Individuo } from 'src/app/domain/Individuo';
 import { REST_SERVER_URL } from '../configuration';
+import { LoginService } from '../loginService/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RelationService {
 
-  constructor(private httpCLient: HttpClient) { }
+  constructor(private httpCLient: HttpClient, private loginService: LoginService) { }
 
-  async getFriendsOfIndividual(id: string) {
-    const friends = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/amigos/' + id).toPromise()
+  getidUserLogged(){
+    return this.loginService.getidUserLogged()
+  }
+
+  async getFriendsOfIndividual() {
+    const friends = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/amigos/' + this.getidUserLogged()).toPromise()
     return friends.map((friend) => Individuo.fromJson(friend))
   }
 
-  async getNoFriendIndividuals(id: string) {
-    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/amigosnoagregados/' + id).toPromise()
+  async getNoFriendIndividuals() {
+    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/amigosnoagregados/' + this.getidUserLogged()).toPromise()
     return Individuals.map((Individual) => Individuo.fromJson(Individual))
   }
-  async getNoEnemysIndividuals(id: string) {
-    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/enemigosnoagregados/' + id).toPromise()
+  async getNoEnemysIndividuals() {
+    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/enemigosnoagregados/' + this.getidUserLogged()).toPromise()
     return Individuals.map((Individual) => Individuo.fromJson(Individual))
   }
 
-  async enemysOfIndividual(id: string) {
-    const enemigos = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/enemigos/' + id).toPromise()
+  async enemysOfIndividual() {
+    const enemigos = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/enemigos/' + this.getidUserLogged()).toPromise()
     return enemigos.map((enemigo) => Individuo.fromJson(enemigo))
   }
 }

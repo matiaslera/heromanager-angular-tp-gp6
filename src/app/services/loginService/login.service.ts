@@ -17,7 +17,7 @@ export class LoginService {
   }
 
   authenticate(apodo: string, password: string) {
-    this.deactivateLogin()//borrar para usar con el api rest
+    // this.deactivateLogin()//borrar para usar con el api rest
     this.http.post<Individuo>(REST_SERVER_URL + "/login", { apodo, password })
       .subscribe((resp: any) => {
         this.authenticated = true
