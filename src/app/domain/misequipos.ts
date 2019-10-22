@@ -2,7 +2,7 @@ import { Usuario } from './usuario'
 
 export class Equipo {
 
-    constructor(public id?: number, private nombre?: string, public lider?: Usuario, public propietario?: Usuario,
+    constructor(public id?: number, public nombre?: string, public lider?: Usuario, public propietario?: Usuario,
         public integrantes?: Usuario["integrantes"]) { }
 
     static fromJson(equipoJSON): Equipo {

@@ -30,4 +30,11 @@ export class EquiposService implements IEquipoService {
        return this.http.put(REST_SERVER_URL + '/misequipos/' + equipo.id, equipo.toJSON()).toPromise()
   }
 
+  async agregarEquipo(equipo: Equipo){
+    return this.http.post(REST_SERVER_URL, equipo.toJSON()).toPromise()
+  }
+  async eliminarEquipo(equipo: Equipo){
+    return this.http.delete(REST_SERVER_URL, equipo.toJSON()).toPromise()
+  }
+
 }
