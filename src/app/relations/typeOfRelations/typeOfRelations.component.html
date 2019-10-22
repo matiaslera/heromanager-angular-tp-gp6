@@ -2,14 +2,14 @@
         <div class="containerFriends">
                 <h4>{{title}}</h4>
                 <div class="LoginFriends">
-                        <form class="formAutocomplit">
+                        <form class="formAutocomplit" >
                                 <mat-form-field appearance="outline" class="matInputFriend">
 
                                         <input type="text" placeholder="individuo" aria-label="allIndividuals" matInput
-                                                [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="candidateIndividualToAdd.apodo">
-                                        <mat-autocomplete #auto="matAutocomplete">
+                                                [formControl]="myControl" [matAutocomplete]="auto"[(ngModel)]="candidateIndividualToAdd">
+                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                                 <mat-option *ngFor="let individual of individualsNotAdded"
-                                                [value]="individual.apodo">
+                                                [value]="individual">
                                                         {{individual.apodo}}
                                                 </mat-option>
                                         </mat-autocomplete>
@@ -20,7 +20,7 @@
                                 <mat-card-footer class="buttonAdd">
                                         <button color="primary" mat-flat-button>
                                                 <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                                        (click)="loginFriend()">add</mat-icon>
+                                                        (click)="loginFriend(auto)">add</mat-icon>
                                         </button>
                                 </mat-card-footer>
                         </form>
