@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { LoginService } from '../services/loginService/login.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { Individuo } from '../domain/Individuo'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -11,30 +13,38 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 export class LoginComponent {
 
   public loginForm: FormGroup
-  constructor(private userLogService: LoginService, private snackBar: MatSnackBar, private biulter: FormBuilder) {
+  private userCredentials:Individuo
+  constructor(private router: Router,private userLogService: LoginService, private snackBar: MatSnackBar, private biulter: FormBuilder) {
     this.loginForm = this.biulter.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     })
+    this.userCredentials = new Individuo
   }
 
   public hasError = (controlName: string, errorName: string) => {
     return this.loginForm.controls[controlName].hasError(errorName)
   }
 
-  authenticate() {
-    this.userLogService.authenticate(this.getUsernameValue(), this.getPasswordValue())
-    if (!this.userLogService.isAuthenticated()) {
-      this.error()
-    }
+  async authenticate() {
+    return await this.userLogService.authenticate(this.userCredentials)
+    .then(response1 => {
+      console.log(response1)
+      return this.navigateHome()
+    })
+    .catch((e) => this.error(e.error))
+    .finally(() =>this.router.navigate(['home']))
   }
   formHasData(){
     return this.loginForm.status == 'INVALID'
   }
-  error() {
-    this.snackBar.open('Nombre de usuario o contraseña invalido', 'x', {
+  error(errorType:string) {
+    this.snackBar.open(errorType, 'x', {
       duration: 2000,
     });
+  }
+  navigateHome(){
+    this.router.navigate(['home']);
   }
 
   getUsernameValue():string{

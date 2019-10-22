@@ -8,12 +8,12 @@
         <div class="logForm" >
           <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
-            <input matInput placeholder="eg: batman" #user autofocus formControlName="username">
+            <input matInput placeholder="eg: batman" autofocus formControlName="username" [(ngModel)]="userCredentials.apodo">
             <mat-error *ngIf="hasError('username','required')">Ingrese un usuario</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput type="password" placeholder="*******" #password formControlName="password">
+            <input matInput type="password" placeholder="*******" formControlName="password" [(ngModel)]="userCredentials.password">
             <mat-error *ngIf="hasError('password','required')">Ingrese la Contrasena</mat-error>
           </mat-form-field>
         </div>

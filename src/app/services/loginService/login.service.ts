@@ -10,29 +10,18 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
   private authenticated: boolean
-  private userLogged: string
+  private userLogged: Individuo
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private http: HttpClient,private router: Router) {
     this.authenticated = false
   }
 
-  authenticate(apodo: string, password: string) {
-    // this.deactivateLogin()//borrar para usar con el api rest
-    this.http.post<Individuo>(REST_SERVER_URL + "/login", { apodo, password })
-      .subscribe((resp: any) => {
-        this.authenticated = true
-        this.userLogged = resp.id
-        this.router.navigate(['home']);
-      })
+  async authenticate(credentials:Individuo) {
+    this.userLogged = await this.http.post<Individuo>(REST_SERVER_URL + '/login', credentials ).toPromise()
   }
 
-  deactivateLogin() {
-    this.authenticated = true
-    this.router.navigate(['home']);
-  }
   getidUserLogged() {
-    return this.userLogged
-
+    return this.userLogged.id
   }
 
   isAuthenticated() {
