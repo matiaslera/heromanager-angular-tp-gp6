@@ -20,12 +20,12 @@ export class RelationService {
     return friends.map((friend) => Individuo.fromJson(friend))
   }
 
-  async getNoFriendIndividuals() {
-    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/amigosnoagregados/' + this.getidUserLogged()).toPromise()
+  async getNonFriendIndividuals() {
+    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/amigos_no_agregados/' + this.getidUserLogged()).toPromise()
     return Individuals.map((Individual) => Individuo.fromJson(Individual))
   }
-  async getNoEnemysIndividuals() {
-    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/enemigosnoagregados/' + this.getidUserLogged()).toPromise()
+  async getNonEnemysIndividuals() {
+    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/enemigos_no_agregados/' + this.getidUserLogged()).toPromise()
     return Individuals.map((Individual) => Individuo.fromJson(Individual))
   }
 

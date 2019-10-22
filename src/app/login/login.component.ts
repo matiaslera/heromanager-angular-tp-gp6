@@ -33,7 +33,7 @@ export class LoginComponent {
   }
   error() {
     this.snackBar.open('Nombre de usuario o contraseña invalido', 'x', {
-      duration: 100000,
+      duration: 2000,
     });
   }
 

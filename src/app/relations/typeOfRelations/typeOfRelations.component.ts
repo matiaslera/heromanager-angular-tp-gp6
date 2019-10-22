@@ -13,7 +13,8 @@ export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: any
   @Input() individuos: Individuo[]
-  individualsNotAdded: Individuo[]
+  @Input() individualsNotAdded: Individuo[]
+  //individualsNotAdded: Individuo[]
   candidateIndividualToAdd: Individuo = new Individuo
   myControl = new FormControl();
 
@@ -21,7 +22,7 @@ export class TypeOfRelationsComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.individualsNotAdded = await this.relationService.getNoFriendIndividuals()
+    this.individualsNotAdded = await this.relationService.getNonFriendIndividuals()
     const individualUserFilter = this.individualsNotAdded.find(individualUserId => (individualUserId.id == this.loginService.getidUserLogged()))
     this.delete(individualUserFilter)
   }
