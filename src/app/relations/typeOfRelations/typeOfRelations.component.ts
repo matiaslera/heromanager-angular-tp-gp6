@@ -46,4 +46,14 @@ export class TypeOfRelationsComponent implements OnInit {
   disabledIndividual() {
     return this.candidateIndividualToAdd == null
   }
+
+  async deleteIndividual(individuodelete: Individuo) {
+    try {
+      await this.typeRelationSerice.deleteIndividual(individuodelete)
+      this.individuos = await this.typeRelationSerice.getIndividuals()
+    }
+    catch (error) {
+      console.log("se rombio el delete", error)
+    }
+  }
 }
