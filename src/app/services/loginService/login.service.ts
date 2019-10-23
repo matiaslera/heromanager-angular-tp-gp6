@@ -18,6 +18,10 @@ export class LoginService {
 
   async authenticate(credentials:Individuo) {
     this.userLogged = await this.http.post<Individuo>(REST_SERVER_URL + '/login', credentials ).toPromise()
+    .then((individuo)=>{
+      this.authenticated = true
+      return individuo
+    })
   }
 
   getidUserLogged() {
