@@ -15,7 +15,9 @@ export class LoginService {
   constructor(private http: HttpClient,private router: Router) {
     this.authenticated = false
   }
-
+  getUser(){
+    return this.userLogged
+  }
   async authenticate(credentials:Individuo) {
     this.userLogged = await this.http.post<Individuo>(REST_SERVER_URL + '/login', credentials ).toPromise()
     .then((individuo)=>{

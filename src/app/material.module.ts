@@ -14,6 +14,7 @@ import {
     MatDividerModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatGridListModule,
     
 
 } from '@Angular/material'
@@ -38,7 +39,8 @@ import {MatTableModule} from '@angular/material/table';
         MatPaginatorModule,
         MatTableModule,
         MatSelectModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatGridListModule,
     ],
     exports: [
         MatAutocompleteModule,
@@ -56,7 +58,8 @@ import {MatTableModule} from '@angular/material/table';
         MatDividerModule,
         MatPaginatorModule,
         MatTableModule,
-        MatSelectModule
+        MatSelectModule,
+        MatGridListModule,
     ]
 })
 export class MaterialModule { }
