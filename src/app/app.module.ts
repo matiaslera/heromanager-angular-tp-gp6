@@ -15,7 +15,8 @@ import { MisEquiposComponent } from './misEquipos/misEquipos.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RelationsComponent } from './relations/relations.component';
 import { TypeOfRelationsComponent } from './relations/typeOfRelations/typeOfRelations.component';
-import { RelationService } from './services/relationsService/relation.service';
+import { EnemiesService } from './services/typeRelationService/enemiesService/enemies.service';
+import { FriendsService } from './services/typeRelationService/friendsService/friends.service';
 
 @NgModule({
    declarations: [
@@ -40,7 +41,8 @@ import { RelationService } from './services/relationsService/relation.service';
    providers: [
       LoginService,
       AuthGuard,
-      RelationService
+      EnemiesService,
+      FriendsService,
    ],
    bootstrap: [
       AppComponent

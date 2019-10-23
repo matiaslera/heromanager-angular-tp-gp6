@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Individuo } from 'src/app/domain/Individuo';
 import { FormControl } from '@angular/forms';
-import { RelationService } from 'src/app/services/relationsService/relation.service';
 import { LoginService } from 'src/app/services/loginService/login.service';
 import * as _ from 'lodash'
+import { TypeRelationService } from 'src/app/services/typeRelationService/typeRelation.service';
 @Component({
   selector: 'app-typeOfRelations',
   templateUrl: './typeOfRelations.component.html',
@@ -12,34 +12,38 @@ import * as _ from 'lodash'
 export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: any
-  @Input() individuos: Individuo[]
-  @Input() individualsNotAdded: Individuo[]
-  candidateIndividualToAdd: Individuo 
+  @Input() typeRelationSerice: TypeRelationService
+  individuos: Individuo[]
+  individualsNotAdded: Individuo[]
+  candidateIndividualToAdd: Individuo
   myControl = new FormControl();
 
-  constructor(private relationService: RelationService, private loginService: LoginService) {}
+  constructor(private loginService: LoginService) { }
 
   async ngOnInit() {
-    
+    this.individuos = await this.typeRelationSerice.getIndividuals()
+    this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
+
   }
   displayFn(individual?: Individuo): string | undefined {
     return individual ? individual.apodo : undefined;
   }
   async loginFriend() {
-    try{
-      await this.relationService.updateIndividual(this.candidateIndividualToAdd)
-      this.individuos = await this.relationService.getFriendsOfIndividual()
-   }catch(error){
-     console.log("me rompi todo",error)
-   }
-   this.candidateIndividualToAdd = null
+    try {
+      await this.typeRelationSerice.updateIndividual(this.candidateIndividualToAdd)
+      this.individuos = await this.typeRelationSerice.getIndividuals()
+    } catch (error) {
+      console.log("me rompi todo", error)
+    }
+
+    this.candidateIndividualToAdd = null
   }
 
-  delete(individual: Individuo){
+  delete(individual: Individuo) {
     _.remove(this.individualsNotAdded, individual)
   }
 
-  disabledIndividual(){
-    return this.candidateIndividualToAdd == null 
+  disabledIndividual() {
+    return this.candidateIndividualToAdd == null
   }
 }
