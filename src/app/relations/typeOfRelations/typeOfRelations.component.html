@@ -18,9 +18,9 @@
 
 
                                 <mat-card-footer class="buttonAdd">
-                                        <button color="primary" mat-flat-button>
+                                        <button color="primary" mat-flat-button (click)="loginFriend(auto)" [disabled]= "disabledIndividual()">
                                                 <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                                        (click)="loginFriend(auto)">add</mat-icon>
+                                                        >add</mat-icon>
                                         </button>
                                 </mat-card-footer>
                         </form>

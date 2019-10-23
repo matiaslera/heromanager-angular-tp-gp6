@@ -25,14 +25,21 @@ export class TypeOfRelationsComponent implements OnInit {
   displayFn(individual?: Individuo): string | undefined {
     return individual ? individual.apodo : undefined;
   }
-  loginFriend() {
-    this.individuos.push(this.candidateIndividualToAdd)
-    this.delete(this.candidateIndividualToAdd)
-    this.candidateIndividualToAdd = new Individuo
+  async loginFriend() {
+    try{
+      await this.relationService.updateIndividual(this.candidateIndividualToAdd)
+      this.individuos = await this.relationService.getFriendsOfIndividual()
+   }catch(error){
+     console.log("me rompi todo",error)
+   }
+   this.candidateIndividualToAdd = null
   }
 
   delete(individual: Individuo){
     _.remove(this.individualsNotAdded, individual)
   }
 
+  disabledIndividual(){
+    return this.candidateIndividualToAdd == null 
+  }
 }

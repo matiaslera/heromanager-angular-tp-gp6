@@ -34,4 +34,8 @@ export class RelationService {
     return enemigos.map((enemigo) => Individuo.fromJson(enemigo))
   }
 
+  updateIndividual(individualUpdate: Individuo){
+     return this.httpCLient.put<Individuo>(REST_SERVER_URL + '/agregar_amigo/' + this.getidUserLogged(), individualUpdate.toJSON()).toPromise()  
+  }
+
 }
