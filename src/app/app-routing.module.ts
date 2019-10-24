@@ -19,8 +19,8 @@ export const routes: Routes =[
       ]
     },
    
-   {path:'perfil',canActivate:[AuthGuard], component:ProfileComponent},
-   {path:'**', redirectTo:'home',pathMatch:'full'},
+   {path:'perfil/:id',canActivate:[AuthGuard], component:ProfileComponent},
+   //{path:'**', redirectTo:'home',pathMatch:'full'},
 ]
 
 @NgModule({

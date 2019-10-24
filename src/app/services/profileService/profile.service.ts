@@ -14,7 +14,7 @@ export class ProfileService {
   userLogged() {
     return this.loginService.getUser()
   }
-   getFullProfile() {
-    return this.httpCLient.post<Individuo>(REST_SERVER_URL+'/perfil_completo',this.userLogged()).toPromise()
+  async getFullProfile(id:String ) {
+    return await this.httpCLient.get<Individuo>(REST_SERVER_URL + '/perfil_completo/' + id).toPromise()
   }
 }
