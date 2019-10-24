@@ -19,42 +19,44 @@ export class TypeOfRelationsComponent implements OnInit {
   candidateIndividualToAdd: Individuo
   myControl = new FormControl();
 
-  constructor(private loginService: LoginService, private router:Router) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   async ngOnInit() {
     this.individuos = await this.typeRelationSerice.getIndividuals()
     this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
+  }
 
-  }
-  displayFn(individual?: Individuo): string | undefined {
-    return individual ? individual.apodo : undefined;
-  }
-  async loginFriend() {
+  async addIndividual() {
     try {
       await this.typeRelationSerice.updateIndividual(this.candidateIndividualToAdd)
       this.individuos.push(this.candidateIndividualToAdd)
+      this.delete(this.candidateIndividualToAdd, this.individualsNotAdded)
+
     } catch (error) {
       console.log("me rompi todo", error)
     }
 
     this.candidateIndividualToAdd = null
   }
+  async deleteIndividual(individuodelete: Individuo) {
+    try {
+      await this.typeRelationSerice.deleteIndividual(individuodelete)
+      this.delete(individuodelete, this.individuos)
+    }
+    catch (error) {
+      console.log("se rombio el delete", error)
+    }
+  }
+  delete(individual: Individuo, colecccionIndividual: Individuo[]) {
+    _.remove(colecccionIndividual, individual)
+  }
 
-  delete(individual: Individuo) {
-    _.remove(this.individualsNotAdded, individual)
+  displayFn(individual?: Individuo): string | undefined {
+    return individual ? individual.apodo : undefined;
   }
 
   disabledIndividual() {
     return this.candidateIndividualToAdd == null
   }
 
-  async deleteIndividual(individuodelete: Individuo) {
-    try {
-      await this.typeRelationSerice.deleteIndividual(individuodelete)
-      this.individuos = await this.typeRelationSerice.getIndividuals()
-    }
-    catch (error) {
-      console.log("se rombio el delete", error)
-    }
-  }
 }
