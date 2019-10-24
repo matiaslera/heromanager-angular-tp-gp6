@@ -23,7 +23,7 @@ export class MisEquiposComponent implements OnInit {
   equipos: Array<Equipo> = []
   errors = [];
   dataSource: MatTableDataSource<Equipo>;
-  perfil = 'Batman';
+  perfil= new Usuario ('Batman');
 
   displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions', 'eliminar'];
   constructor(public equiposService: EquiposService, private router: Router, public dialog: MatDialog) { }
@@ -32,37 +32,53 @@ export class MisEquiposComponent implements OnInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
 
   async ngOnInit() {
-
-    console.log(this.dataSource);
     try {
-      // Truco para que refresque la pantalla
-      console.log('error en init')
       // this.router.routeReuseStrategy.shouldReuseRoute = () => false
       this.equipos = await this.equiposService.todosLosEquipos()
       this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
     } catch (error) {
       mostrarError(this, error)
     }
+    console.log(this.equipos)
   }
 
-  async abandonar(equipo: Equipo) {
-    console.log(equipo)
-    try {
-      console.log(equipo)
-      equipo.eliminarIntregrante(this.perfil)
-      await this.equiposService.actualizarEquipo(equipo)
-    } catch (error) {
+  async actualizarDato(){
+    try{this.equipos = await this.equiposService.todosLosEquipos()
+    this.dataSource = new MatTableDataSource<Equipo>(this.equipos);}
+    catch(error){
       mostrarError(this, error)
     }
   }
+  async abandonar(equipo: Equipo) {
+    try {
+      console.log(equipo)
+       equipo.eliminarIntregrante(this.perfil.nombre)
+      //  const alto= this.equipos.splice(this.equipos.indexOf(equipo), 1)
+      //  return  this.dataSource = new MatTableDataSource<Equipo>(alto);
+      } catch (error) {
+      mostrarError(this, error)
+    }
+    console.log(equipo)
+  }
+  eliminar(elemento) {
+  this.dataSource.data = this.dataSource.data.filter(i => i !== elemento)
+  // .filter(i => i !== elemento)
+//  .map((i, idx) => (id.Equipo = (idx + 1), i)); // Update the position
+
+}
 
   async eliminarEquipo(equipo: Equipo) {
     try {
-      this.equiposService.eliminarEquipo(equipo)
-      await  this.equiposService.actualizarEquipo(equipo)
+      if (this.equipos.includes(equipo)) {
+        const alto= this.equipos.splice(this.equipos.indexOf(equipo), 1)
+        return  this.dataSource = new MatTableDataSource<Equipo>(alto);
+    }
+      // this.equiposService.eliminarEquipo(equipo)
+      // await  this.equiposService.actualizarEquipo(equipo)
     } catch (error) {
       mostrarError(this, error)
     }
+    console.log(equipo)
   }
   
   openDialog(action, obj) {
