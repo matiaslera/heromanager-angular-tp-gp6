@@ -27,6 +27,11 @@ export class FriendsService implements TypeRelationService{
   }
 
   updateIndividual(individualUpdate: Individuo){
-    return this.httpCLient.put<Individuo>(REST_SERVER_URL + '/agregar_amigo/' + this.getidUserLogged(), individualUpdate.toJSON()).toPromise()  
+    return this.httpCLient.put<Individuo>(REST_SERVER_URL + '/agregar_amigo/' + this.getidUserLogged(), individualUpdate).toPromise()  
+  }
+
+  deleteIndividual(individualDelete: Individuo){
+    console.log(individualDelete)
+    return this.httpCLient.put<Individuo>(REST_SERVER_URL + '/eliminar_amigo/' + this.getidUserLogged(),individualDelete ).toPromise()
   }
 }

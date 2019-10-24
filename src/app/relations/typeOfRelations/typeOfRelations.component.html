@@ -30,7 +30,7 @@
                 <mat-nav-list class="listFriends">
                         <mat-list-item *ngFor="let individuo of individuos" [routerLink]="['../../perfil',individuo.id]">{{individuo.apodo}}
                                 <span class="buttonclear"></span>
-                                <button mat-flat-button>
+                                <button mat-flat-button (click)="deleteIndividual(individuo)">
                                         <mat-icon aria-hidden="false" aria-label="Example home icon">clear
                                         </mat-icon>
                                 </button>
