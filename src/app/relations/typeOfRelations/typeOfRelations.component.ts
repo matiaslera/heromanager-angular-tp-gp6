@@ -32,7 +32,7 @@ export class TypeOfRelationsComponent implements OnInit {
   async loginFriend() {
     try {
       await this.typeRelationSerice.updateIndividual(this.candidateIndividualToAdd)
-      this.individuos = await this.typeRelationSerice.getIndividuals()
+      this.individuos.push(this.candidateIndividualToAdd)
     } catch (error) {
       console.log("me rompi todo", error)
     }
