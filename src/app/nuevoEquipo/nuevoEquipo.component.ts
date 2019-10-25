@@ -43,7 +43,7 @@ export class NewEquipoComponent implements OnInit {
  }
 
   ngOnInit() {
-   this.equipo.propietario = new Usuario(this.misEquipo.perfil) 
+   //this.equipo.propietario = new Usuario(this.misEquipo.perfil) 
   }
 
   mensajePrueba(){
