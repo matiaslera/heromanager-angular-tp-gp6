@@ -18,7 +18,6 @@ export const routes: Routes =[
         {path:'', redirectTo:'misequipos',pathMatch:'full'},
       ]
     },
-   
    {path:'perfil/:id',canActivate:[AuthGuard], component:ProfileComponent},
    {path:'**', redirectTo:'home',pathMatch:'full'},
 ]

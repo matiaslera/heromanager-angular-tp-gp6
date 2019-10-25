@@ -27,13 +27,12 @@ export class LoginComponent {
   }
 
   async authenticate() {
-    return await this.userLogService.authenticate(this.userCredentials)
-    .then(response1 => {
-      console.log(response1)
-      return this.navigateHome()
-    })
-    .catch((e) => this.error(e.error))
-    .finally(() =>this.router.navigate(['home']))
+    try{
+      return await this.userLogService.authenticate(this.userCredentials)
+    }
+    catch(e){
+      this.error(e.error)
+    }
   }
   formHasData(){
     return this.loginForm.status == 'INVALID'
