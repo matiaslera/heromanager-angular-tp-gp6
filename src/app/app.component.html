@@ -7,7 +7,7 @@
       <mat-icon mat-list-icon>home</mat-icon>
       Home
     </a>
-    <a mat-button routerLink="perfil">
+    <a mat-button [routerLink]="['/perfil',loggedId()]">
       <mat-icon mat-list-icon>person</mat-icon>
       Perfil
     </a>
