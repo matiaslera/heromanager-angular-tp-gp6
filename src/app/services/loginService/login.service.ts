@@ -19,14 +19,14 @@ export class LoginService {
     this.userLogged = await this.http.post<Individuo>(REST_SERVER_URL + '/login', credentials).toPromise()
       .then((individuo) => {
         this.authenticated = true
+        this.router.navigate(['home'])
         return individuo
       })
   }
-
   getUser() {
     return this.userLogged
   }
-  
+
   getidUserLogged() {
     return this.userLogged.id
   }
