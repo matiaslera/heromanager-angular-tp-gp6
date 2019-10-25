@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/services/loginService/login.service';
 import * as _ from 'lodash'
 import { TypeRelationService } from 'src/app/services/typeRelationService/typeRelation.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-typeOfRelations',
   templateUrl: './typeOfRelations.component.html',
@@ -19,21 +20,26 @@ export class TypeOfRelationsComponent implements OnInit {
   candidateIndividualToAdd: Individuo
   myControl = new FormControl();
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService,  private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
     this.individuos = await this.typeRelationSerice.getIndividuals()
     this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
   }
 
+  error(errorType:string) {
+    this.snackBar.open(errorType, 'x', {
+      duration: 2000,
+    });
+  }
   async addIndividual() {
     try {
       await this.typeRelationSerice.updateIndividual(this.candidateIndividualToAdd)
       this.individuos.push(this.candidateIndividualToAdd)
       this.delete(this.candidateIndividualToAdd, this.individualsNotAdded)
 
-    } catch (error) {
-      console.log("me rompi todo", error)
+    } catch  {
+      this.error('a ingresado un nombre Incorrecto')
     }
 
     this.candidateIndividualToAdd = null
