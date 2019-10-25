@@ -1,7 +1,7 @@
 export class Usuario {
 
-  integrantes = [];
-    nombre: string
+    nombre: string;
+    id: number;
   
     static fromJSON(nombre: string): Usuario {
       if (!nombre) {
@@ -15,8 +15,8 @@ export class Usuario {
     }
   
     // Lo necesitamos para mostrar el valor seleccionado en el combo
-    equals(_otro) {
-      return _otro && this.nombre === _otro.nombre
-    }
+    // equals(_otro) {
+    //   return _otro && this.nombre === _otro.nombre
+    // }
   
   }

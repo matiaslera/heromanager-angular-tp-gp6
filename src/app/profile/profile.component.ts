@@ -3,6 +3,7 @@ import { Individuo } from '../domain/Individuo';
 import { ProfileService } from '../services/profileService/profile.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from '../services/loginService/login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -10,15 +11,12 @@ import { LoginService } from '../services/loginService/login.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  profileData:Individuo 
+  profileData: Observable<{}>
   paramId = this.route.snapshot.params.id
-  constructor(private profileService: ProfileService, private route: ActivatedRoute, private loginService:LoginService) { 
+  constructor(private profileService: ProfileService, private route: ActivatedRoute, private loginService: LoginService) {
   }
-  
-   async ngOnInit() {
-    if(this.paramId==null){
-      this.paramId = this.loginService.getidUserLogged()
-    }
+
+  async ngOnInit() {
     this.profileData = await this.profileService.getFullProfile(this.paramId)
   }
 

@@ -1,28 +1,28 @@
 import { Usuario } from './usuario'
-
+import { Individuo} from './Individuo'
 export class Equipo {
 
-    constructor(public id?: number, public nombre?: string, public lider?: Usuario, public propietario?: Usuario,
-        public integrantes?: Usuario["integrantes"]) { }
+    constructor(public id?: number, public nombre?: string, public lider?: Usuario, public propietario?: Individuo,
+        public integrantes?: Usuario[]) { }
 
     static fromJson(equipoJSON): Equipo {
         return Object.assign(new Equipo(), equipoJSON)
     }
 
-    esUnIntegrante(individuo: string): boolean {
+    esUnIntegrante(individuo: Usuario): boolean {
         return this.integrantes.includes(individuo)
     }
 
-    esPropietario(individuo: Usuario): boolean {
+    esPropietario(individuo: Individuo): boolean {
         return this.propietario === individuo
     }
     esLider(individuo: Usuario): boolean {
         return this.lider === individuo
     }
 
-    eliminarIntregrante(individuo: string) {
+    eliminarIntregrante(individuo: Usuario) {
         if (this.esUnIntegrante(individuo)) {
-            return this.integrantes.splice(this.integrantes.indexOf('individuo'), 1)
+            return this.integrantes.splice(this.integrantes.indexOf(individuo), 1)
         }
     }
 
@@ -30,7 +30,7 @@ export class Equipo {
         return this.integrantes.push(individuo)
     }
 
-    asignarPropietario(individuo: Usuario) {
+    asignarPropietario(individuo: Individuo) {
         return this.propietario == individuo
     }
 

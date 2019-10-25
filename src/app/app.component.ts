@@ -13,4 +13,7 @@ export class AppComponent {
   isLogged(){
     return this.userLogService.isAuthenticated()
   }
+  loggedId(){
+    return this.userLogService.getidUserLogged()
+  }
 }

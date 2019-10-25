@@ -1,11 +1,15 @@
+import { Usuario } from '../../domain/usuario';
 
-import { NewEquipoComponent } from 'src/app/nuevoEquipo/nuevoEquipo.component';
-import { MessageService } from 'src/app/services/individuos/mensajes.service';
-
-
-export class IndividuoService {
+// export class IndividuoService {
   
-}
+// }
 
 
+export const HEROES: Usuario[] = [
+  { id: 11, nombre: 'Dr Nice' },
+  { id: 12, nombre: 'Narco' },
+  { id: 13, nombre: 'Bombasto' },
+  { id: 14, nombre: 'Celeritas' },
+ 
+];
   

@@ -24,22 +24,22 @@ export class MisEquiposComponent implements OnInit {
   errors = [];
   dataSource: MatTableDataSource<Equipo>;
   perfil= new Usuario ('Batman');
-
+  equipoSelec:Equipo;
+  nombre:string;
+  lider:Usuario;
   displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions', 'eliminar'];
   constructor(public equiposService: EquiposService, private router: Router, public dialog: MatDialog) { }
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator; table: MatTable<Equipo>;
 
   async ngOnInit() {
     try {
-      // this.router.routeReuseStrategy.shouldReuseRoute = () => false
       this.equipos = await this.equiposService.todosLosEquipos()
       this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
     } catch (error) {
       mostrarError(this, error)
     }
-    console.log(this.equipos)
+    console.log(this.dataSource)
   }
 
   async actualizarDato(){
@@ -52,9 +52,7 @@ export class MisEquiposComponent implements OnInit {
   async abandonar(equipo: Equipo) {
     try {
       console.log(equipo)
-       equipo.eliminarIntregrante(this.perfil.nombre)
-      //  const alto= this.equipos.splice(this.equipos.indexOf(equipo), 1)
-      //  return  this.dataSource = new MatTableDataSource<Equipo>(alto);
+      //  equipo.eliminarIntregrante(this.perfil.nombre)
       } catch (error) {
       mostrarError(this, error)
     }
@@ -70,8 +68,8 @@ export class MisEquiposComponent implements OnInit {
   async eliminarEquipo(equipo: Equipo) {
     try {
       if (this.equipos.includes(equipo)) {
-        const alto= this.equipos.splice(this.equipos.indexOf(equipo), 1)
-        return  this.dataSource = new MatTableDataSource<Equipo>(alto);
+        const nuevoEq= this.equipos.splice(this.equipos.indexOf(equipo), 1)
+        return  this.dataSource = new MatTableDataSource<Equipo>(nuevoEq);
     }
       // this.equiposService.eliminarEquipo(equipo)
       // await  this.equiposService.actualizarEquipo(equipo)
@@ -80,17 +78,21 @@ export class MisEquiposComponent implements OnInit {
     }
     console.log(equipo)
   }
-  
-  openDialog(action, obj) {
-    obj.action = action;
+
+  agregarEquipo(equipo:Equipo){
+    this.equipos.includes(equipo)
+  }
+  openDialog(accion, objeto) {
+    objeto.accion=accion;
     const dialogRef = this.dialog.open(NewEquipoComponent, {
       width: '800px',
-      data: obj
+      data: objeto
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.event == 'Add') {
-        this.addRowData(result.data);
+      console.log('se esta cerrando el Dialog')
+      if (result.event == 'Nuevo') {
+        this.agregarEquipo(result.data);
       } else if (result.event == 'Update') {
         this.updateRowData(result.data);
       } else if (result.event == 'Delete') {
@@ -99,15 +101,6 @@ export class MisEquiposComponent implements OnInit {
     });
   }
 
-  addRowData(row_obj) {
-    var d = new Date();
-    var a = new Usuario('matias');
-    this.equiposService.actualizarEquipo(row_obj = new Equipo
-      (4, 'algo', a, a, [])
-    );
-    this.table.renderRows();
-
-  }
   updateRowData(row_obj) {
     this.equipos = this.equipos.filter((value, key) => {
       if (value.id == row_obj.id) {
