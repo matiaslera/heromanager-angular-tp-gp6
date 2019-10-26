@@ -1,0 +1,15 @@
+<mat-card *ngIf="item | async as item;">
+  <mat-card-header>
+      <img src="{{item.photoUrl}}" height="150rem">
+  </mat-card-header>
+  <span class="spacer"></span>
+    <mat-card-content>
+        <strong>Alcance: </strong>{{item.alcance}}<br><br>
+        <strong>Peso: </strong>{{item.peso}}<br><br>
+        <strong>Daño: </strong>{{item.danio}}<br>
+        <strong>Sobrenatural: </strong> 
+        <i class="material-icons"  *ngIf="!item.sobrenatural">cancel</i>
+        <i class="material-icons"  *ngIf="item.sobrenatural">check_circle</i><br><br>
+        <strong>Poder de ataque: </strong>{{item.poderDeAtaque}}<br><br>
+    </mat-card-content>
+  </mat-card>

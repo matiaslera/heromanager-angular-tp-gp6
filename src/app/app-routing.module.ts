@@ -7,19 +7,23 @@ import { NewEquipoComponent } from './nuevoEquipo/nuevoEquipo.component'
 import { MisEquiposComponent } from './misEquipos/misEquipos.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RelationsComponent } from './relations/relations.component';
+import { ShowItemDetailsComponent } from './showItemDetails/showItemDetails.component';
 
-export const routes: Routes =[
-   {path:'login',component:LoginComponent},
-   {path:'home',canActivate:[AuthGuard], component:HomeComponent,
-      children:[
-        {path:'misequipos', component:MisEquiposComponent},
-        {path:'relaciones',  component:RelationsComponent},
-        {path:'misequipos/nuevo', component:NewEquipoComponent},
-        {path:'', redirectTo:'misequipos',pathMatch:'full'},
-      ]
-    },
-   {path:'perfil/:id',canActivate:[AuthGuard], component:ProfileComponent},
-   {path:'**', redirectTo:'home',pathMatch:'full'},
+export const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  {path: 'home', canActivate: [AuthGuard], component: HomeComponent,
+    children: [
+      { path: 'misequipos', component: MisEquiposComponent },
+      { path: 'relaciones', component: RelationsComponent },
+      { path: 'misequipos/nuevo', component: NewEquipoComponent },
+      { path: '', redirectTo: 'misequipos', pathMatch: 'full' },
+    ]},
+  {path: 'perfil/:id', canActivate: [AuthGuard], component: ProfileComponent,
+   children: [
+      {path: 'detalles_item/:id', component: ShowItemDetailsComponent },
+    ]
+  },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ]
 
 @NgModule({

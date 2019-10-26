@@ -39,7 +39,7 @@ export class TypeOfRelationsComponent implements OnInit {
       this.delete(this.candidateIndividualToAdd, this.individualsNotAdded)
 
     } catch  {
-      this.error('a ingresado un nombre Incorrecto')
+      this.error('Seleccione uno de la lista')
     }
 
     this.candidateIndividualToAdd = null

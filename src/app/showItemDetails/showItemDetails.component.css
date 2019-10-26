@@ -1,0 +1,9 @@
+mat-card{
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    width: 92.5%;
+}
+.spacer{
+    flex: 1 1 auto;
+}

@@ -17,6 +17,8 @@ import { RelationsComponent } from './relations/relations.component';
 import { TypeOfRelationsComponent } from './relations/typeOfRelations/typeOfRelations.component';
 import { EnemiesService } from './services/typeRelationService/enemiesService/enemies.service';
 import { FriendsService } from './services/typeRelationService/friendsService/friends.service';
+import { ShowAllItemsComponent } from './showAllItems/showAllItems.component';
+import { ShowItemDetailsComponent } from './showItemDetails/showItemDetails.component';
 
 @NgModule({
    declarations: [
@@ -27,7 +29,9 @@ import { FriendsService } from './services/typeRelationService/friendsService/fr
       MisEquiposComponent,
       ProfileComponent,
       RelationsComponent,
-      TypeOfRelationsComponent
+      TypeOfRelationsComponent,
+      ShowAllItemsComponent,
+      ShowItemDetailsComponent
    ],
    imports: [
       BrowserModule,
@@ -42,7 +46,7 @@ import { FriendsService } from './services/typeRelationService/friendsService/fr
       LoginService,
       AuthGuard,
       EnemiesService,
-      FriendsService,
+      FriendsService
    ],
    bootstrap: [
       AppComponent

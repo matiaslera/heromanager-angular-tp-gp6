@@ -13,6 +13,6 @@ export class ProfileService {
   constructor(private httpCLient: HttpClient, private loginService: LoginService) { }
 
   async getFullProfile(id:String ) {
-    return of(await this.httpCLient.get<Individuo>(REST_SERVER_URL + '/perfil_completo/' +id).toPromise())
+    return of (await this.httpCLient.get<Individuo>(REST_SERVER_URL + '/perfil_completo/' +id).toPromise())
   }
 }
