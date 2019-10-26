@@ -3,6 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { Item } from '../domain/Item';
 import { ItemsService } from '../services/ItemService/items.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-showAllItems',
@@ -14,13 +15,19 @@ export class ShowAllItemsComponent implements OnInit {
   items :Item[] 
   dataSource : MatTableDataSource<Item>
 
-  constructor(private itemsService : ItemsService){}
+  constructor(private itemsService : ItemsService, private route:ActivatedRoute ){}
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator
 
-  async ngOnInit() {
-    const itemList = await this.itemsService.getItems()
+  ngOnInit() {
+    this.route.params.subscribe(routeParams => {
+      this.loadItems(routeParams.id)      
+    })
+  }
+  async loadItems(id:String){
+    const itemList = await this.itemsService.getItems(id)
     this.dataSource= new MatTableDataSource<Item>(itemList)
     this.dataSource.paginator = this.paginator;
   }
+
 }

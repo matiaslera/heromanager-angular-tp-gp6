@@ -12,12 +12,16 @@ import { Observable } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
   profileData: Observable<{}>
-  paramId = this.route.snapshot.params.id
   constructor(private profileService: ProfileService, private route: ActivatedRoute, private loginService: LoginService) {
   }
 
-  async ngOnInit() {
-    this.profileData = await this.profileService.getFullProfile(this.paramId)
+  ngOnInit() {
+    this.route.params.subscribe(routeParams => {
+      this.loadProfile(routeParams.id)      
+    })
+  }
+  async loadProfile(id:String){
+    this.profileData = await this.profileService.getFullProfile(id)
   }
 
 }

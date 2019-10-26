@@ -9,12 +9,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./showItemDetails.component.css']
 })
 export class ShowItemDetailsComponent implements OnInit {
-  item:Observable<{}>
-  paramId = this.route.snapshot.params.id
+  item:Observable<{}> 
   constructor(private route: ActivatedRoute,private itemsService : ItemsService) { }
 
-  async ngOnInit() {
-    this.item = await this.itemsService.getItemDetail(this.paramId)
+  ngOnInit() {
+    this.route.params.subscribe(routeParams => {
+      this.loadItems(routeParams.id)      
+    })
   }
-
+  async loadItems(id:String){
+    this.item = await this.itemsService.getItemDetail(id)
+  }
 }

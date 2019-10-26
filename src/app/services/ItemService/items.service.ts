@@ -12,8 +12,8 @@ export class ItemsService {
 
   constructor(private http: HttpClient, private logService:LoginService) { }
 
-  async getItems(){
-    const items = await this.http.get<Item[]>(REST_SERVER_URL + '/obtener_items/'+ this.logService.getidUserLogged()).toPromise()
+  async getItems(id:String){
+    const items = await this.http.get<Item[]>(REST_SERVER_URL + '/obtener_items/'+ id).toPromise()
     return items.map((item) => Item.fromJson(item))
   }
   async getItemDetail(id:String){
