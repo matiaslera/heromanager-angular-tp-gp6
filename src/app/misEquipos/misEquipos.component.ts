@@ -26,7 +26,7 @@ export class MisEquiposComponent implements OnInit {
   errors = [];
   dataSource: MatTableDataSource<Equipo>;
   equipoSelec:Equipo;
-  displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions', 'eliminar'];
+  displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions'];
   constructor(public equiposService: EquiposService, private router: Router,
     private loginService: LoginService, public dialog: MatDialog) {
 

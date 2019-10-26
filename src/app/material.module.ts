@@ -15,7 +15,7 @@ import {
     MatSelectModule,
     MatAutocompleteModule,
     MatGridListModule,
-    MatProgressSpinnerModule,    
+    MatTooltipModule,
 
 } from '@Angular/material'
 import { MatDialogModule } from '@angular/material/dialog'
@@ -41,7 +41,7 @@ import {MatTableModule} from '@angular/material/table';
         MatSelectModule,
         MatAutocompleteModule,
         MatGridListModule,
-        MatProgressSpinnerModule,
+        MatTooltipModule,
     ],
     exports: [
         MatAutocompleteModule,
@@ -61,7 +61,7 @@ import {MatTableModule} from '@angular/material/table';
         MatTableModule,
         MatSelectModule,
         MatGridListModule,
-        MatProgressSpinnerModule,
+        MatTooltipModule,
     ]
 })
 export class MaterialModule { }
