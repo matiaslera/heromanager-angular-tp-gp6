@@ -47,6 +47,7 @@ export class NewEquipoComponent implements OnInit {
   }
 
   doAction() {
+    this.action= 'Nuevo';
     this.crearEquipo()
     this.dialogRef.close({ event: this.action, data: this.equipo });
   }

@@ -28,7 +28,9 @@ export class MisEquiposComponent implements OnInit {
   equipoSelec:Equipo;
   displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions', 'eliminar'];
   constructor(public equiposService: EquiposService, private router: Router,
-    private loginService: LoginService, public dialog: MatDialog) { }
+    private loginService: LoginService, public dialog: MatDialog) {
+
+     }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator; table: MatTable<Equipo>;
 
@@ -75,8 +77,7 @@ export class MisEquiposComponent implements OnInit {
         const nuevoEq= this.equipos.splice(this.equipos.indexOf(equipo), 1)
         return  this.dataSource = new MatTableDataSource<Equipo>(nuevoEq);
     }
-      // this.equiposService.eliminarEquipo(equipo)
-      // await  this.equiposService.actualizarEquipo(equipo)
+    
     } catch (error) {
       mostrarError(this, error)
     }
@@ -86,26 +87,23 @@ export class MisEquiposComponent implements OnInit {
   agregarEquipo(equipo:Equipo){
     this.equipos.includes(equipo)
     this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
-    var d = new Date();
-    // this.dataSource.push({
-    //   id:d.getTime(),
-    //   name:row_obj.name
-    // });
-    this.table.renderRows();
+    
   }
 
   openDialog(accion, objeto) {
     objeto.accion=accion;
     const dialogRef = this.dialog.open(NewEquipoComponent, {
-      width: '800px',
+      width: '500px',
       data: objeto
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('se esta cerrando el Dialog')
       if (result.event == 'Nuevo') {
+        console.log(result.data)
         this.agregarEquipo(result.data);
       } else if (result.event == 'Actualizar') {
+        console.log(result.data)
         this.actualizarEquipo(result.data);
       } else if (result.event == 'Delete') {
         this.deleteRowData(result.data);
@@ -113,10 +111,14 @@ export class MisEquiposComponent implements OnInit {
     });
   }
 
-  actualizarEquipo(row_obj) {
+  actualizarEquipo(obj) {
     this.equipos = this.equipos.filter((value, key) => {
-      if (value.id == row_obj.id) {
-        value.nombre = row_obj.nombre;
+      if ( value.nombre == obj.nombre) {
+        // value.nombre = obj.nombre;
+        value.lider = obj.lider;
+        value.propietario= obj.propietario;
+        value.integrantes=obj.integrantes;
+        this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
       }
       return true;
     });
