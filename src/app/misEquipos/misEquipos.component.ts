@@ -7,6 +7,8 @@ import { Router } from '@angular/router'
 import { MatDialog, MatTable } from '@angular/material';
 import { NewEquipoComponent } from '../nuevoEquipo/nuevoEquipo.component'
 import { Usuario } from '../domain/usuario'
+import { LoginService } from '../services/loginService/login.service';
+
 
 function mostrarError(component, error) {
   console.log('error', error)
@@ -23,12 +25,10 @@ export class MisEquiposComponent implements OnInit {
   equipos: Array<Equipo> = []
   errors = [];
   dataSource: MatTableDataSource<Equipo>;
-  perfil= new Usuario ('Batman');
   equipoSelec:Equipo;
-  nombre:string;
-  lider:Usuario;
   displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions', 'eliminar'];
-  constructor(public equiposService: EquiposService, private router: Router, public dialog: MatDialog) { }
+  constructor(public equiposService: EquiposService, private router: Router,
+    private loginService: LoginService, public dialog: MatDialog) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator; table: MatTable<Equipo>;
 
@@ -40,6 +40,10 @@ export class MisEquiposComponent implements OnInit {
       mostrarError(this, error)
     }
     console.log(this.dataSource)
+  }
+
+  getUser() {
+    return this.loginService.getUser()
   }
 
   async actualizarDato(){
@@ -58,12 +62,12 @@ export class MisEquiposComponent implements OnInit {
     }
     console.log(equipo)
   }
+
   eliminar(elemento) {
   this.dataSource.data = this.dataSource.data.filter(i => i !== elemento)
   // .filter(i => i !== elemento)
-//  .map((i, idx) => (id.Equipo = (idx + 1), i)); // Update the position
-
-}
+  //  .map((i, idx) => (id.Equipo = (idx + 1), i)); // Update the position
+  }
 
   async eliminarEquipo(equipo: Equipo) {
     try {
@@ -81,7 +85,15 @@ export class MisEquiposComponent implements OnInit {
 
   agregarEquipo(equipo:Equipo){
     this.equipos.includes(equipo)
+    this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
+    var d = new Date();
+    // this.dataSource.push({
+    //   id:d.getTime(),
+    //   name:row_obj.name
+    // });
+    this.table.renderRows();
   }
+
   openDialog(accion, objeto) {
     objeto.accion=accion;
     const dialogRef = this.dialog.open(NewEquipoComponent, {
@@ -93,15 +105,15 @@ export class MisEquiposComponent implements OnInit {
       console.log('se esta cerrando el Dialog')
       if (result.event == 'Nuevo') {
         this.agregarEquipo(result.data);
-      } else if (result.event == 'Update') {
-        this.updateRowData(result.data);
+      } else if (result.event == 'Actualizar') {
+        this.actualizarEquipo(result.data);
       } else if (result.event == 'Delete') {
         this.deleteRowData(result.data);
       }
     });
   }
 
-  updateRowData(row_obj) {
+  actualizarEquipo(row_obj) {
     this.equipos = this.equipos.filter((value, key) => {
       if (value.id == row_obj.id) {
         value.nombre = row_obj.nombre;

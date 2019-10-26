@@ -30,7 +30,6 @@ export class NewEquipoComponent implements OnInit {
   miFormulario = new FormControl();
   seleccionado: Usuario;
   
-
   constructor(private equipoService: EquiposService, private router: Router,private integranteFri: FriendsService,
     public dialogRef: MatDialogRef<NewEquipoComponent>, private loginService: LoginService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Equipo) {
@@ -48,7 +47,8 @@ export class NewEquipoComponent implements OnInit {
   }
 
   doAction() {
-    this.dialogRef.close({ event: this.action, data: this.local_data });
+    this.crearEquipo()
+    this.dialogRef.close({ event: this.action, data: this.equipo });
   }
 
   closeDialog() {
@@ -80,10 +80,12 @@ export class NewEquipoComponent implements OnInit {
   }
 
   crearEquipo(){
-    this.equipo.nombre= this.nombreEquipo
-    this.equipo.integrantes= this.integrantes
-    this.equipo.propietario=this.propietario()
-    this.equipo.lider = this.liderEquipo
+    const id=3 
+   this.equipo= new Equipo(id,this.nombreEquipo,this.liderEquipo, this.propietario(),this.integrantes)
+    // this.equipo.nombre= this.nombreEquipo
+    // this.equipo.integrantes= this.integrantes
+    // this.equipo.propietario=this.propietario()
+    // this.equipo.lider = this.liderEquipo
   }
 
 }
