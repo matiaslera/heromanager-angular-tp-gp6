@@ -32,7 +32,6 @@ export class EnemiesService implements TypeRelationService{
   }
 
   deleteIndividual(individualDelete: Individuo){
-    console.log(individualDelete)
     this.httpCLient.put<Individuo>(REST_SERVER_URL + '/eliminar_enemigo/' + this.getidUserLogged(), individualDelete).toPromise()
   }
 }

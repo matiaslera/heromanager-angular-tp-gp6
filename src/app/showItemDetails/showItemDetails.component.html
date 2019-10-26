@@ -10,6 +10,6 @@
         <strong>Sobrenatural: </strong> 
         <i class="material-icons"  *ngIf="!item.sobrenatural">cancel</i>
         <i class="material-icons"  *ngIf="item.sobrenatural">check_circle</i><br><br>
-        <strong>Poder de ataque: </strong>{{item.poderDeAtaque}}<br><br>
+        <strong>Poder de ataque: </strong>{{item.poderDeAtaque | number :'1.2-2':'es'}}<br><br>
     </mat-card-content>
   </mat-card>

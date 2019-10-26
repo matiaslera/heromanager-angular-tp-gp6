@@ -19,7 +19,10 @@ import { EnemiesService } from './services/typeRelationService/enemiesService/en
 import { FriendsService } from './services/typeRelationService/friendsService/friends.service';
 import { ShowAllItemsComponent } from './showAllItems/showAllItems.component';
 import { ShowItemDetailsComponent } from './showItemDetails/showItemDetails.component';
+import { registerLocaleData } from '@angular/common'
+import localeEs from '@angular/common/locales/es'
 
+registerLocaleData(localeEs)
 @NgModule({
    declarations: [
       AppComponent,
