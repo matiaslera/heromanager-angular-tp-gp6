@@ -57,7 +57,7 @@ export class NewEquipoComponent implements OnInit {
   }
 
   crearEquipo() {
-    this.equipo = new Equipo(null, this.nombreEquipo, this.liderEquipo, this.propietario(), this.integrantes)
+    // this.equipo = new Equipo(null, this.nombreEquipo, this.liderEquipo, this.propietario(), this.integrantes)
   }
 
   disabledIndividual() {

@@ -6,9 +6,9 @@ import { EquiposService } from '../services/individuos/misequipos.service';
 import { Router } from '@angular/router'
 import { MatDialog, MatTable } from '@angular/material';
 import { NewEquipoComponent } from '../nuevoEquipo/nuevoEquipo.component'
-import { Usuario } from '../domain/usuario'
 import { LoginService } from '../services/loginService/login.service';
 import { Individuo } from '../domain/Individuo';
+import { TeamService } from '../services/typeRelationService/teamService/team.service';
 
 
 function mostrarError(component, error) {
@@ -28,7 +28,7 @@ export class MisEquiposComponent implements OnInit {
   dataSource: MatTableDataSource<Equipo>;
   equipoSelec:Equipo;
   displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions'];
-  constructor(public equiposService: EquiposService, private router: Router,
+  constructor(public teamService: TeamService, private router: Router,
     private loginService: LoginService, public dialog: MatDialog) {
 
      }
@@ -37,7 +37,7 @@ export class MisEquiposComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      this.equipos = await this.equiposService.todosLosEquipos()
+      this.equipos = await this.teamService.getAllTeam()
       this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
     } catch (error) {
       mostrarError(this, error)
@@ -50,7 +50,7 @@ export class MisEquiposComponent implements OnInit {
   }
 
   async actualizarDato(){
-    try{this.equipos = await this.equiposService.todosLosEquipos()
+    try{this.equipos = await this.teamService.getAllTeam()
     this.dataSource = new MatTableDataSource<Equipo>(this.equipos);}
     catch(error){
       mostrarError(this, error)
@@ -126,8 +126,8 @@ export class MisEquiposComponent implements OnInit {
     });
   }
 
-  individualAdmin(propietario: Individuo){
-    return propietario.id == this.loginService.getidUserLogged()
+  individualAdmin(propietario: string){
+    return propietario == this.loginService.getidUserLogged()
   }
 
 }

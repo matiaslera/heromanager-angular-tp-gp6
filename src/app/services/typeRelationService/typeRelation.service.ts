@@ -6,5 +6,5 @@ export interface TypeRelationService {
   getNonIndividuals()
   updateIndividual(individualUpdate: Individuo)
   deleteIndividual(deleteIndividual: Individuo)
-
+  
 }
