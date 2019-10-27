@@ -113,8 +113,8 @@ export class MisEquiposComponent implements OnInit {
     this.equipos = this.equipos.filter((value, key) => {
       if ( value.nombre == obj.nombre) {
         value.lider = obj.lider;
-        value.propietario= obj.propietario;
-        value.integrantes=obj.integrantes;
+        // value.propietario= obj.propietario;
+        // value.integrantes=obj.integrantes;
         this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
       }
       return true;
