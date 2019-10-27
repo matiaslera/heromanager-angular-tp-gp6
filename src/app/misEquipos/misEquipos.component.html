@@ -19,7 +19,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
       <td mat-cell *matCellDef="let equipo">
-        <button mat-icon-button (click)="abandonar(equipo)">
+        <button mat-icon-button (click)="abandonar(equipo)" *ngIf="removeTeamAdmin(equipo.ownerId)">
           <mat-icon aria-label="Example icon-button with a heart icon"
           matTooltip="Abandonar equipo" matTooltipPosition="left">redo</mat-icon>
         </button>

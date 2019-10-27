@@ -21,8 +21,6 @@ export class TeamService implements TeamService {
     const teams = await this.httpCLient.get<Equipo[]>(REST_SERVER_URL +  "/equipos/" + this.getidUserLogged()).toPromise()
     return teams.map((team) => Equipo.fromJson(team)) 
   }
- 
-
 
  async getIndividuals() {
     const individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL +  '/enemigos/' + this.getidUserLogged()).toPromise()
@@ -33,12 +31,20 @@ export class TeamService implements TeamService {
     return Individuals.map((Individual) => Individuo.fromJson(Individual))
  
   }
+
+  updateTeam(teamUpdate: Equipo){
+    return this.httpCLient.put<Equipo>(REST_SERVER_URL + "/actualizar_equipo", teamUpdate).toPromise()
+  }
+
+
   updateIndividual(individualUpdate: Individuo) {
 
   }
   deleteIndividual(deleteIndividual: Individuo) {
 
   }
+
+
 
 
 }

@@ -2,17 +2,16 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Equipo } from '../domain/misequipos';
-import { EquiposService } from '../services/individuos/misequipos.service';
+import * as _ from 'lodash'
 import { Router } from '@angular/router'
 import { MatDialog, MatTable } from '@angular/material';
 import { NewEquipoComponent } from '../nuevoEquipo/nuevoEquipo.component'
 import { LoginService } from '../services/loginService/login.service';
-import { Individuo } from '../domain/Individuo';
 import { TeamService } from '../services/typeRelationService/teamService/team.service';
 
 
 function mostrarError(component, error) {
-  console.log('error', error)
+  console.log('se rompio todooooo', error)
   component.errors.push(error.error)
 }
 
@@ -23,15 +22,15 @@ function mostrarError(component, error) {
 })
 export class MisEquiposComponent implements OnInit {
 
-  equipos: Array<Equipo> = []
+  equipos: Equipo[] = []
   errors = [];
   dataSource: MatTableDataSource<Equipo>;
-  equipoSelec:Equipo;
+  equipoSelec: Equipo;
   displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions'];
   constructor(public teamService: TeamService, private router: Router,
     private loginService: LoginService, public dialog: MatDialog) {
 
-     }
+  }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator; table: MatTable<Equipo>;
 
@@ -49,47 +48,54 @@ export class MisEquiposComponent implements OnInit {
     return this.loginService.getUser()
   }
 
-  async actualizarDato(){
-    try{this.equipos = await this.teamService.getAllTeam()
-    this.dataSource = new MatTableDataSource<Equipo>(this.equipos);}
-    catch(error){
+  async actualizarDato() {
+    try {
+    this.equipos = await this.teamService.getAllTeam()
+      this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
+    }
+    catch (error) {
       mostrarError(this, error)
     }
   }
   async abandonar(equipo: Equipo) {
     try {
-      console.log(equipo)
-      } catch (error) {
+      // aqui ahi que pegarselo al backend
+      // await this.teamService.updateTeam(equipo)
+      this.abandonarEquipo( equipo)
+    } catch (error) {
       mostrarError(this, error)
     }
-    console.log(equipo)
   }
 
-  eliminar(elemento) {
-  this.dataSource.data = this.dataSource.data.filter(i => i !== elemento)
+  abandonarEquipo(equipo: Equipo) {
+    _.remove(this.equipos, equipo)
   }
+  eliminar(elemento) {
+    this.dataSource.data = this.dataSource.data.filter(i => i !== elemento)
+  }
+  
 
   async eliminarEquipo(equipo: Equipo) {
     try {
       if (this.equipos.includes(equipo)) {
-        const nuevoEq= this.equipos.splice(this.equipos.indexOf(equipo), 1)
-        return  this.dataSource = new MatTableDataSource<Equipo>(nuevoEq);
-    }
-    
+        const nuevoEq = this.equipos.splice(this.equipos.indexOf(equipo), 1)
+        return this.dataSource = new MatTableDataSource<Equipo>(nuevoEq);
+      }
+
     } catch (error) {
       mostrarError(this, error)
     }
     console.log(equipo)
   }
 
-  agregarEquipo(equipo:Equipo){
+  agregarEquipo(equipo: Equipo) {
     this.equipos.includes(equipo)
     this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
-    
+
   }
 
   openDialog(accion, objeto) {
-    objeto.accion=accion;
+    objeto.accion = accion;
     const dialogRef = this.dialog.open(NewEquipoComponent, {
       width: '500px',
       data: objeto
@@ -111,7 +117,7 @@ export class MisEquiposComponent implements OnInit {
 
   actualizarEquipo(obj) {
     this.equipos = this.equipos.filter((value, key) => {
-      if ( value.nombre == obj.nombre) {
+      if (value.nombre == obj.nombre) {
         value.lider = obj.lider;
         // value.propietario= obj.propietario;
         // value.integrantes=obj.integrantes;
@@ -126,8 +132,12 @@ export class MisEquiposComponent implements OnInit {
     });
   }
 
-  individualAdmin(propietario: string){
+  individualAdmin(propietario: string) {
     return propietario == this.loginService.getidUserLogged()
+  }
+
+  removeTeamAdmin(equipo: Equipo){
+    return equipo != this.loginService.getidUserLogged()
   }
 
 }

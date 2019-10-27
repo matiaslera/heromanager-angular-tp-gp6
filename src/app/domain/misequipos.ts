@@ -8,5 +8,6 @@ export class Equipo {
         return Object.assign(new Equipo(), equipoJSON)
     }
 
-
 }
+
+
