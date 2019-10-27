@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Individuo } from 'src/app/domain/Individuo';
 import { FormControl } from '@angular/forms';
 import { LoginService } from 'src/app/services/loginService/login.service';
@@ -15,19 +15,20 @@ export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: any
   @Input() typeRelationSerice: TypeRelationService
-  individuos: Individuo[]
+  @Output() individuos: Individuo[]
+
   individualsNotAdded: Individuo[]
   candidateIndividualToAdd: Individuo
   myControl = new FormControl();
 
-  constructor(private loginService: LoginService,  private snackBar: MatSnackBar) { }
+  constructor(private loginService: LoginService, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
     this.individuos = await this.typeRelationSerice.getIndividuals()
     this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
   }
 
-  error(errorType:string) {
+  error(errorType: string) {
     this.snackBar.open(errorType, 'x', {
       duration: 2000,
     });

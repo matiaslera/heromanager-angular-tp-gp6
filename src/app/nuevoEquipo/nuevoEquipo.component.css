@@ -2,6 +2,12 @@
     min-width: 150px;
     max-width: 500px;
     width: 100%;
+    display: flex;
+  }
+  
+  .labelNombre{
+    margin: auto;
+    padding: 2px;
   }
   
   .example-full-width {

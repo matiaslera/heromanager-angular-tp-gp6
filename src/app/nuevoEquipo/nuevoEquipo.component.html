@@ -1,17 +1,17 @@
 <div>
-        <p>Nuevo Equipo</p>
+        <h2>Nuevo Equipo</h2>
 
         <div class="example-container">
         <form class="example-form"> 
-                        <label>Nombre De Equipo:</label>
+                        <label class="labelNombre">Nombre:</label>
                 <mat-form-field appearance="outline">
-                     <input matInput type="text"  placeholder="ej: los galacticos" [(ngModel)]="nombreEquipo" name="algo "/>
+                     <input matInput type="text"  placeholder="ej: los galacticos" [(ngModel)]="nombreEquipo" name="algo" required>
                 </mat-form-field>
 
                 <mat-form-field>
-                        <mat-select placeholder="Lider:"  [(ngModel)]="liderEquipo" name="integrantes">
-                                <mat-option *ngFor="let integrante of integrantes"[value]="integrante.nombre" >
-                                {{integrante.nombre}}</mat-option>
+                        <mat-select placeholder="Lider:" [(ngModel)]="liderEquipo" name="integrante">
+                                <mat-option *ngFor="let integrante of integrantes"[value]="integrante.id"  >
+                                {{integrante.apodo}}</mat-option>
                         </mat-select>
                 </mat-form-field>
         </form>
@@ -19,38 +19,13 @@
 
         <mat-card >
                 <div >
-                        <h4>Integrantes: </h4>
-                        <div class="example-container">
-                                <mat-card-content class="masCardInputFriends">
-                                        <mat-form-field appearance="outline" class="matInputFriend">
-                                                <mat-label>Nuevo integrante: </mat-label>
-                                                <input #usuario matInput type="text" autofocus placeholder="ej: Batman">
-                                        </mat-form-field>
-                                                <button color="primary" mat-flat-button
-                                                (click)="agregarIntegrante(usuario.value); usuario.value=''">
-                                                <mat-icon aria-hidden="false" aria-label="Example home icon">add
-                                                </mat-icon>
-                                        </button>
-                                </mat-card-content>
-                        </div>
-
-                        <mat-nav-list>
-                                <mat-list-item *ngFor="let integrante of integrantes" (click)="seleccionado(integrante)">
-                                        {{integrante.id}} {{integrante.nombre}}
-                                        <a *ngIf="integrante.description"> Descripcion: {{ integrante.description }}
-                                        </a>
-                                        <span class="buttonclear"></span>
-                                        <button mat-flat-button  title="delete hero" (click)="eliminarIntegrante(integrante)">
-                                                <mat-icon aria-hidden="false" aria-label="Example home icon">clear
-                                                </mat-icon>
-                                        </button>
-                                </mat-list-item>
-                        </mat-nav-list>
+                        <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'" [typeRelationSerice]="teamService" (individuos2)="integrantes"></app-typeOfRelations>
+ 
                 </div>
         </mat-card>
 </div>
 
 <div mat-dialog-actions>
-        <button mat-button (click)="doAction()">Agregar</button>
-        <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+        <button mat-button (click)="agregarNuevoEquipo()"  [disabled]="disabledIndividual()">Agregar</button>
+        <button mat-button (click)="cancelarNuevoEquipo()" mat-flat-button color="warn">Cancel</button>
 </div>

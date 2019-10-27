@@ -3,13 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Usuario } from '../domain/usuario';
 import { Equipo } from '../domain/misequipos'
-import { EquiposService } from '../services/individuos/misequipos.service'
 import { Router } from '@angular/router';
-import { UsuariosService } from '../services/individuos/usuariosService'
-import{FriendsService} from '../services/typeRelationService/friendsService/friends.service'
-import { Individuo } from 'src/app/domain/Individuo';
-import {HEROES} from '../services/individuos/Individuos.service'
 import { LoginService } from '../services/loginService/login.service';
+import { Integrantes } from '../domain/integrantes';
+import { Individuo } from '../domain/Individuo';
+import { TeamService } from '../services/typeRelationService/teamService/team.service';
 
 @Component({
   selector: 'app-nuevoEquipo',
@@ -17,76 +15,54 @@ import { LoginService } from '../services/loginService/login.service';
   styleUrls: ['./nuevoEquipo.component.css']
 })
 export class NewEquipoComponent implements OnInit {
-  
-  nombreEquipo:string;
-  liderEquipo:Usuario;
-  integrantes= [];
-  propietario = this.getUser;
 
+  nombreEquipo: string
+  liderEquipo: Individuo
+  integrantes: Individuo[]
+  allIntegrante: Individuo[]
+  propietario = this.getUser
   equipo: Equipo;
   action: string;
   local_data: any;
-
   miFormulario = new FormControl();
-  seleccionado: Usuario;
-  
-  constructor(private equipoService: EquiposService, private router: Router,private integranteFri: FriendsService,
+
+  constructor(private teamService: TeamService,
     public dialogRef: MatDialogRef<NewEquipoComponent>, private loginService: LoginService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Equipo) {
 
-    console.log(data);
     this.local_data = { ...data };
     this.action = this.local_data.action;
-      }
-      ngOnInit() {
+  }
+  async ngOnInit() {
+    this.integrantes = await this.teamService.getIndividuals()
 
-      }
-
-  mensajePrueba() {
-    window.alert('El componente esta funcionando');
   }
 
-  doAction() {
-    this.action= 'Nuevo';
+
+  agregarNuevoEquipo() {
+    this.action = 'Nuevo';
     this.crearEquipo()
     this.dialogRef.close({ event: this.action, data: this.equipo });
   }
 
-  closeDialog() {
+  cancelarNuevoEquipo() {
     this.dialogRef.close({ event: 'Cancel' });
   }
 
-  navegarHome() {
-    this.router.navigate(['/misequipos'])
+  agregarIntegrante(integrente: Individuo) {
+    this.integrantes.push(integrente);
   }
-
-  seleccion(user:Usuario){
-    this.seleccionado = user;
-  }
-  agregarIntegrante(name:string){
-    this.integrantes.push(new Usuario(name));
-      
-  }
-
-   esUnIntegrante(usuario:Usuario){
-     return this.integrantes.includes(usuario)
- }
- eliminarIntegrante(usuario:Usuario){
-     if (this.esUnIntegrante(usuario)) {
-       return this.integrantes.splice(this.integrantes.indexOf(usuario), 1)
-   }
-   }
-   getUser() {
+  getUser() {
     return this.loginService.getUser()
   }
 
-  crearEquipo(){
-    const id=3 
-   this.equipo= new Equipo(id,this.nombreEquipo,this.liderEquipo, this.propietario(),this.integrantes)
-    // this.equipo.nombre= this.nombreEquipo
-    // this.equipo.integrantes= this.integrantes
-    // this.equipo.propietario=this.propietario()
-    // this.equipo.lider = this.liderEquipo
+  crearEquipo() {
+    this.equipo = new Equipo(null, this.nombreEquipo, this.liderEquipo, this.propietario(), this.integrantes)
   }
+
+  disabledIndividual() {
+    return this.nombreEquipo == null
+  }
+
 
 }

@@ -8,6 +8,7 @@ import { MatDialog, MatTable } from '@angular/material';
 import { NewEquipoComponent } from '../nuevoEquipo/nuevoEquipo.component'
 import { Usuario } from '../domain/usuario'
 import { LoginService } from '../services/loginService/login.service';
+import { Individuo } from '../domain/Individuo';
 
 
 function mostrarError(component, error) {
@@ -58,7 +59,6 @@ export class MisEquiposComponent implements OnInit {
   async abandonar(equipo: Equipo) {
     try {
       console.log(equipo)
-      //  equipo.eliminarIntregrante(this.perfil.nombre)
       } catch (error) {
       mostrarError(this, error)
     }
@@ -67,8 +67,6 @@ export class MisEquiposComponent implements OnInit {
 
   eliminar(elemento) {
   this.dataSource.data = this.dataSource.data.filter(i => i !== elemento)
-  // .filter(i => i !== elemento)
-  //  .map((i, idx) => (id.Equipo = (idx + 1), i)); // Update the position
   }
 
   async eliminarEquipo(equipo: Equipo) {
@@ -114,7 +112,6 @@ export class MisEquiposComponent implements OnInit {
   actualizarEquipo(obj) {
     this.equipos = this.equipos.filter((value, key) => {
       if ( value.nombre == obj.nombre) {
-        // value.nombre = obj.nombre;
         value.lider = obj.lider;
         value.propietario= obj.propietario;
         value.integrantes=obj.integrantes;
@@ -129,5 +126,8 @@ export class MisEquiposComponent implements OnInit {
     });
   }
 
+  individualAdmin(propietario: Individuo){
+    return propietario.id == this.loginService.getidUserLogged()
+  }
 
 }
