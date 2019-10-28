@@ -49,7 +49,7 @@ export class MisEquiposComponent implements OnInit {
 
   async actualizarDato() {
     try {
-    // this.equipos = await this.teamService.getAllTeam()
+    this.equipos = await this.teamService.getAllTeam()
       this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
     }
     catch (error) {
