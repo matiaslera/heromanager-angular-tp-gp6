@@ -5,25 +5,26 @@
 
                 <label class="labelNombre">Nombre:</label>
                 <mat-form-field appearance="outline">
-                        <input matInput type="text" placeholder="ej: los galacticos" name="algo" [(ngModel)]="team.nombre"
-                                required>
+                        <input matInput type="text" placeholder="ej: los galacticos" name="algo"
+                                [(ngModel)]="team.nombre" required>
                 </mat-form-field>
 
                 <mat-form-field>
-                        <mat-select placeholder="Lider:" name="integrante" [(ngModel)]="teamLeader">
-                                <mat-option *ngFor="let integrante of team.integrantes"
-                                        [value]="integrante.id">{{integrante.apodo}}</mat-option>
+                        <mat-select placeholder="Lider:" name="integrante" [(ngModel)]="team.lider">
+                                <mat-option *ngFor="let integrante of team.integrantes" [value]="integrante">
+                                        {{integrante.apodo}}</mat-option>
                         </mat-select>
                 </mat-form-field>
 
         </div>
         <div>
                 <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'"
-                        [typeRelationSerice]="teamService"></app-typeOfRelations>
+                [typeRelationSerice]="teamService" (individualToDelete)="eliminarIntegrante($event)" 
+                (individualToAdd)="agregarIntegrante($event)"></app-typeOfRelations>
         </div>
 
 </mat-dialog-content>
 <mat-dialog-actions>
-        <button mat-button (click)="agregarNuevoEquipo()" [disabled]="disableTeam()">Agregar</button>
-        <button mat-button (click)="cancelarNuevoEquipo()" mat-flat-button color="warn">Cancel</button>
+        <button mat-button [mat-dialog-close]="team" [disabled]="disableTeam()">Agregar</button>
+        <button mat-button [mat-dialog-close]="'no'" mat-flat-button color="warn">Cancel</button>
 </mat-dialog-actions>

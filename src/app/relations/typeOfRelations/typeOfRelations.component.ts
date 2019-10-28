@@ -15,11 +15,13 @@ export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: any
   @Input() typeRelationSerice: TypeRelationService
+  @Output() individualToDelete:EventEmitter<Individuo>=new EventEmitter<Individuo>()
+  @Output() individualToAdd:EventEmitter<Individuo>=new EventEmitter<Individuo>()
   individuos: Entidad[]
 
   individualsNotAdded: Entidad[]
   candidateIndividualToAdd: Entidad
-  myControl = new FormControl();
+  myControl = new FormControl(); 
 
   constructor(private loginService: LoginService, private snackBar: MatSnackBar) { }
 
@@ -39,7 +41,7 @@ export class TypeOfRelationsComponent implements OnInit {
       await this.typeRelationSerice.updateIndividual(this.candidateIndividualToAdd)
       this.individuos.push(this.candidateIndividualToAdd)
       this.delete(this.candidateIndividualToAdd, this.individualsNotAdded)
-
+      this.individualToAdd.emit(this.candidateIndividualToAdd)
     } catch  {
       this.error('Seleccione uno de la lista')
     }
@@ -50,6 +52,7 @@ export class TypeOfRelationsComponent implements OnInit {
     try {
       await this.typeRelationSerice.deleteIndividual(individuodelete)
       this.delete(individuodelete, this.individuos)
+      this.individualToDelete.emit(individuodelete)
     }
     catch (error) {
       console.log("se rombio el delete", error)

@@ -49,7 +49,7 @@ export class MisEquiposComponent implements OnInit {
 
   async actualizarDato() {
     try {
-    this.equipos = await this.teamService.getAllTeam()
+      this.equipos = await this.teamService.getAllTeam()
       this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
     }
     catch (error) {
@@ -68,7 +68,7 @@ export class MisEquiposComponent implements OnInit {
   removeEquipo(equipo: Equipo) {
     _.remove(this.equipos, equipo)
   }
-  
+
 
   async eliminarEquipo(equipo: Equipo) {
     try {
@@ -84,15 +84,20 @@ export class MisEquiposComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('se esta cerrando el Dialog')
-      
+     if(result!="no"){
+       this.agregar(result)
+     }
     });
+    
+  }
+  agregar(nuevoEquipo:Equipo){
+    console.log(nuevoEquipo)
   }
   individualAdmin(propietario: string) {
     return propietario == this.loginService.getidUserLogged()
   }
 
-  removeTeamAdmin(equipo: string){
+  removeTeamAdmin(equipo: string) {
     return equipo != this.loginService.getidUserLogged()
   }
 
