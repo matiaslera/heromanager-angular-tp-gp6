@@ -11,8 +11,17 @@ export class Equipo implements Entidad{
 }
 
 export class EquipoComplete {
-    constructor(public id?: string, public nombre?: string, public ownerId?: string, public owner?: string, public lider?: Individuo) { }
+    constructor(public id?: string, public nombre?: string, public ownerId?: String, public owner?: Individuo, public lider?: Individuo) { }
 
+    toJSON(): any {
+        return {
+            ...this,
+            lider: null,
+            liderA: this.lider ? this.lider.id : '',
+            owner: null,
+            ownerA: this.owner ? this.owner.apodo : ''
+        }
+    }
 }
 
 

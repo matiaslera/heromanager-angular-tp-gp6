@@ -35,7 +35,7 @@ export class TeamService implements TeamService {
   }
 
   updateTeam(teamUpdate: EquipoComplete){
-    return this.httpCLient.put<Equipo>(REST_SERVER_URL + "/crear_equipo", teamUpdate).toPromise()
+    return this.httpCLient.put<Equipo>(REST_SERVER_URL + "/crear_equipo", teamUpdate.toJSON()).toPromise()
   }
 
 

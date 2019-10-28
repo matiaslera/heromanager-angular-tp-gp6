@@ -5,11 +5,11 @@
         <form class="example-form"> 
                         <label class="labelNombre">Nombre:</label>
                 <mat-form-field appearance="outline">
-                     <input matInput type="text"  placeholder="ej: los galacticos"name="algo" required>
+                     <input matInput type="text"  placeholder="ej: los galacticos"name="algo" [(ngModel)]="nombreEquipo">
                 </mat-form-field>
 
                 <mat-form-field>
-                        <mat-select placeholder="Lider:" name="integrante">
+                        <mat-select placeholder="Lider:" name="integrante" [(ngModel)]="liderEquipo">
                                 <mat-option *ngFor="let integrante of integrantes" [value]= "integrante.id">{{integrante.apodo}}</mat-option>
                         </mat-select>
                 </mat-form-field>

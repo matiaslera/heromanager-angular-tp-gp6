@@ -31,6 +31,8 @@ export class LoginService {
     return this.userLogged.id
   }
 
+ 
+
   isAuthenticated() {
     return this.authenticated
   }

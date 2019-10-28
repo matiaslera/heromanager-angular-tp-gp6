@@ -16,14 +16,24 @@ import { TeamService } from '../services/typeRelationService/teamService/team.se
 })
 export class NewEquipoComponent implements OnInit {
   integrantes: Individuo[]
-  Equipo: EquipoComplete
-  constructor(public dialogRef: MatDialogRef<NewEquipoComponent>,private teamService: TeamService, @Optional() @Inject(MAT_DIALOG_DATA) public data: Equipo){}
+  nombreEquipo: string
+  liderEquipo: Individuo
+  equipo: EquipoComplete
+  constructor(private loginservice: LoginService, public dialogRef: MatDialogRef<NewEquipoComponent>, private teamService: TeamService, @Optional() @Inject(MAT_DIALOG_DATA) public data: Equipo) { }
   async ngOnInit() {
-    this.integrantes= await this.teamService.getIndividuals()
+    this.integrantes = await this.teamService.getIndividuals()
   }
 
-  agregarNuevoEquipo(){
-      this.teamService.updateTeam(Equipo)
-      this.dialogRef.close()
+  getUser() {
+    return this.loginservice.getUser()
   }
+  agregarNuevoEquipo() {
+    this.equipo = new EquipoComplete(null, this.nombreEquipo, this.loginservice.getidUserLogged(), this.loginservice.getUser(), this.liderEquipo)
+
+    this.teamService.updateTeam(this.equipo)
+    this.dialogRef.close()
+  }
+
+
+
 }
