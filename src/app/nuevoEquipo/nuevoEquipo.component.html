@@ -1,29 +1,29 @@
-<div>
+<mat-dialog-content>
         <h2>Nuevo Equipo</h2>
 
         <div class="example-container">
-        <form class="example-form"> 
-                        <label class="labelNombre">Nombre:</label>
+
+                <label class="labelNombre">Nombre:</label>
                 <mat-form-field appearance="outline">
-                     <input matInput type="text"  placeholder="ej: los galacticos"name="algo" [(ngModel)]="teamName" required>
+                        <input matInput type="text" placeholder="ej: los galacticos" name="algo" [(ngModel)]="team.nombre"
+                                required>
                 </mat-form-field>
 
                 <mat-form-field>
                         <mat-select placeholder="Lider:" name="integrante" [(ngModel)]="teamLeader">
-                                <mat-option *ngFor="let integrante of candidateIndividualsForLeader" [value]= "integrante.id">{{integrante.apodo}}</mat-option>
+                                <mat-option *ngFor="let integrante of team.integrantes"
+                                        [value]="integrante.id">{{integrante.apodo}}</mat-option>
                         </mat-select>
                 </mat-form-field>
-        </form>
+
+        </div>
+        <div>
+                <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'"
+                        [typeRelationSerice]="teamService"></app-typeOfRelations>
         </div>
 
-        <mat-card >
-                <div >
-                        <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'" [typeRelationSerice]="teamService"></app-typeOfRelations>
-                </div>
-        </mat-card>
-</div>
-
-<div mat-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
         <button mat-button (click)="agregarNuevoEquipo()" [disabled]="disableTeam()">Agregar</button>
         <button mat-button (click)="cancelarNuevoEquipo()" mat-flat-button color="warn">Cancel</button>
-</div>
+</mat-dialog-actions>

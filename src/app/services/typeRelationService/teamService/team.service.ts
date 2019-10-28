@@ -4,7 +4,6 @@ import { LoginService } from '../../loginService/login.service';
 import { HttpClient } from '@angular/common/http';
 import { REST_SERVER_URL } from '../../configuration';
 import { Equipo, EquipoComplete } from 'src/app/domain/misequipos';
-import { NewEquipoComponent } from 'src/app/nuevoEquipo/nuevoEquipo.component';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +34,7 @@ export class TeamService implements TeamService {
   }
 
   updateTeam(teamUpdate: EquipoComplete){
-    return this.httpCLient.put<Equipo>(REST_SERVER_URL + "/crear_equipo", teamUpdate.toJSON()).toPromise()
+    return this.httpCLient.put<Equipo>(REST_SERVER_URL + "/crear_equipo", teamUpdate).toPromise()
   }
 
 

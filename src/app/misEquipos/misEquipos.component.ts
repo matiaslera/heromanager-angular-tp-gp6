@@ -80,7 +80,6 @@ export class MisEquiposComponent implements OnInit {
 
   openDialog(equipo: Equipo) {
     const dialogRef = this.dialog.open(NewEquipoComponent, {
-      width: '500px',
       data: equipo
     });
 
