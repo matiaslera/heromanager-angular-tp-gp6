@@ -19,21 +19,35 @@ export class NewEquipoComponent implements OnInit {
   nombreEquipo: string
   liderEquipo: Individuo
   equipo: EquipoComplete
-  constructor(private loginservice: LoginService, public dialogRef: MatDialogRef<NewEquipoComponent>, private teamService: TeamService, @Optional() @Inject(MAT_DIALOG_DATA) public data: Equipo) { }
+  constructor(private loginservice: LoginService, public dialogRef: MatDialogRef<NewEquipoComponent>, private teamService: TeamService, @Optional() @Inject(MAT_DIALOG_DATA) private data: EquipoComplete) { }
   async ngOnInit() {
     this.integrantes = await this.teamService.getIndividuals()
+    this.nombreEquipo = this.data.nombre
+    this.liderEquipo = this.data.lider
   }
 
   getUser() {
     return this.loginservice.getUser()
   }
+  
   agregarNuevoEquipo() {
-    this.equipo = new EquipoComplete(null, this.nombreEquipo, this.loginservice.getidUserLogged(), this.loginservice.getUser(), this.liderEquipo)
-
-    this.teamService.updateTeam(this.equipo)
+    try {
+      this.equipo = new EquipoComplete(null, this.nombreEquipo, this.loginservice.getidUserLogged(), this.loginservice.getUser(), this.liderEquipo)
+      
+      this.teamService.updateTeam(this.equipo)
+    }
+    catch  {
+      console.error('se rompio el put del api rest')
+    }
     this.dialogRef.close()
   }
 
+  cancelarNuevoEquipo() {
+    this.dialogRef.close()
+  }
 
+  disableTeam(){
+    return this.nombreEquipo == null 
+  }
 
 }

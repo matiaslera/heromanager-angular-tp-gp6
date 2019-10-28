@@ -6,7 +6,7 @@
                                 <mat-form-field appearance="outline" class="matInputFriend">
                                         <input type="text" placeholder="individuo" aria-label="allIndividuals" matInput
                                                 [formControl]="myControl" [matAutocomplete]="auto"
-                                                [(ngModel)]="candidateIndividualToAdd">
+                                                [(ngModel)]="candidateIndividualToAdd" required>
                                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                                 <mat-option *ngFor="let individual of individualsNotAdded"
                                                         [value]="individual">

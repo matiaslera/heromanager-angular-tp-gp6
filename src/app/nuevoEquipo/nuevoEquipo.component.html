@@ -24,6 +24,6 @@
 </div>
 
 <div mat-dialog-actions>
-        <button mat-button (click)="agregarNuevoEquipo()" >Agregar</button>
+        <button mat-button (click)="agregarNuevoEquipo()" [disabled]="disableTeam()">Agregar</button>
         <button mat-button (click)="cancelarNuevoEquipo()" mat-flat-button color="warn">Cancel</button>
 </div>
