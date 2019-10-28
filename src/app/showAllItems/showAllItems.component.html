@@ -11,7 +11,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['detalles_item',row.id]"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[6]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[4]"></mat-paginator>
 </div>
 
 <router-outlet></router-outlet>
