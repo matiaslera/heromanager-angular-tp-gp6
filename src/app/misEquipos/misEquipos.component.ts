@@ -23,7 +23,6 @@ function mostrarError(component, error) {
 export class MisEquiposComponent implements OnInit {
 
   equipos: Equipo[] = []
-  errors = [];
   dataSource: MatTableDataSource<Equipo>;
   equipoSelec: Equipo;
   displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions'];
@@ -50,7 +49,7 @@ export class MisEquiposComponent implements OnInit {
 
   async actualizarDato() {
     try {
-    this.equipos = await this.teamService.getAllTeam()
+    // this.equipos = await this.teamService.getAllTeam()
       this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
     }
     catch (error) {
@@ -61,82 +60,40 @@ export class MisEquiposComponent implements OnInit {
     try {
       // aqui ahi que pegarselo al backend
       // await this.teamService.updateTeam(equipo)
-      this.abandonarEquipo( equipo)
     } catch (error) {
       mostrarError(this, error)
     }
   }
 
-  abandonarEquipo(equipo: Equipo) {
+  removeEquipo(equipo: Equipo) {
     _.remove(this.equipos, equipo)
-  }
-  eliminar(elemento) {
-    this.dataSource.data = this.dataSource.data.filter(i => i !== elemento)
   }
   
 
   async eliminarEquipo(equipo: Equipo) {
     try {
-      if (this.equipos.includes(equipo)) {
-        const nuevoEq = this.equipos.splice(this.equipos.indexOf(equipo), 1)
-        return this.dataSource = new MatTableDataSource<Equipo>(nuevoEq);
-      }
-
+      this.removeEquipo(equipo)
     } catch (error) {
       mostrarError(this, error)
     }
-    console.log(equipo)
   }
 
-  agregarEquipo(equipo: Equipo) {
-    this.equipos.includes(equipo)
-    this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
-
-  }
-
-  openDialog(accion, objeto) {
-    objeto.accion = accion;
+  openDialog(equipo: Equipo) {
     const dialogRef = this.dialog.open(NewEquipoComponent, {
       width: '500px',
-      data: objeto
+      data: equipo
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('se esta cerrando el Dialog')
-      if (result.event == 'Nuevo') {
-        console.log(result.data)
-        this.agregarEquipo(result.data);
-      } else if (result.event == 'Actualizar') {
-        console.log(result.data)
-        this.actualizarEquipo(result.data);
-      } else if (result.event == 'Delete') {
-        this.deleteRowData(result.data);
-      }
+      
     });
   }
-
-  actualizarEquipo(obj) {
-    this.equipos = this.equipos.filter((value, key) => {
-      if (value.nombre == obj.nombre) {
-        value.lider = obj.lider;
-        // value.propietario= obj.propietario;
-        // value.integrantes=obj.integrantes;
-        this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
-      }
-      return true;
-    });
-  }
-  deleteRowData(row_obj) {
-    this.equipos = this.equipos.filter((value, key) => {
-      return value.id != row_obj.id;
-    });
-  }
-
   individualAdmin(propietario: string) {
     return propietario == this.loginService.getidUserLogged()
   }
 
-  removeTeamAdmin(equipo: Equipo){
+  removeTeamAdmin(equipo: string){
     return equipo != this.loginService.getidUserLogged()
   }
 

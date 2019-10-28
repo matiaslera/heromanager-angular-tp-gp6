@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Individuo } from 'src/app/domain/Individuo';
+import { Individuo, Entidad } from 'src/app/domain/Individuo';
 import { FormControl } from '@angular/forms';
 import { LoginService } from 'src/app/services/loginService/login.service';
 import * as _ from 'lodash'
@@ -15,10 +15,10 @@ export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: any
   @Input() typeRelationSerice: TypeRelationService
-  @Output() individuos: Individuo[]
+  individuos: Entidad[]
 
-  individualsNotAdded: Individuo[]
-  candidateIndividualToAdd: Individuo
+  individualsNotAdded: Entidad[]
+  candidateIndividualToAdd: Entidad
   myControl = new FormControl();
 
   constructor(private loginService: LoginService, private snackBar: MatSnackBar) { }
@@ -26,6 +26,7 @@ export class TypeOfRelationsComponent implements OnInit {
   async ngOnInit() {
     this.individuos = await this.typeRelationSerice.getIndividuals()
     this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
+    console.log(this.individuos)
   }
 
   error(errorType: string) {

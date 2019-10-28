@@ -5,13 +5,12 @@
         <form class="example-form"> 
                         <label class="labelNombre">Nombre:</label>
                 <mat-form-field appearance="outline">
-                     <input matInput type="text"  placeholder="ej: los galacticos" [(ngModel)]="nombreEquipo" name="algo" required>
+                     <input matInput type="text"  placeholder="ej: los galacticos"name="algo" required>
                 </mat-form-field>
 
                 <mat-form-field>
-                        <mat-select placeholder="Lider:" [(ngModel)]="liderEquipo" name="integrante">
-                                <mat-option *ngFor="let integrante of integrantes"[value]="integrante.id"  >
-                                {{integrante.apodo}}</mat-option>
+                        <mat-select placeholder="Lider:" name="integrante">
+                                <mat-option *ngFor="let integrante of integrantes" [value]= "integrante.id">{{integrante.apodo}}</mat-option>
                         </mat-select>
                 </mat-form-field>
         </form>
@@ -19,13 +18,12 @@
 
         <mat-card >
                 <div >
-                        <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'" [typeRelationSerice]="teamService" (individuos2)="integrantes"></app-typeOfRelations>
- 
+                        <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'" [typeRelationSerice]="teamService"></app-typeOfRelations>
                 </div>
         </mat-card>
 </div>
 
 <div mat-dialog-actions>
-        <button mat-button (click)="agregarNuevoEquipo()"  [disabled]="disabledIndividual()">Agregar</button>
+        <button mat-button (click)="agregarNuevoEquipo()" >Agregar</button>
         <button mat-button (click)="cancelarNuevoEquipo()" mat-flat-button color="warn">Cancel</button>
 </div>
