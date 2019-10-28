@@ -1,9 +1,14 @@
 mat-card{
-    margin: 1rem;
+    margin: auto;
     display: flex;
     flex-direction: row;
-    width: 92.5%;
+    padding-top: 2rem;
 }
-.spacer{
-    flex: 1 1 auto;
+mat-card-content{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+.cardContainer{
+    margin-top: 1rem;
+    display: flex;
 }
