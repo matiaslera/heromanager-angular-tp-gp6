@@ -24,13 +24,16 @@
                         </form>
                 </div>
                 <mat-nav-list class="listFriends">
-                        <mat-list-item *ngFor="let individuo of individuos"
-                                [routerLink]="['../../perfil',individuo.id]">{{individuo.apodo}}
-                                <button mat-flat-button (click)="deleteIndividual(individuo)">
-                                        <mat-icon aria-hidden="false" aria-label="Example home icon">clear
-                                        </mat-icon>
-                                </button>
-                        </mat-list-item>
+                        <div *ngFor="let individuo of individuos" class="buttonRemove">
+                                <mat-list-item
+                                        [routerLink]="['../../perfil',individuo.id]">
+                                        {{individuo.apodo}}
+                                </mat-list-item>
+                                        <button mat-flat-button (click)="deleteIndividual(individuo)">
+                                                <mat-icon aria-hidden="false" aria-label="Example home icon">clear
+                                                </mat-icon>
+                                        </button>
+                        </div>
                 </mat-nav-list>
         </div>
 </mat-card>

@@ -38,6 +38,7 @@ export class NewEquipoComponent implements OnInit {
 
   agregarNuevoEquipo() {
     try {
+      //TODO: estaria bueno mejorar esto me parece horrible hacer esto
       this.team = new EquipoComplete(this.data.id, this.teamName, this.loginservice.getidUserLogged(), this.loginservice.getUser(), this.teamLeader)
       this.teamService.updateTeam(this.team)
     }

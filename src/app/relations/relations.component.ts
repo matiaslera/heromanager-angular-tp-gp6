@@ -8,7 +8,7 @@ import { TypeRelationService } from '../services/typeRelationService/typeRelatio
   templateUrl: './relations.component.html',
   styleUrls: ['./relations.component.css']
 })
-export class RelationsComponent implements OnInit {
+export class RelationsComponent {
   typeService : TypeRelationService
   
   
@@ -17,8 +17,7 @@ export class RelationsComponent implements OnInit {
   }
   
 
-  async ngOnInit() {
-  }
+  
   
 
 
