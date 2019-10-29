@@ -45,12 +45,12 @@ export class TeamService implements TeamService {
     return this.httpCLient.put<Equipo>(REST_SERVER_URL + "/actualizar_equipo", teamUpdate).toPromise()
   }
 
-
-  updateIndividual(individualUpdate: Individuo) {
-
-  }
-  deleteIndividual(deleteIndividual: Individuo) {
-
+  deleteTeam(teamDelete: EquipoComplete){
+    return this.httpCLient.delete<EquipoComplete>(REST_SERVER_URL + '/eliminar_equipo/' + teamDelete.id).toPromise()
   }
 
+  updateIndividual(individualUpdate: Individuo) {}
+  deleteIndividual(deleteIndividual: Individuo) {}
+  
+  
 }

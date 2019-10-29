@@ -10,8 +10,8 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                        <mat-select placeholder="Lider:" name="integrante" [(ngModel)]="team.lider">
-                                <mat-option *ngFor="let integrante of team.integrantes" [value]="integrante">
+                        <mat-select placeholder="Lider:" name="integrante" [(ngModel)]="team.lider" required>
+                                <mat-option *ngFor="let integrante of team.integrantes" [value]="integrante" >
                                         {{integrante.apodo}}</mat-option>
                         </mat-select>
                 </mat-form-field>
@@ -19,13 +19,13 @@
         </div>
         <div> 
                 <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'"
-                [typeRelationSerice]="teamService" (individualToDelete)="eliminarIntegrante($event)" 
-                (individualToAdd)="agregarIntegrante($event)"
+                [typeRelationSerice]="teamService" 
+        
                 [individuos]="team.integrantes" [individualsNotAdded]="noIntegrantes"></app-typeOfRelations>
         </div>
 
 </mat-dialog-content>
 <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="team" [disabled]="disableTeam()">Agregar</button>
+        <button mat-button [mat-dialog-close]="team" [disabled]="disableTeam()" >Agregar</button>
         <button mat-button [mat-dialog-close]="'no'" mat-flat-button color="warn">Cancel</button>
 </mat-dialog-actions>

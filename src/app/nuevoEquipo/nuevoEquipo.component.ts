@@ -4,6 +4,7 @@ import { Equipo, EquipoComplete } from '../domain/misequipos'
 import { LoginService } from '../services/loginService/login.service';
 import { Individuo, Entidad } from '../domain/Individuo';
 import { TeamService } from '../services/typeRelationService/teamService/team.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-nuevoEquipo',
@@ -12,22 +13,20 @@ import { TeamService } from '../services/typeRelationService/teamService/team.se
 })
 export class NewEquipoComponent implements OnInit {
   noIntegrantes: Individuo[]
-  team: EquipoComplete = new EquipoComplete
+  team: EquipoComplete = new EquipoComplete 
   constructor(private loginservice: LoginService, public dialogRef: MatDialogRef<NewEquipoComponent>, private teamService: TeamService, @Optional() @Inject(MAT_DIALOG_DATA) private data: EquipoComplete) { }
+  
   async ngOnInit() {
     this.dialogRef.disableClose = true;
     this.noIntegrantes = await this.teamService.getNonIndividuals(this.data.id)
-    this.team=this.data
-  }
-  
-  disableTeam() {
-    return this.team.nombre == null || this.team.nombre == ''
-  }
-  eliminarIntegrante(borrado:Individuo){
-    this.team.eliminarIntegrante(borrado)
-  }
-  agregarIntegrante(agregado:Individuo){
-    this.team.agregarIntegrante(agregado)
+    this.team = this.data
+    console.log(this.data.lider)
   }
 
+  disableTeam() {
+    return (this.team.nombre == null || this.team.nombre == '') 
+  }
+  
+
+  
 }

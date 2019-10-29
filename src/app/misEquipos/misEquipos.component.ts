@@ -35,8 +35,8 @@ export class MisEquiposComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      this.equipos = await this.teamService.getAllTeam()
-      this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
+      this.getTeam()
+
     } catch (error) {
       mostrarError(this, error)
     }
@@ -53,37 +53,48 @@ export class MisEquiposComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-     if(result!="no"){
-       this.agregar(result)
-     }
+      if (result != "no") {
+        this.agregar(result)
+      }
     })
   }
 
-  async editarEquipo(equipo: string){
+  async editarEquipo(equipo: string) {
     const dialogRef = this.dialog.open(NewEquipoComponent, {
       data: await this.teamService.getFullTeam(equipo),
     })
     dialogRef.afterClosed().subscribe(result => {
-     if(result!="no"){
-       this.actualizar(result)
-     }
+      if (result != "no") {
+        this.actualizar(result)
+      }
     })
   }
-  
+
   async actualizar(equipo: EquipoComplete) {
     await this.teamService.updateTeam(equipo)
+    this.getTeam()
   }
 
-  async agregar(nuevoEquipo:EquipoComplete){
-    nuevoEquipo.owner=this.getUser()
+  async agregar(nuevoEquipo: EquipoComplete) {
+    nuevoEquipo.owner = this.getUser()
     await this.teamService.addTeam(nuevoEquipo)
+    this.getTeam()
   }
   individualAdmin(propietario: string) {
     return propietario == this.loginService.getidUserLogged()
   }
 
   removeTeamAdmin(equipo: string) {
-    return equipo != this.loginService.getidUserLogged()
+    return equipo != this.loginService.getidUserLogged() 
   }
 
+  async getTeam() {
+    this.equipos = await this.teamService.getAllTeam()
+    this.dataSource = new MatTableDataSource<Equipo>(this.equipos)
+  }
+
+  async eliminarEquipo(deleteTeam: EquipoComplete){
+    await this.teamService.deleteTeam(deleteTeam)
+    this.getTeam()
+  }
 }
