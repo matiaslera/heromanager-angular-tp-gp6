@@ -5,8 +5,6 @@ import { MaterialModule } from '../app/material.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-
-
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -28,11 +26,11 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  // it(`should have as title 'hero-manager'`, () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   expect(app.title).toEqual('hero-manager');
-  // });
+  it(`should have as title 'hero-manager'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual('hero-manager');
+  });
 
   // it('should render title', () => {
   //   const fixture = TestBed.createComponent(AppComponent);

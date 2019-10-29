@@ -46,25 +46,22 @@ describe('Test de LoginComponent', () => {
   
   })
 
-
-
   it('debe crear correctamente la aplicación', async(() => {
   expect(app).toBeTruthy()
 }))
 
-  // it('form invalid when empty',  async(()  => {
-  //   expect(app.loginForm.valid).toBeFalsy()
-  // }))
+  it('form invalid when empty',  async(()  => {
+    expect(app.loginForm.valid).toBeFalsy()
+  }))
 
-  // it('username field validity',  async(()  => {
-  //   let itemUsername = app.loginForm.controls['username']
-  //   expect(itemUsername.valid).toBeFalsy()
+  it('username field validity',  async(()  => {
+    let itemUsername = app.loginForm.controls['username']
+    expect(itemUsername.valid).toBeFalsy()
 
-  //   let errors = {}
-  //   errors = itemUsername.errors
-  //   expect(errors['required']).toBeTruthy()
-  // }))
+    let errors = {}
+    errors = itemUsername.errors
+    expect(errors['required']).toBeTruthy()
+  }))
 
-  
 });
 
