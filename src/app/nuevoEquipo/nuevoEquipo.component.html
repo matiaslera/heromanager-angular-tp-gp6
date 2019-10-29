@@ -11,7 +11,7 @@
 
                 <mat-form-field>
                         <mat-select placeholder="Lider:" name="integrante" [(ngModel)]="team.lider" required>
-                                <mat-option *ngFor="let integrante of team.integrantes" [value]="integrante" >
+                                <mat-option *ngFor="let integrante of noIntegrantes" [value]="integrante" >
                                         {{integrante.apodo}}</mat-option>
                         </mat-select>
                 </mat-form-field>

@@ -27,6 +27,4 @@ export class NewEquipoComponent implements OnInit {
     return (this.team.nombre == null || this.team.nombre == '') 
   }
   
-
-  
 }

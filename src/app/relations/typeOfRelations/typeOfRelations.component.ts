@@ -27,7 +27,6 @@ export class TypeOfRelationsComponent implements OnInit {
 
   async ngOnInit() {
 
-   // this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
   }
 
   error(errorType: string) {
@@ -44,12 +43,12 @@ export class TypeOfRelationsComponent implements OnInit {
     } catch  {
       this.error('Seleccione uno de la lista')
     }
-
     this.candidateIndividualToAdd = null
   }
   async deleteIndividual(individuodelete: Individuo) {
     try {
       await this.typeRelationSerice.deleteIndividual(individuodelete)
+      this.individualsNotAdded.push(individuodelete)
       this.delete(individuodelete, this.individuos)
       this.individualToDelete.emit(individuodelete)
     }
