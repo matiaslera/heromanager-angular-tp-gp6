@@ -35,19 +35,23 @@ export class TeamService implements TeamService {
     return Individuals.map((Individual) => Individuo.fromJson(Individual))
  
   }
-
   async addTeam(newTeam:EquipoComplete){
     newTeam.id=null
     await this.httpCLient.put(REST_SERVER_URL + '/crear_equipo',newTeam).toPromise()
   }
 
-  updateTeam(teamUpdate: EquipoComplete){
-    return this.httpCLient.put<Equipo>(REST_SERVER_URL + "/actualizar_equipo", teamUpdate).toPromise()
+  async updateTeam(teamUpdate: EquipoComplete){
+    return await this.httpCLient.put<Equipo>(REST_SERVER_URL + "/actualizar_equipo", teamUpdate).toPromise()
   }
 
-  deleteTeam(teamDelete: EquipoComplete){
-    return this.httpCLient.delete<EquipoComplete>(REST_SERVER_URL + '/eliminar_equipo/' + teamDelete.id).toPromise()
+  async deleteTeam(teamDelete:String){
+    return await this.httpCLient.delete<EquipoComplete>(REST_SERVER_URL + '/eliminar_equipo/' + teamDelete).toPromise()
   }
+  async abandonTeam(team : String ){
+    return await this.httpCLient.delete<EquipoComplete>(REST_SERVER_URL + '/abandonar_equipo/' + team 
+        + '/' + this.getidUserLogged()).toPromise()
+  }
+  
 
   updateIndividual(individualUpdate: Individuo) {}
   deleteIndividual(deleteIndividual: Individuo) {}
