@@ -4,7 +4,7 @@ import { Equipo, EquipoComplete } from '../domain/misequipos'
 import { LoginService } from '../services/loginService/login.service';
 import { Individuo, Entidad } from '../domain/Individuo';
 import { TeamService } from '../services/typeRelationService/teamService/team.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-nuevoEquipo',
@@ -14,6 +14,7 @@ import { FormControl } from '@angular/forms';
 export class NewEquipoComponent implements OnInit {
   noIntegrantes: Individuo[]
   team: EquipoComplete = new EquipoComplete 
+  integranteFormControl = new FormControl('',Validators.required )
   constructor(private loginservice: LoginService, public dialogRef: MatDialogRef<NewEquipoComponent>, private teamService: TeamService, @Optional() @Inject(MAT_DIALOG_DATA) private data: EquipoComplete) { }
   
   async ngOnInit() {
@@ -24,7 +25,7 @@ export class NewEquipoComponent implements OnInit {
   }
 
   disableTeam() {
-    return (this.team.nombre == null || this.team.nombre == '') 
+    return (this.team.nombre == null || this.team.nombre == '') ||  this.team.lider == null 
   }
   
 }

@@ -10,10 +10,13 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                        <mat-select placeholder="Lider:" name="integrante" [(ngModel)]="team.lider" required>
+                        <mat-select placeholder="Lider:" name="integrante" [(ngModel)]="team.lider" required [formControl]="integranteFormControl">
                                 <mat-option *ngFor="let integrante of noIntegrantes" [value]="integrante" >
                                         {{integrante.apodo}}</mat-option>
                         </mat-select>
+                        <mat-error *ngIf="integranteFormControl.hasError('required')">
+                                        This field is required
+                                      </mat-error>
                 </mat-form-field>
 
         </div>
@@ -26,6 +29,6 @@
 
 </mat-dialog-content>
 <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="team" [disabled]="disableTeam()" >Agregar</button>
+        <button mat-button [mat-dialog-close]="team" [disabled]="disableTeam()" >Guardar</button>
         <button mat-button [mat-dialog-close]="'no'" mat-flat-button color="warn">Cancel</button>
 </mat-dialog-actions>
