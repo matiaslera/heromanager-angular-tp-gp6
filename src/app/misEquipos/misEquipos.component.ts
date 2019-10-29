@@ -80,12 +80,8 @@ export class MisEquiposComponent implements OnInit {
     await this.teamService.addTeam(nuevoEquipo)
     this.getTeam()
   }
-  individualAdmin(propietario: string) {
-    return propietario == this.loginService.getidUserLogged()
-  }
-
-  removeTeamAdmin(equipo: string) {
-    return equipo != this.loginService.getidUserLogged() 
+  individuoEsAdmin(individuo: string) {
+    return individuo == this.loginService.getidUserLogged()
   }
 
   async getTeam() {
@@ -94,7 +90,11 @@ export class MisEquiposComponent implements OnInit {
   }
 
   async eliminarEquipo(deleteTeam: EquipoComplete){
-    await this.teamService.deleteTeam(deleteTeam)
+    await this.teamService.deleteTeam(deleteTeam.id)
+    this.getTeam()
+  }
+  async abandonar(team: EquipoComplete){
+    await this.teamService.abandonTeam(team.id)
     this.getTeam()
   }
 }

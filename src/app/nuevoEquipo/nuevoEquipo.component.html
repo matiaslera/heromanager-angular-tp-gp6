@@ -1,12 +1,16 @@
 <mat-dialog-content>
-        <h2>Nuevo Equipo</h2>
+        <h2>Administracion de equipo</h2>
+        <h3 *ngIf="team.id=='null'">Nuevo equipo</h3>
 
         <div class="example-container">
 
-                <label class="labelNombre">Nombre:</label>
                 <mat-form-field appearance="outline">
-                        <input matInput type="text" placeholder="ej: los galacticos" name="algo"
+                                <mat-label>Nombre del equipo</mat-label>
+                        <input matInput type="text" placeholder="ej: Avengers" name="algo"
                                 [(ngModel)]="team.nombre" required>
+                                <mat-error *ngIf="integranteFormControl.hasError('required')">
+                                        Escriba un nombre
+                                      </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
@@ -15,7 +19,7 @@
                                         {{integrante.apodo}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="integranteFormControl.hasError('required')">
-                                        This field is required
+                                        Elija un lider
                                       </mat-error>
                 </mat-form-field>
 
