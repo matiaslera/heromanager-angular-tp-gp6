@@ -1,8 +1,10 @@
 <div class="relationsContains">
   <div class="type">
-    <app-typeOfRelations [title]="'Amigos'" [typeRelationSerice]="friendsService"></app-typeOfRelations>
+    <app-typeOfRelations [title]="'Amigos'" [typeRelationSerice]="friendsService"
+    [individuos]="friends" [individualsNotAdded]="nonFriends"></app-typeOfRelations>
   </div>
   <div class="type">
-    <app-typeOfRelations [title]="'Enemigos'" [typeRelationSerice]="enemiesService"></app-typeOfRelations>
+    <app-typeOfRelations [title]="'Enemigos'" [typeRelationSerice]="enemiesService" 
+    [individuos]="enemies" [individualsNotAdded]="nonEnemies"></app-typeOfRelations>
   </div>
 </div>

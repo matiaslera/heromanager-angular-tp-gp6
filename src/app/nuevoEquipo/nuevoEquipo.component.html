@@ -17,10 +17,11 @@
                 </mat-form-field>
 
         </div>
-        <div>
+        <div> 
                 <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'"
                 [typeRelationSerice]="teamService" (individualToDelete)="eliminarIntegrante($event)" 
-                (individualToAdd)="agregarIntegrante($event)"></app-typeOfRelations>
+                (individualToAdd)="agregarIntegrante($event)"
+                [individuos]="team.integrantes" [individualsNotAdded]="noIntegrantes"></app-typeOfRelations>
         </div>
 
 </mat-dialog-content>

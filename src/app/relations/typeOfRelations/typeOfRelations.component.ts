@@ -17,18 +17,17 @@ export class TypeOfRelationsComponent implements OnInit {
   @Input() typeRelationSerice: TypeRelationService
   @Output() individualToDelete:EventEmitter<Individuo>=new EventEmitter<Individuo>()
   @Output() individualToAdd:EventEmitter<Individuo>=new EventEmitter<Individuo>()
-  individuos: Entidad[]
+  @Input() individuos: Entidad[]
 
-  individualsNotAdded: Entidad[]
+  @Input() individualsNotAdded: Entidad[]
   candidateIndividualToAdd: Entidad
   myControl = new FormControl(); 
 
   constructor(private loginService: LoginService, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
-    this.individuos = await this.typeRelationSerice.getIndividuals()
-    this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
-    console.log(this.individuos)
+
+   // this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
   }
 
   error(errorType: string) {

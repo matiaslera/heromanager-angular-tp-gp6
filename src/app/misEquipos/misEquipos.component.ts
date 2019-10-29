@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Equipo } from '../domain/misequipos';
+import { Equipo, EquipoComplete } from '../domain/misequipos';
 import * as _ from 'lodash'
 import { Router } from '@angular/router'
 import { MatDialog, MatTable } from '@angular/material';
@@ -47,51 +47,36 @@ export class MisEquiposComponent implements OnInit {
     return this.loginService.getUser()
   }
 
-  async actualizarDato() {
-    try {
-      this.equipos = await this.teamService.getAllTeam()
-      this.dataSource = new MatTableDataSource<Equipo>(this.equipos);
-    }
-    catch (error) {
-      mostrarError(this, error)
-    }
-  }
-  async abandonar(equipo: Equipo) {
-    try {
-      // aqui ahi que pegarselo al backend
-      // await this.teamService.updateTeam(equipo)
-    } catch (error) {
-      mostrarError(this, error)
-    }
-  }
-
-  removeEquipo(equipo: Equipo) {
-    _.remove(this.equipos, equipo)
-  }
-
-
-  async eliminarEquipo(equipo: Equipo) {
-    try {
-      this.removeEquipo(equipo)
-    } catch (error) {
-      mostrarError(this, error)
-    }
-  }
-
-  openDialog(equipo: Equipo) {
+  nuevoEquipo() {
     const dialogRef = this.dialog.open(NewEquipoComponent, {
-      data: equipo
-    });
+      data: new EquipoComplete()
+    })
 
     dialogRef.afterClosed().subscribe(result => {
      if(result!="no"){
        this.agregar(result)
      }
-    });
-    
+    })
   }
-  agregar(nuevoEquipo:Equipo){
-    console.log(nuevoEquipo)
+
+  async editarEquipo(equipo: string){
+    const dialogRef = this.dialog.open(NewEquipoComponent, {
+      data: await this.teamService.getFullTeam(equipo),
+    })
+    dialogRef.afterClosed().subscribe(result => {
+     if(result!="no"){
+       this.actualizar(result)
+     }
+    })
+  }
+  
+  async actualizar(equipo: EquipoComplete) {
+    await this.teamService.updateTeam(equipo)
+  }
+
+  async agregar(nuevoEquipo:EquipoComplete){
+    nuevoEquipo.owner=this.getUser()
+    await this.teamService.addTeam(nuevoEquipo)
   }
   individualAdmin(propietario: string) {
     return propietario == this.loginService.getidUserLogged()

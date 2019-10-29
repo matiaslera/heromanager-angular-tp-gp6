@@ -11,7 +11,7 @@ export class Equipo implements Entidad {
 }
 
 export class EquipoComplete {
-    public id: string
+    public id: string = "null"
     public nombre: string
     public owner: Individuo
     public lider: Individuo

@@ -11,12 +11,13 @@ import { TeamService } from '../services/typeRelationService/teamService/team.se
   styleUrls: ['./nuevoEquipo.component.css']
 })
 export class NewEquipoComponent implements OnInit {
-
-  members: Individuo[]
+  noIntegrantes: Individuo[]
   team: EquipoComplete = new EquipoComplete
   constructor(private loginservice: LoginService, public dialogRef: MatDialogRef<NewEquipoComponent>, private teamService: TeamService, @Optional() @Inject(MAT_DIALOG_DATA) private data: EquipoComplete) { }
   async ngOnInit() {
-    this.members = await this.teamService.getIndividuals()
+    this.dialogRef.disableClose = true;
+    this.noIntegrantes = await this.teamService.getNonIndividuals(this.data.id)
+    this.team=this.data
   }
   
   disableTeam() {
@@ -28,5 +29,5 @@ export class NewEquipoComponent implements OnInit {
   agregarIntegrante(agregado:Individuo){
     this.team.agregarIntegrante(agregado)
   }
-  
+
 }

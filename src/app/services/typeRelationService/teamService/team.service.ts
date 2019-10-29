@@ -22,19 +22,27 @@ export class TeamService implements TeamService {
     const teams = await this.httpCLient.get<Equipo[]>(REST_SERVER_URL +  "/equipos/" + this.getidUserLogged()).toPromise()
     return teams.map((team) => Equipo.fromJson(team)) 
   }
+  async getFullTeam(id:String) {
+    return await this.httpCLient.get<Equipo>(REST_SERVER_URL +  "/equipo_completo/" + id).toPromise()
+  }
 
- async getIndividuals() {
-    const individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL +  '/integrantes/null').toPromise()
+ async getIndividuals(id:String) {
+    const individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL +  '/integrantes/').toPromise()
     return individuals.map((individual) => Individuo.fromJson(individual)) 
   }
-  async getNonIndividuals() {
-    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/integrantes_no_agregados/null').toPromise()
+  async getNonIndividuals(id:String) {
+    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/integrantes_no_agregados/'+id).toPromise()
     return Individuals.map((Individual) => Individuo.fromJson(Individual))
  
   }
 
+  async addTeam(newTeam:EquipoComplete){
+    newTeam.id=null
+    await this.httpCLient.put(REST_SERVER_URL + '/crear_equipo',newTeam).toPromise()
+  }
+
   updateTeam(teamUpdate: EquipoComplete){
-    return this.httpCLient.put<Equipo>(REST_SERVER_URL + "/crear_equipo", teamUpdate).toPromise()
+    return this.httpCLient.put<Equipo>(REST_SERVER_URL + "/actualizar_equipo", teamUpdate).toPromise()
   }
 
 
@@ -44,8 +52,5 @@ export class TeamService implements TeamService {
   deleteIndividual(deleteIndividual: Individuo) {
 
   }
-
-
-
 
 }
