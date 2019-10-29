@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { Item } from '../domain/Item';
-import { ItemsService } from '../services/ItemService/items.service';
+import { ItemsService } from '../services/ItemService/Items.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
