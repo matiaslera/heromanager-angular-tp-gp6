@@ -16,7 +16,7 @@ export class ItemsService {
     const items = await this.http.get<Item[]>(REST_SERVER_URL + '/obtener_items/'+ id).toPromise()
     return items.map((item) => Item.fromJson(item))
   }
-  async getItemDetail(id:String){
+  async getItemDetails(id:String){
     return of (await this.http.get<Item>(REST_SERVER_URL + '/obtener_item_completo/'+ id).toPromise())
   }
 }

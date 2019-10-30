@@ -11,18 +11,14 @@ import { ShowItemDetailsComponent } from './showItemDetails/showItemDetails.comp
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  {path: 'home', canActivate: [AuthGuard], component: HomeComponent,
+  { path: 'home', canActivate: [AuthGuard], component: HomeComponent,
     children: [
       { path: 'misequipos', component: MisEquiposComponent },
       { path: 'relaciones', component: RelationsComponent },
       { path: 'misequipos/nuevo', component: NewEquipoComponent },
       { path: '', redirectTo: 'misequipos', pathMatch: 'full' },
     ]},
-  {path: 'perfil/:id', canActivate: [AuthGuard], component: ProfileComponent,
-   children: [
-      {path: 'detalles_item/:id', component: ShowItemDetailsComponent },//TODO: sacar esta ruta pasar a componente
-    ]
-  },
+  { path: 'perfil/:id', canActivate: [AuthGuard], component: ProfileComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ]
 

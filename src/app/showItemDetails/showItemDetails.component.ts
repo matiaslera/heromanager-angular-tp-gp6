@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ItemsService } from '../services/ItemService/items.service';
 import { Observable } from 'rxjs';
 
@@ -8,16 +7,16 @@ import { Observable } from 'rxjs';
   templateUrl: './showItemDetails.component.html',
   styleUrls: ['./showItemDetails.component.css']
 })
-export class ShowItemDetailsComponent implements OnInit {
-  item:Observable<{}> 
-  constructor(private route: ActivatedRoute,private itemsService : ItemsService) { }
+export class ShowItemDetailsComponent implements OnChanges {
+  itemDetailed: Observable<{}>
+  @Input() itemId: String
 
-  ngOnInit() {
-    this.route.params.subscribe(routeParams => {
-      this.loadItems(routeParams.id)      
-    })
+  constructor(private itemsService: ItemsService) { }
+
+  ngOnChanges(): void {
+    this.loadItem()
   }
-  async loadItems(id:String){
-    this.item = await this.itemsService.getItemDetail(id)
+  async loadItem() {
+    this.itemDetailed = await this.itemsService.getItemDetails(this.itemId)
   }
 }

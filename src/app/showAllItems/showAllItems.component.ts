@@ -14,6 +14,7 @@ export class ShowAllItemsComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'poder']
   items :Item[] 
   dataSource : MatTableDataSource<Item>
+  itemSelected:String = null
 
   constructor(private itemsService : ItemsService, private route:ActivatedRoute ){}
 
@@ -29,5 +30,7 @@ export class ShowAllItemsComponent implements OnInit {
     this.dataSource= new MatTableDataSource<Item>(itemList)
     this.dataSource.paginator = this.paginator;
   }
-
+  selectItem(item:String){
+    this.itemSelected=item
+  }
 }
