@@ -9,12 +9,12 @@
           <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
             <input matInput placeholder="eg: batman" autofocus formControlName="username" [(ngModel)]="userCredentials.apodo">
-            <mat-error *ngIf="hasError('username','required')">Ingrese un usuario</mat-error>
+            <mat-error *ngIf="hasError('username','required')">Ingrese un <strong>Username</strong></mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput type="password" placeholder="*******" formControlName="password" [(ngModel)]="userCredentials.password">
-            <mat-error *ngIf="hasError('password','required')">Ingrese la Contrasena</mat-error>
+            <mat-error *ngIf="hasError('password','required')">Ingrese la <strong>Contraseña</strong> </mat-error>
           </mat-form-field>
         </div>
       </mat-card-content>

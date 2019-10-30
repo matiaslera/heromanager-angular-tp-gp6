@@ -9,7 +9,7 @@
                         <input matInput type="text" placeholder="ej: Avengers" name="algo"
                                 [(ngModel)]="team.nombre" required>
                                 <mat-error *ngIf="integranteFormControl.hasError('required')">
-                                        Escriba un nombre
+                                        Escriba un <strong>Nombre</strong> 
                                       </mat-error>
                 </mat-form-field>
 
@@ -19,7 +19,7 @@
                                         {{integrante.apodo}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="integranteFormControl.hasError('required')">
-                                        Elija un lider
+                                        Elija un <strong>lider</strong>
                                       </mat-error>
                 </mat-form-field>
 
