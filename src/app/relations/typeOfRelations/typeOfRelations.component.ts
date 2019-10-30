@@ -22,6 +22,8 @@ export class TypeOfRelationsComponent implements OnInit {
   constructor(private loginService: LoginService, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
+    this.individuos = await this.typeRelationSerice.getIndividuals()
+    this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
 
   }
 
