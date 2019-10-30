@@ -1,8 +1,8 @@
 import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Equipo, EquipoComplete } from '../domain/misequipos'
+import { EquipoComplete } from '../domain/misequipos'
 import { LoginService } from '../services/loginService/login.service';
-import { Individuo, Entidad } from '../domain/Individuo';
+import { Individuo} from '../domain/Individuo';
 import { TeamService } from '../services/typeRelationService/teamService/team.service';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -24,7 +24,7 @@ export class NewEquipoComponent implements OnInit {
     console.log(this.data.lider)
   }
 
-  disableTeam() {
+  cantSaveChanges() {
     return (this.team.nombre == null || this.team.nombre == '') ||  this.team.lider == null 
   }
   

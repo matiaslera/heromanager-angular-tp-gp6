@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
-import { Individuo, Entidad } from './Individuo'
+import { Individuo} from './Individuo'
 import { FormControl } from '@angular/forms'
-export class Equipo implements Entidad {
+export class Equipo{
   [x: string]: any
 
     constructor(public id?: string, public nombre?: string, public ownerId?: string, public owner?: string, public lider?: string) { }

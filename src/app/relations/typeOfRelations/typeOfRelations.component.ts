@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Individuo, Entidad } from 'src/app/domain/Individuo';
+import { Individuo,} from 'src/app/domain/Individuo';
 import { FormControl } from '@angular/forms';
 import { LoginService } from 'src/app/services/loginService/login.service';
 import * as _ from 'lodash'
 import { TypeRelationService } from 'src/app/services/typeRelationService/typeRelation.service';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-typeOfRelations',
@@ -13,14 +12,11 @@ import { MatSnackBar } from '@angular/material';
 })
 export class TypeOfRelationsComponent implements OnInit {
 
-  @Input() title: any
+  @Input() title: String
   @Input() typeRelationSerice: TypeRelationService
-  @Output() individualToDelete:EventEmitter<Individuo>=new EventEmitter<Individuo>()
-  @Output() individualToAdd:EventEmitter<Individuo>=new EventEmitter<Individuo>()
-  @Input() individuos: Entidad[]
-
-  @Input() individualsNotAdded: Entidad[]
-  candidateIndividualToAdd: Entidad
+  @Input() individuos: Individuo[]
+  @Input() individualsNotAdded: Individuo[]
+  candidateIndividualToAdd: Individuo
   myControl = new FormControl(); 
 
   constructor(private loginService: LoginService, private snackBar: MatSnackBar) { }
@@ -39,7 +35,6 @@ export class TypeOfRelationsComponent implements OnInit {
       await this.typeRelationSerice.updateIndividual(this.candidateIndividualToAdd)
       this.individuos.push(this.candidateIndividualToAdd)
       this.delete(this.candidateIndividualToAdd, this.individualsNotAdded)
-      this.individualToAdd.emit(this.candidateIndividualToAdd)
     } catch  {
       this.error('Seleccione uno de la lista')
     }
@@ -50,10 +45,9 @@ export class TypeOfRelationsComponent implements OnInit {
       await this.typeRelationSerice.deleteIndividual(individuodelete)
       this.individualsNotAdded.push(individuodelete)
       this.delete(individuodelete, this.individuos)
-      this.individualToDelete.emit(individuodelete)
     }
     catch (error) {
-      console.log("se rombio el delete", error)
+      console.log("Error al borrar", error)
     }
   }
   delete(individual: Individuo, colecccionIndividual: Individuo[]) {

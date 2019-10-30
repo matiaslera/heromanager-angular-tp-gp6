@@ -26,13 +26,12 @@
         </div>
         <div> 
                 <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'"
-                [typeRelationSerice]="teamService" 
-        
-                [individuos]="team.integrantes" [individualsNotAdded]="noIntegrantes"></app-typeOfRelations>
+                [typeRelationSerice]="teamService" [individuos]="team.integrantes" 
+                [individualsNotAdded]="noIntegrantes"></app-typeOfRelations>
         </div>
 
 </mat-dialog-content>
 <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="team" [disabled]="disableTeam()" >Guardar</button>
+        <button mat-button [mat-dialog-close]="team" [disabled]="cantSaveChanges()" >Guardar</button>
         <button mat-button [mat-dialog-close]="'no'" mat-flat-button color="warn">Cancel</button>
 </mat-dialog-actions>

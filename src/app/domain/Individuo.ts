@@ -1,9 +1,4 @@
-export interface Entidad{
-}
-
-
-export class Individuo implements Entidad{
-
+export class Individuo {
     constructor(public id?: String,public apodo?: string) { }
 
     static fromJson(individuoJSON): Individuo {

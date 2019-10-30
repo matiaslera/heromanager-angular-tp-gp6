@@ -22,7 +22,7 @@ function mostrarError(component, error) {
 })
 export class MisEquiposComponent implements OnInit {
 
-  equipos: Equipo[] = []
+  equipos: Equipo[] 
   dataSource: MatTableDataSource<Equipo>;
   equipoSelec: Equipo;
   displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions'];
@@ -35,30 +35,25 @@ export class MisEquiposComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      this.getTeam()
-
+      this.getTeams()
     } catch (error) {
       mostrarError(this, error)
     }
     console.log(this.dataSource)
   }
-
   getUser() {
     return this.loginService.getUser()
   }
-
   nuevoEquipo() {
     const dialogRef = this.dialog.open(NewEquipoComponent, {
       data: new EquipoComplete()
     })
-
     dialogRef.afterClosed().subscribe(result => {
       if (result != "no") {
         this.agregar(result)
       }
     })
   }
-
   async editarEquipo(equipo: string) {
     const dialogRef = this.dialog.open(NewEquipoComponent, {
       data: await this.teamService.getFullTeam(equipo),
@@ -69,32 +64,28 @@ export class MisEquiposComponent implements OnInit {
       }
     })
   }
-
   async actualizar(equipo: EquipoComplete) {
     await this.teamService.updateTeam(equipo)
-    this.getTeam()
+    this.getTeams()
   }
-
   async agregar(nuevoEquipo: EquipoComplete) {
     nuevoEquipo.owner = this.getUser()
     await this.teamService.addTeam(nuevoEquipo)
-    this.getTeam()
+    this.getTeams()
   }
   individuoEsAdmin(individuo: string) {
     return individuo == this.loginService.getidUserLogged()
   }
-
-  async getTeam() {
+  async getTeams() {
     this.equipos = await this.teamService.getAllTeam()
     this.dataSource = new MatTableDataSource<Equipo>(this.equipos)
   }
-
   async eliminarEquipo(deleteTeam: EquipoComplete){
     await this.teamService.deleteTeam(deleteTeam.id)
-    this.getTeam()
+    this.getTeams()
   }
   async abandonar(team: EquipoComplete){
     await this.teamService.abandonTeam(team.id)
-    this.getTeam()
+    this.getTeams()
   }
 }

@@ -45,7 +45,6 @@ export class LoginComponent {
   navigateHome(){
     this.router.navigate(['home']);
   }
-
   getUsernameValue():string{
     return this.loginForm.get('username').value
   }

@@ -14,7 +14,6 @@ export class ProfileComponent implements OnInit {
   profileData: Observable<{}>
   constructor(private profileService: ProfileService, private route: ActivatedRoute, private loginService: LoginService) {
   }
-
   ngOnInit() {
     this.route.params.subscribe(routeParams => {
       this.loadProfile(routeParams.id)      

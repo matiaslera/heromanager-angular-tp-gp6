@@ -5,15 +5,19 @@
                         <form class="formAutocomplit">
                                 <mat-form-field appearance="outline" class="matInputFriend">
                                         <mat-label>Individuo</mat-label>
-                                        <input type="text" placeholder="Seleccione un individuo" aria-label="allIndividuals" matInput
-                                                [formControl]="myControl" [matAutocomplete]="auto"
-                                                [(ngModel)]="candidateIndividualToAdd" required>
+                                        <input type="text" placeholder="Seleccione un individuo"
+                                                aria-label="allIndividuals" matInput [formControl]="myControl"
+                                                [matAutocomplete]="auto" [(ngModel)]="candidateIndividualToAdd"
+                                                required>
                                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                                 <mat-option *ngFor="let individual of individualsNotAdded"
                                                         [value]="individual">
                                                         {{individual.apodo}}
                                                 </mat-option>
                                         </mat-autocomplete>
+                                        <mat-error *ngIf="myControl.hasError('required')">
+                                                Elija un individuo de la lista
+                                        </mat-error>
                                 </mat-form-field>
                                 <mat-card-footer class="buttonAdd">
                                         <button color="primary" mat-flat-button (click)="addIndividual()"
