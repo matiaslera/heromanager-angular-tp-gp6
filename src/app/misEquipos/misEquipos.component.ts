@@ -11,7 +11,6 @@ import { TeamService } from '../services/typeRelationService/teamService/team.se
 
 
 function mostrarError(component, error) {
-  console.log('se rompio todooooo', error)
   component.errors.push(error.error)
 }
 
@@ -39,7 +38,6 @@ export class MisEquiposComponent implements OnInit {
     } catch (error) {
       mostrarError(this, error)
     }
-    console.log(this.dataSource)
   }
   getUser() {
     return this.loginService.getUser()

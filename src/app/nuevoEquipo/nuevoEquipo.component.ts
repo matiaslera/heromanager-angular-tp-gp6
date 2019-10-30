@@ -21,7 +21,6 @@ export class NewEquipoComponent implements OnInit {
     this.dialogRef.disableClose = true;
     this.noIntegrantes = await this.teamService.getNonIndividuals(this.data.id)
     this.team = this.data
-    console.log(this.data.lider)
   }
 
   cantSaveChanges() {

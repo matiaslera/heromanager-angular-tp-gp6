@@ -31,7 +31,6 @@ export class FriendsService implements TypeRelationService{
   }
 
   deleteIndividual(individualDelete: Individuo){
-    console.log(individualDelete)
     return this.httpCLient.put<Individuo>(REST_SERVER_URL + '/eliminar_amigo/' + this.getidUserLogged(),individualDelete ).toPromise()
   }
 }
