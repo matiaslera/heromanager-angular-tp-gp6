@@ -21,9 +21,9 @@ function mostrarError(component, error) {
 })
 export class MisEquiposComponent implements OnInit {
 
-  equipos: Equipo[] 
-  dataSource: MatTableDataSource<Equipo>;
-  equipoSelec: Equipo;
+  equipos: Equipo[]
+  dataSource: MatTableDataSource<Equipo>
+  equipoSelec: Equipo = new Equipo
   displayedColumns: string[] = ['nombre', 'lider', 'propietario', 'actions'];
   constructor(public teamService: TeamService, private router: Router,
     private loginService: LoginService, public dialog: MatDialog) {
@@ -42,37 +42,21 @@ export class MisEquiposComponent implements OnInit {
   getUser() {
     return this.loginService.getUser()
   }
-  nuevoEquipo() {
+  async editarEquipo(equipo: String) {
     const dialogRef = this.dialog.open(NewEquipoComponent, {
-      data: new EquipoComplete()
+      data: equipo //await this.teamService.getFullTeam(equipo),
     })
     dialogRef.afterClosed().subscribe(result => {
-      if (result != "no") {
-        this.agregar(result)//delegar y unificar
+      if (result) {
+        this.actualizar()
       }
     })
   }
-  async editarEquipo(equipo: string) {
-    const dialogRef = this.dialog.open(NewEquipoComponent, {
-      data: await this.teamService.getFullTeam(equipo),
-    })
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != "no") {
-        this.actualizar(result)
-      }
-    })
-  }
-  async actualizar(equipo: EquipoComplete) {
-    await this.teamService.updateTeam(equipo)
-    this.getTeams()
-  }
-  async agregar(nuevoEquipo: EquipoComplete) {
-    nuevoEquipo.owner = this.getUser()
-    await this.teamService.addTeam(nuevoEquipo)
+  async actualizar() {
     this.getTeams()
   }
   individuoEsAdmin(individuo: string) {
-    return individuo == this.loginService.getidUserLogged()//TODO: comportamiento del equipo
+    return individuo == this.loginService.getUserLoggedId()//TODO: comportamiento del equipo
   }
   async getTeams() {
     this.equipos = await this.teamService.getAllTeam()

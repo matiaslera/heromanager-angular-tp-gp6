@@ -32,6 +32,6 @@
 
 </mat-dialog-content>
 <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="team" [disabled]="cantSaveChanges()" >Guardar</button>
-        <button mat-button [mat-dialog-close]="'no'" mat-flat-button color="warn">Cancel</button>
+        <button mat-button (click)="guardarCambios()" [mat-dialog-close]="true" [disabled]="cantSaveChanges()" >Guardar</button>
+        <button mat-button [mat-dialog-close]="false" mat-flat-button color="warn">Cancel</button>
 </mat-dialog-actions>

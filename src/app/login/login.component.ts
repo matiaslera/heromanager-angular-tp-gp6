@@ -28,7 +28,8 @@ export class LoginComponent {
 
   async authenticate() {
     try{
-      return await this.userLogService.authenticate(this.userCredentials)
+      await this.userLogService.authenticate(this.userCredentials)
+      this.router.navigate(['home'])
     }
     catch(e){
       this.error(e.error)

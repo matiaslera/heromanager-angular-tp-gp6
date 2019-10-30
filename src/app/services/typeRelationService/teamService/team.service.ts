@@ -15,7 +15,7 @@ export class TeamService implements TeamService {
   
 
    getidUserLogged() {
-    return this.loginService.getidUserLogged()
+    return this.loginService.getUserLoggedId()
   }
   
   async getAllTeam() {
@@ -23,7 +23,7 @@ export class TeamService implements TeamService {
     return teams.map((team) => Equipo.fromJson(team)) 
   }
   async getFullTeam(id:String) {
-    return await this.httpCLient.get<Equipo>(REST_SERVER_URL +  "/equipo_completo/" + id).toPromise()
+    return await this.httpCLient.get<EquipoComplete>(REST_SERVER_URL +  "/equipo_completo/" + id).toPromise()
   }
 
  async getIndividuals(id:String) {

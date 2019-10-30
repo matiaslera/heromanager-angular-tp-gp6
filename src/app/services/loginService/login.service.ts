@@ -3,36 +3,29 @@ import { _supportsShadowDom } from '@angular/cdk/platform';
 import { HttpClient } from '@angular/common/http';
 import { REST_SERVER_URL } from '../configuration';
 import { Individuo } from 'src/app/domain/Individuo';
-import { Router } from '@angular/router';
+import { isUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private authenticated: boolean//pasar a un metodo
-  private userLogged: Individuo
+ private userLogged: Individuo = new Individuo
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.authenticated = false
+  constructor(private http: HttpClient) {
   }
   async authenticate(credentials: Individuo) {
     this.userLogged = await this.http.post<Individuo>(REST_SERVER_URL + '/login', credentials).toPromise()
-      .then((individuo) => {
-        this.authenticated = true
-        this.router.navigate(['home'])
-        return individuo
-      })
   }
   getUser() {
     return this.userLogged
   }
 
-  getidUserLogged() {
+  getUserLoggedId() {
     return this.userLogged.id
   }
 
   isAuthenticated() {
-    return this.authenticated
+    return !isUndefined(this.userLogged.id)
   }
 
 }

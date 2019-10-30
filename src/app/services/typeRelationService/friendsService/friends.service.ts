@@ -13,7 +13,7 @@ export class FriendsService implements TypeRelationService{
   constructor(private httpCLient: HttpClient, private loginService: LoginService) { }
 
   getidUserLogged() {
-    return this.loginService.getidUserLogged()
+    return this.loginService.getUserLoggedId()
   }
 
   async getIndividuals() {

@@ -2,9 +2,7 @@ import * as _ from 'lodash'
 import { Individuo} from './Individuo'
 import { FormControl } from '@angular/forms'
 export class Equipo{
-  [x: string]: any
-
-    constructor(public id?: string, public nombre?: string, public ownerId?: string, public owner?: string, public lider?: string) { }
+    constructor(public id?: string,public nombre?: string, public ownerId?: string, public owner?: string, public lider?: string) { }
 
     static fromJson(equipoJSON): Equipo {
         return Object.assign(new Equipo(), equipoJSON)
@@ -13,7 +11,7 @@ export class Equipo{
 }
 
 export class EquipoComplete {
-    public id: string = "null"
+    public id: string = ""
     public nombre: string
     public owner: Individuo
     public lider: Individuo 
