@@ -33,6 +33,7 @@ export class LoginComponent {
     catch(e){
       this.error(e.error)
     }
+
   }
   formHasData(){
     return this.loginForm.status == 'INVALID'

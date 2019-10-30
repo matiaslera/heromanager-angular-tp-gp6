@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class LoginService {
-  private authenticated: boolean
+  private authenticated: boolean//pasar a un metodo
   private userLogged: Individuo
 
   constructor(private http: HttpClient, private router: Router) {
@@ -30,8 +30,6 @@ export class LoginService {
   getidUserLogged() {
     return this.userLogged.id
   }
-
- 
 
   isAuthenticated() {
     return this.authenticated

@@ -20,7 +20,7 @@ export const routes: Routes = [
     ]},
   {path: 'perfil/:id', canActivate: [AuthGuard], component: ProfileComponent,
    children: [
-      {path: 'detalles_item/:id', component: ShowItemDetailsComponent },
+      {path: 'detalles_item/:id', component: ShowItemDetailsComponent },//TODO: sacar esta ruta pasar a componente
     ]
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },

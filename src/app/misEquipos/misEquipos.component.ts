@@ -32,7 +32,7 @@ export class MisEquiposComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator; table: MatTable<Equipo>;
 
-  async ngOnInit() {
+   ngOnInit() {
     try {
       this.getTeams()
     } catch (error) {
@@ -48,7 +48,7 @@ export class MisEquiposComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result != "no") {
-        this.agregar(result)
+        this.agregar(result)//delegar y unificar
       }
     })
   }
@@ -72,7 +72,7 @@ export class MisEquiposComponent implements OnInit {
     this.getTeams()
   }
   individuoEsAdmin(individuo: string) {
-    return individuo == this.loginService.getidUserLogged()
+    return individuo == this.loginService.getidUserLogged()//TODO: comportamiento del equipo
   }
   async getTeams() {
     this.equipos = await this.teamService.getAllTeam()
