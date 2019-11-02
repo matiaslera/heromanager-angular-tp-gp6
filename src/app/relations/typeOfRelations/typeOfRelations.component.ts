@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Individuo,} from 'src/app/domain/Individuo';
 import { FormControl } from '@angular/forms';
 import { LoginService } from 'src/app/services/loginService/login.service';
-import * as _ from 'lodash'
 import { TypeRelationService } from 'src/app/services/typeRelationService/typeRelation.service';
 import { MatSnackBar } from '@angular/material';
 @Component({
@@ -16,15 +15,12 @@ export class TypeOfRelationsComponent implements OnInit {
   @Input() typeRelationSerice: TypeRelationService
   @Input() individuos: Individuo[]
   @Input() individualsNotAdded: Individuo[]
-  candidateIndividualToAdd: Individuo
   myControl = new FormControl(); 
 
   constructor(private loginService: LoginService, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
-    this.individuos = await this.typeRelationSerice.getIndividuals()
-    this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
-
+    this.updateLists()
   }
 
   error(errorType: string) {
@@ -34,34 +30,35 @@ export class TypeOfRelationsComponent implements OnInit {
   }
   async addIndividual() {
     try {
-      await this.typeRelationSerice.updateIndividual(this.candidateIndividualToAdd)
-      this.individuos.push(this.candidateIndividualToAdd)
-      this.delete(this.candidateIndividualToAdd, this.individualsNotAdded)
+      await this.typeRelationSerice.updateIndividual(this.myControl.value)
     } catch  {
       this.error('Seleccione uno de la lista')
     }
-    this.candidateIndividualToAdd = null
+    this.myControl.setValue(null)
+    this.updateLists()
   }
+
   async deleteIndividual(individuodelete: Individuo) {
     try {
       await this.typeRelationSerice.deleteIndividual(individuodelete)
-      this.individualsNotAdded.push(individuodelete)
-      this.delete(individuodelete, this.individuos)
     }
     catch (error) {
       console.log("Error al borrar", error)
     }
+    this.updateLists()
   }
-  delete(individual: Individuo, colecccionIndividual: Individuo[]) {
-    _.remove(colecccionIndividual, individual)
+  
+  async updateLists(){
+    this.individuos = await this.typeRelationSerice.getIndividuals()
+    this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
   }
-
+  
   displayFn(individual?: Individuo): string | undefined {
     return individual ? individual.apodo : undefined;
   }
 
-  disabledIndividual() {
-    return this.candidateIndividualToAdd == null
+  cantAddFriend() {
+    return this.myControl.value == null
   }
 
 }

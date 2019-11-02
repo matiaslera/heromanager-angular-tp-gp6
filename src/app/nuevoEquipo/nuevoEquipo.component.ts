@@ -2,7 +2,6 @@ import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EquipoComplete } from '../domain/misequipos'
 import { LoginService } from '../services/loginService/login.service';
-import { Individuo } from '../domain/Individuo';
 import { TeamService } from '../services/typeRelationService/teamService/team.service';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -13,18 +12,14 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class NewEquipoComponent implements OnInit {
   
-  noIntegrantes: Individuo[]
   team: EquipoComplete = new EquipoComplete
   integranteFormControl = new FormControl('', Validators.required)
   constructor(private loginservice: LoginService, public dialogRef: MatDialogRef<NewEquipoComponent>, private teamService: TeamService, @Optional() @Inject(MAT_DIALOG_DATA) private data: string) { }
 
   async ngOnInit() {
-    this.team.owner = this.loginservice.getUser()
     this.dialogRef.disableClose = true;
-    if (!this.elEquipoEsNuevo()) {
-      this.team = await this.teamService.getFullTeam(this.data)
-    }
-    this.noIntegrantes = await this.teamService.getNonIndividuals(this.data)
+    await this.teamService.getFullTeam(this.data)
+    this.team = this.teamService.getSelectedTeam()
   }
 
   cantSaveChanges() {
@@ -32,10 +27,6 @@ export class NewEquipoComponent implements OnInit {
   }
 
   async guardarCambios() {
-    await this.teamService.updateTeam(this.team)
-  }
-
-  elEquipoEsNuevo() {
-    return this.data == null
+    await this.teamService.updateTeam()
   }
 }

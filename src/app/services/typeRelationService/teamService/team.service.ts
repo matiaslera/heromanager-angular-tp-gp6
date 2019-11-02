@@ -9,52 +9,57 @@ import { Equipo, EquipoComplete } from 'src/app/domain/misequipos';
   providedIn: 'root'
 })
 export class TeamService implements TeamService {
-
+  selectedTeam: EquipoComplete = new EquipoComplete
 
   constructor(private httpCLient: HttpClient, private loginService: LoginService) { }
-  
 
-   getidUserLogged() {
+  getidUserLogged() {
     return this.loginService.getUserLoggedId()
   }
-  
-  async getAllTeam() {
-    const teams = await this.httpCLient.get<Equipo[]>(REST_SERVER_URL +  "/equipos/" + this.getidUserLogged()).toPromise()
-    return teams.map((team) => Equipo.fromJson(team)) 
-  }
-  async getFullTeam(id:String) {
-    return await this.httpCLient.get<EquipoComplete>(REST_SERVER_URL +  "/equipo_completo/" + id).toPromise()
+
+  async getAllTeams() {
+    const teams = await this.httpCLient.get<Equipo[]>(REST_SERVER_URL + "/equipos/" + this.getidUserLogged()).toPromise()
+    return teams.map((team) => Equipo.fromJson(team))
   }
 
- async getIndividuals(id:String) {
-    const individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL +  '/integrantes/').toPromise()
-    return individuals.map((individual) => Individuo.fromJson(individual)) 
-  }
-  async getNonIndividuals(id:String) {
-    const Individuals = await this.httpCLient.get<Individuo[]>(REST_SERVER_URL + '/integrantes_no_agregados/'+id).toPromise()
-    return Individuals.map((Individual) => Individuo.fromJson(Individual))
- 
-  }
-  async addTeam(newTeam:EquipoComplete){
-    newTeam.id=null
-    await this.httpCLient.put(REST_SERVER_URL + '/crear_equipo',newTeam).toPromise()
+  async getFullTeam(id: String) {
+    const team = await this.httpCLient.get<EquipoComplete>(`${REST_SERVER_URL}/equipo_completo/${id}`).toPromise()
+    this.selectedTeam = EquipoComplete.fromJson(team)
   }
 
-  async updateTeam(teamUpdate: EquipoComplete){
-    return await this.httpCLient.put<Equipo>(REST_SERVER_URL + "/actualizar_equipo", teamUpdate).toPromise()
+  getIndividuals(id: String) {
+    return this.selectedTeam.integrantes
   }
 
-  async deleteTeam(teamDelete:String){
-    return await this.httpCLient.delete<EquipoComplete>(REST_SERVER_URL + '/eliminar_equipo/' + teamDelete).toPromise()
+  getNonIndividuals(id: String) {
+    return this.selectedTeam.posiblesIntegrantes
   }
-  async abandonTeam(team : String ){
-    return await this.httpCLient.delete<EquipoComplete>(REST_SERVER_URL + '/abandonar_equipo/' + team 
-        + '/' + this.getidUserLogged()).toPromise()
-  }
-  
 
-  updateIndividual(individualUpdate: Individuo) {}
-  deleteIndividual(deleteIndividual: Individuo) {}
-  
-  
+  async updateTeam() {
+    if (this.selectedTeam.isANewTeam()) {
+      this.selectedTeam.owner = this.loginService.getUser()
+    }
+    await this.httpCLient.put<Equipo>(REST_SERVER_URL + "/actualizar_equipo", this.selectedTeam.toJSON()).toPromise()
+  }
+
+  async deleteTeam(teamToDelete: String) {
+    return await this.httpCLient.delete<EquipoComplete>(REST_SERVER_URL + '/eliminar_equipo/' + teamToDelete).toPromise()
+  }
+
+  async abandonTeam(teamId: String) {
+    return await this.httpCLient.delete<EquipoComplete>(REST_SERVER_URL + '/abandonar_equipo/' + teamId
+      + '/' + this.getidUserLogged()).toPromise()
+  }
+
+  async updateIndividual(individualUpdate: Individuo) {
+    this.selectedTeam.addMember(individualUpdate)
+  }
+
+  async deleteIndividual(deleteIndividual: Individuo) {
+    this.selectedTeam.deleteMember(deleteIndividual)
+  }
+
+  getSelectedTeam() {
+    return this.selectedTeam
+  }
 }

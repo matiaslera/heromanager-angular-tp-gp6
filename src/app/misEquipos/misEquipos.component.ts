@@ -59,7 +59,7 @@ export class MisEquiposComponent implements OnInit {
     return individuo == this.loginService.getUserLoggedId()//TODO: comportamiento del equipo
   }
   async getTeams() {
-    this.equipos = await this.teamService.getAllTeam()
+    this.equipos = await this.teamService.getAllTeams()
     this.dataSource = new MatTableDataSource<Equipo>(this.equipos)
   }
   async eliminarEquipo(deleteTeam: EquipoComplete){

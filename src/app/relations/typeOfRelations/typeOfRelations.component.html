@@ -7,8 +7,7 @@
                                         <mat-label>Individuo</mat-label>
                                         <input type="text" placeholder="Seleccione un individuo"
                                                 aria-label="allIndividuals" matInput [formControl]="myControl"
-                                                [matAutocomplete]="auto" [(ngModel)]="candidateIndividualToAdd"
-                                                required>
+                                                [matAutocomplete]="auto" required>
                                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                                 <mat-option *ngFor="let individual of individualsNotAdded"
                                                         [value]="individual">
@@ -21,7 +20,7 @@
                                 </mat-form-field>
                                 <mat-card-footer class="buttonAdd">
                                         <button color="primary" mat-flat-button (click)="addIndividual()"
-                                                [disabled]="disabledIndividual()">
+                                                [disabled]="cantAddFriend()">
                                                 <mat-icon aria-hidden="false" aria-label="Example home icon">add
                                                 </mat-icon>
                                         </button>
