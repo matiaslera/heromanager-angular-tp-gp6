@@ -6,6 +6,10 @@ import { NewEquipoComponent } from '../nuevoEquipo/nuevoEquipo.component'
 export class Equipo {
     constructor(public id?: string, public nombre?: string, public ownerId?: string, public owner?: string, public lider?: string) { }
 
+    isTheOwner(id:String){
+        return this.ownerId == id
+    }
+
     static fromJson(equipoJSON): Equipo {
         return Object.assign(new Equipo(), equipoJSON)
     }
@@ -37,6 +41,7 @@ export class EquipoComplete {
         this.integrantes.push(newMember)
         _.remove(this.posiblesIntegrantes, newMember)
     }
+
     toJSON():EquipoComplete{
         delete this.posiblesIntegrantes
         return {...this}

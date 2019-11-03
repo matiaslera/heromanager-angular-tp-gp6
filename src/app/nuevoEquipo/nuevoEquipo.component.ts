@@ -12,7 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class NewEquipoComponent implements OnInit {
   
-  team: EquipoComplete = new EquipoComplete
+  team: EquipoComplete 
   integranteFormControl = new FormControl('', Validators.required)
   constructor(private loginservice: LoginService, public dialogRef: MatDialogRef<NewEquipoComponent>, private teamService: TeamService, @Optional() @Inject(MAT_DIALOG_DATA) private data: string) { }
 
@@ -25,8 +25,8 @@ export class NewEquipoComponent implements OnInit {
   cantSaveChanges() {
     return (this.team.nombre == null || this.team.nombre == '') || this.team.lider == null
   }
-
-  async guardarCambios() {
-    await this.teamService.updateTeam()
+  
+  guardarCambios() {
+    this.teamService.updateTeam()
   }
 }
