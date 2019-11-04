@@ -12,7 +12,7 @@
                                 Escriba un <strong>Nombre</strong>
                         </mat-error>
                         </mat-form-field>
-
+                        <p *ngIf="team.lider">Lider seleccionado: <strong>{{team.lider.apodo}}</strong></p>
                         <mat-form-field>
                                 <mat-select placeholder="Lider:" [(value)]="team.lider" required
                                         [formControl]="integranteFormControl">
