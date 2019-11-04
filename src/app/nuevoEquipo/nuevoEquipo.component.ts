@@ -10,6 +10,7 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './nuevoEquipo.component.html',
   styleUrls: ['./nuevoEquipo.component.css']
 })
+
 export class NewEquipoComponent implements OnInit {
   
   team: EquipoComplete 

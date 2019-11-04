@@ -36,6 +36,11 @@ registerLocaleData(localeEs)
       ShowAllItemsComponent,
       ShowItemDetailsComponent
    ],
+   
+   entryComponents: [
+      NewEquipoComponent,
+   ],
+
    imports: [
       BrowserModule,
       AppRoutingModule,

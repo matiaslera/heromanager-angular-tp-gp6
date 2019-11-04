@@ -32,11 +32,7 @@ export class MisEquiposComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator; table: MatTable<Equipo>;
 
   ngOnInit() {
-    try {
-      this.getTeams()
-    } catch (error) {
-      mostrarError(this, error)
-    }
+    this.getTeams()
   }
 
   async editarEquipo(equipoId: Equipo) {
@@ -53,8 +49,12 @@ export class MisEquiposComponent implements OnInit {
   }
 
   async getTeams() {
-    this.equipos = await this.teamService.getAllTeams()
-    this.dataSource = new MatTableDataSource<Equipo>(this.equipos)
+    try {
+      this.equipos = await this.teamService.getAllTeams()
+      this.dataSource = new MatTableDataSource<Equipo>(this.equipos)
+    } catch (error) {
+      mostrarError(this, error)
+    }
   }
 
   async eliminarEquipo(deleteTeam: Equipo) {

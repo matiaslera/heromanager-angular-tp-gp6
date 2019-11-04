@@ -41,7 +41,7 @@ export class TeamService implements TeamService {
       this.selectedTeam.owner = this.loginService.getUser()
     }
     await this.httpCLient.put<Equipo>(REST_SERVER_URL + "/actualizar_equipo", this.selectedTeam.toJSON()).toPromise()
-    this.resetTeam()
+
   }
 
   async deleteTeam(teamToDelete: String) {
@@ -63,8 +63,5 @@ export class TeamService implements TeamService {
 
   getSelectedTeam() {
     return this.selectedTeam
-  }
-  resetTeam() {
-    this.selectedTeam=null
   }
 }

@@ -13,8 +13,8 @@ export class TypeOfRelationsComponent implements OnInit {
 
   @Input() title: String
   @Input() typeRelationSerice: TypeRelationService
-  @Input() individuos: Individuo[]
-  @Input() individualsNotAdded: Individuo[]
+  individuos: Individuo[]
+  individualsNotAdded: Individuo[]
   myControl = new FormControl(); 
 
   constructor(private loginService: LoginService, private snackBar: MatSnackBar) { }
