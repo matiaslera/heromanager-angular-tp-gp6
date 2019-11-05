@@ -14,14 +14,16 @@ export class ShowAllItemsComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'poder']
   items :Item[] 
   dataSource : MatTableDataSource<Item>
-  itemSelected:String = null
+  itemSelected:String
 
   constructor(private itemsService : ItemsService, private route:ActivatedRoute ){}
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator
 
   ngOnInit() {
+    
     this.route.params.subscribe(routeParams => {
+      this.itemSelected = null
       this.loadItems(routeParams.id)      
     })
   }
