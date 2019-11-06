@@ -48,7 +48,7 @@ export class TypeOfRelationsComponent implements OnInit {
     this.updateLists()
   }
   
-  async updateLists(){
+  async updateLists(){//refresh
     this.individuos = await this.typeRelationSerice.getIndividuals()
     this.individualsNotAdded = await this.typeRelationSerice.getNonIndividuals()
   }
