@@ -1,0 +1,29 @@
+[{
+    "id": "I1",
+    "nombre": "Batarang",
+    "alcance": 100,
+    "peso": 1,
+    "danio": 50,
+    "resistencia": 0,
+    "precio": 800,
+    "sobrenatural": false
+},
+{
+    "id": "I2",
+    "nombre": "Spray anti-tiburones",
+    "alcance": 10,
+    "peso": 1.5,
+    "danio": 25,
+    "resistencia": 30,
+    "precio": 400,
+    "sobrenatural": false
+},
+{
+    "id": "I3",
+    "nombre": "Baticinturón",
+    "componentes": [
+        "I1",
+        "I2"
+    ]
+}
+]

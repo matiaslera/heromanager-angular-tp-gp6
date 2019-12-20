@@ -1,0 +1,40 @@
+<div *ngIf="team">
+        <mat-dialog-content>
+                <h2>Administracion de equipo</h2>
+                <p *ngIf="team.isANewTeam()"><strong>Nuevo equipo</strong></p>
+                <div class="example-container">
+
+                        <mat-form-field appearance="outline">
+                                <mat-label>Nombre del equipo</mat-label>
+                                <input matInput type="text" placeholder="ej: Avengers" name="algo"
+                                        [(ngModel)]="team.nombre" required>
+                                <mat-error *ngIf="integranteFormControl.hasError('required')">
+                                Escriba un <strong>Nombre</strong>
+                        </mat-error>
+                        </mat-form-field>
+                        <p *ngIf="team.lider">Lider seleccionado: <strong>{{team.lider.apodo}}</strong></p>
+                        <mat-form-field>
+                                <mat-select placeholder="Lider:" [(value)]="team.lider" required
+                                        [formControl]="integranteFormControl">
+                                        <mat-option *ngFor="let integrante of teamService.getNonIndividuals()"
+                                                [value]="integrante">
+                                                {{integrante.apodo}}</mat-option>
+                                </mat-select>
+                                 <mat-error *ngIf="integranteFormControl.hasError('required')">
+                                Elija un <strong>lider</strong>
+                        </mat-error> 
+                        </mat-form-field>
+
+                </div>
+                <div>
+                        <app-typeOfRelations class="compAddIntegrantes" [title]="'integrantes'"
+                                [typeRelationSerice]="teamService"></app-typeOfRelations>
+                </div>
+
+        </mat-dialog-content>
+        <mat-dialog-actions>
+                <button mat-button (click)="guardarCambios()" [mat-dialog-close]="true"
+                        [disabled]="cantSaveChanges()">Guardar</button>
+                <button mat-button [mat-dialog-close]="false" mat-flat-button color="warn">Cancel</button>
+        </mat-dialog-actions>
+</div>

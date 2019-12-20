@@ -1,0 +1,16 @@
+
+
+.cardContainer{
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  position: absolute;
+  top: 4rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+}
+.items{
+  flex-grow:1;
+}

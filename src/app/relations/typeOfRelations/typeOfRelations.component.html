@@ -1,0 +1,42 @@
+<mat-card class="mainFriends">
+        <div class="containerFriends">
+                <h4>{{title}}</h4>
+                <div class="LoginFriends">
+                        <form class="formAutocomplit">
+                                <mat-form-field appearance="outline" class="matInputFriend">
+                                        <mat-label>Individuo</mat-label>
+                                        <input type="text" placeholder="Seleccione un individuo"
+                                                aria-label="allIndividuals" matInput [formControl]="myControl"
+                                                [matAutocomplete]="auto" required>
+                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                                <mat-option *ngFor="let individual of individualsNotAdded"
+                                                        [value]="individual">
+                                                        {{individual.apodo}}
+                                                </mat-option>
+                                        </mat-autocomplete>
+                                        <mat-error *ngIf="myControl.hasError('required')">
+                                                Elija un <strong>Individuo</strong>  de la <strong>Lista</strong>
+                                        </mat-error>
+                                </mat-form-field>
+                                <mat-card-footer class="buttonAdd">
+                                        <button color="primary" mat-flat-button (click)="addIndividual()"
+                                                [disabled]="cantAddFriend()">
+                                                <mat-icon aria-hidden="false" aria-label="Example home icon">add
+                                                </mat-icon>
+                                        </button>
+                                </mat-card-footer>
+                        </form>
+                </div>
+                <mat-nav-list class="listFriends">
+                        <div *ngFor="let individuo of individuos" class="buttonRemove">
+                                <mat-list-item [routerLink]="['../../perfil',individuo.id]">
+                                        {{individuo.apodo}}
+                                </mat-list-item>
+                                <button mat-flat-button (click)="deleteIndividual(individuo)">
+                                        <mat-icon aria-hidden="false" aria-label="Example home icon">clear
+                                        </mat-icon>
+                                </button>
+                        </div>
+                </mat-nav-list>
+        </div>
+</mat-card>

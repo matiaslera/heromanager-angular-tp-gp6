@@ -1,0 +1,25 @@
+<div class="cardContainer">
+  <mat-card class="dataCard" *ngIf="profileData | async as profileData;">
+    <img src="{{profileData.photoUrl}}" width="250rem">
+    <mat-card-header>
+      <mat-card-title>
+        {{profileData.apodo}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{profileData.nombre}}
+        {{profileData.apellido}}
+        <br>
+        {{profileData.email}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <strong>Tipo: </strong>{{profileData.tipo}}<br>
+      <strong>Poder de ataque: </strong>{{profileData.poderDeAtaque| number:'1.2-2':'es'}}<br>
+      <strong>XP: </strong>{{profileData.experiencia| number:'1.2-2':'es'}}<br>
+      <strong>Efectividad: </strong>{{profileData.efectividad | number:'1.2-2':'es'}}<br>
+    </mat-card-content>
+  </mat-card>
+  <div class="items">
+    <app-showAllItems></app-showAllItems>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+mat-card{
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    padding-top: 2rem;
+}
+mat-card-content{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+.cardContainer{
+    margin-top: 1rem;
+    display: flex;
+}

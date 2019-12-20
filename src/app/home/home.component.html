@@ -1,0 +1,24 @@
+<mat-divider></mat-divider>
+<mat-sidenav-container class="sidenavContainer">
+    <mat-sidenav #sidenav mode="side" class="sidenav" opened>
+        <mat-nav-list>
+            <mat-list-item routerLink="./relaciones" routerLinkActive="active">
+                <mat-icon mat-list-icon>people_alt</mat-icon>
+                <div> Relaciones</div>
+            </mat-list-item>
+            <mat-list-item routerLink="./misequipos" routerLinkActive="active">
+                <mat-icon mat-list-icon>group_work</mat-icon>
+                <div>Mis Equipos</div>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <button mat-icon-button color=primary (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>
+            <router-outlet></router-outlet>
+        </span>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-divider></mat-divider>
